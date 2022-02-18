@@ -31,6 +31,9 @@ class UsersController extends AdminController
 
     public function index()
     {
+        $this->loadModel('Users');
+        $users = $this->paginate($this->Users->find('all'),array('limit'=>'10'));
+        $this->set('users',$users);
         $this->set('title','Quản lý users');
     }
 }
