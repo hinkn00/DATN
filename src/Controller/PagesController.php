@@ -79,6 +79,7 @@ class PagesController extends AppController
                 'conditions' => array(
                     "email" => $this->request->getData('email'),
                     "password" => md5($this->request->getData('password')),
+                    'is_admin' => 1,
                 )
             ])->first();
             if($check_user){
