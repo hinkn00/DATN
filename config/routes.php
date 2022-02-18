@@ -34,7 +34,9 @@ return static function (RouteBuilder $routes) {
     * Router Admin
     */
     $routes->prefix('admin', function (RouteBuilder $routes){
+        $routes->connect('/', ['controller' => 'Dashboard', 'action' => 'index'],['_name'=>'admin_dashboard']);
         $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+        $routes->connect('/users', ['controller' => 'Users', 'action' => 'index'],['_name'=>'admin_user_index']);
     });
 
     /*

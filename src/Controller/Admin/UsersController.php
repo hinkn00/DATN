@@ -9,6 +9,7 @@ class UsersController extends AdminController
 {
     public function login()
     {
+        $this->viewBuilder()->setLayout('ajax');
         $this->loadModel('Users');
         if($this->request->is('post')){
             $check_user = $this->Users->find('all',[
@@ -26,5 +27,10 @@ class UsersController extends AdminController
             die;
         }
         $this->set('title','Đăng nhập');
+    }
+
+    public function index()
+    {
+        $this->set('title','Quản lý users');
     }
 }
