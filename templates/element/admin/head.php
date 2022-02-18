@@ -11,5 +11,5 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">    
     <?= $this->Html->css(['bootstrap.min'])?>
-    <?= $this->Html->script(['bootstrap.min','jquery.min'])?>
+    <?= $this->Html->script(['jquery.min'])?>
 </head>
