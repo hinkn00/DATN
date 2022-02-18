@@ -1,7 +1,7 @@
 <?php
 $tab = $this->request->getParam('controller');
 ?>
-<div class="col-md-3 slidebar">
+<nav class="col-md-3 sidebar">
     <ul class="list-group">
         <li class="list-group-item">
             <div class="media">
@@ -11,7 +11,7 @@ $tab = $this->request->getParam('controller');
                 <div class="media-body">
                     <h4 class="media-heading">Admin</h4>
                     <!-- if else -->
-                    <span class="label label-primary">Quản trị viên</span>
+                    <span class="badge badge-primary">Quản trị viên</span>
                 </div>
             </div>
         </li>
@@ -47,4 +47,4 @@ $tab = $this->request->getParam('controller');
             <i class="fa-solid fa-gear"></i> Cài đặt chung
         </a>
     </ul>
-</div>
+</nav>
