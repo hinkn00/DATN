@@ -1,50 +1,23 @@
-<?php
-$tab = $this->request->getParam('controller');
-?>
-<nav class="col-md-3 sidebar">
-    <ul class="list-group">
-        <li class="list-group-item">
-            <div class="media">
-                <a class="pull-left">
-                    <img src="" alt="Ảnh đại diện" class="media-object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">Admin</h4>
-                    <!-- if else -->
-                    <span class="badge badge-primary">Quản trị viên</span>
-                </div>
-            </div>
-        </li>
-        <a href="<?php echo $this->Url->build(array('_name'=>'admin_dashboard'))?>" class="list-group-item <?php echo $tab == 'Dashboard' ? 'active' : ''; ?>">
-            <i class="fa-solid fa-gauge-high" id="dashboard"></i> Bảng điều khiển
+<div class="col-md-3 col-lg-2 sidebar-offcanvas pt-3" id="sidebar" role="navigation">
+   <ul class="nav flex-column pl-1">
+      <li class="nav-item"><a class="nav-link <?= $this->request->getParam('controller') == 'Dashboard' ? 'active' : ''?>" href="<?php echo $this->Url->build(['_name'=>'admin_dashboard'])?>"><i class="fa-solid fa-gauge-high" id="dashboard"></i> Bảng điều khiển</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-tags"></i>&nbsp;Danh mục phim</a></li>
+      <li class="nav-item">
+         <a class="nav-link" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i class="fa-solid fa-tag"></i> Thể loại phim&#9662;</a>
+         <ul class="list-unstyled flex-column pl-3 collapse" id="submenu1" aria-expanded="false">
+            <li class="nav-item"><a class="nav-link" href="">Thêm mới</a></li>
+            <li class="nav-item"><a class="nav-link" href="">Danh sách</a></li>
+         </ul>
+      </li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-earth-asia"></i> Quốc gia</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-clapperboard"></i> Phim</a></li>
+      <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-video"></i> Tập phim</a></li>
+      <li class="nav-item">
+        <a href="<?php echo $this->Url->build(['_name'=>'admin_user_index'])?>" class="nav-link <?= $this->request->getParam('controller') == 'Users' ? 'active' : ''?>">
+            <i class="fa-solid fa-user"></i>&nbsp;Quản lý người dùng
         </a>
-
-        <a href="#" class="list-group-item <?php echo $tab == 'Categories' ? 'active' : ''; ?> ">
-            <i class="fa-solid fa-tags"></i> Danh mục phim
-        </a>
-
-        <a href="#" class="list-group-item <?php echo $tab == 'Genres' ? 'active' : ''; ?> ">
-            <i class="fa-solid fa-tag"></i> Thể loại phim
-        </a>
-
-        <a href="#" class="list-group-item <?php echo $tab == 'Countries' ? 'active' : ''; ?> ">
-            <i class="fa-solid fa-earth-asia"></i> Quốc gia
-        </a>
-
-        <a href="#" class="list-group-item <?php echo $tab == 'Movies' ? 'active' : ''; ?>">
-            <i class="fa-solid fa-clapperboard"></i> Phim
-        </a>
-
-        <a href="#" class="list-group-item <?php echo $tab == 'Episodes' ? 'active' : ''; ?> ">
-            <i class="fa-solid fa-video"></i> Tập phim
-        </a>
-
-        <a href="<?php echo $this->Url->build(['_name'=>'admin_user_index'])?>" class="list-group-item <?php echo $tab == 'Users' ? 'active' : ''; ?>">
-            <i class="fa-solid fa-user"></i> Quản lý người dùng
-        </a>
-        
-        <a href="#" class="list-group-item <?php echo $tab == 'Configes' ? 'active' : ''; ?> ">
-            <i class="fa-solid fa-gear"></i> Cài đặt chung
-        </a>
-    </ul>
-</nav>
+      </li>
+      <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-gear"></i> Cài đặt chung</a></li>
+   </ul>
+</div>
+<!--/col-->
