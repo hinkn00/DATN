@@ -10,6 +10,6 @@
     <?= $this->Html->meta('icon') ?>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">    
-    <?= $this->Html->css(['bootstrap.min','admin/main'])?>
+    <?= $this->Html->css(['bootstrap.min','font-awesome.min','admin/main'])?>
     <?= $this->Html->script(['jquery.min'])?>
 </head>

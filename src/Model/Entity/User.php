@@ -19,6 +19,7 @@ class User extends Entity
         'status' => true,
         'create_at' => true,
         'modified' => true,
+        'img_avatar' => true,
     ];
     
     protected $_hidden = [
