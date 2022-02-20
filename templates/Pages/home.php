@@ -100,14 +100,15 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                     </div>
                 </div>
                 <div class="row">
-                <div class="column">
-                    <h4>Trang đăng nhập</h4>
-                    <ul>
-                    <?php if (version_compare(PHP_VERSION, '7.2.0', '>=')) : ?>
-                        <li class="bullet success"><?= $this->Html->link('Đăng nhập',['_name'=>'login'],['style'=>'text-decoration:none'])?></li>
-                    <?php endif; ?>
-                    </ul>
-                </div>
+                    <div class="column">
+                        <h4>Trang đăng nhập</h4>
+                        <ul>
+                        <?php if (version_compare(PHP_VERSION, '7.2.0', '>=')) : ?>
+                            <li class="bullet success"><?= $this->Html->link('Đăng nhập',['_name'=>'login'],['style'=>'text-decoration:none'])?></li>
+                            <li class="bullet success"><?= $this->Html->link('Admin',['_name'=>'admin_dashboard'],['style'=>'text-decoration:none'])?></li>
+                        <?php endif; ?>
+                        </ul>
+                    </div>
                     <div class="column">
                         <h4>Environment</h4>
                         <ul>
