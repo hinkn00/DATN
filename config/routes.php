@@ -25,49 +25,19 @@ use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 
 return static function (RouteBuilder $routes) {
-    /*
-     * The default class to use for all routes
-     *
-     * The following route classes are supplied with CakePHP and are appropriate
-     * to set as the default:
-     *
-     * - Route
-     * - InflectedRoute
-     * - DashedRoute
-     *
-     * If no call is made to `Router::defaultRouteClass()`, the class used is
-     * `Route` (`Cake\Routing\Route\Route`)
-     *
-     * Note that `Route` does not do any inflections on URLs which will result in
-     * inconsistently cased URLs when used with `{plugin}`, `{controller}` and
-     * `{action}` markers.
-     */
+
     $routes->setRouteClass(DashedRoute::class);
 
-    $routes->scope('/', function (RouteBuilder $builder) {
- 
-        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-
-        $builder->connect('/pages/*', 'Pages::display');
-        $builder->connect(
-            '/login',
-            ['controller'=>'Pages', 'action'=>'login'],
-            ['_name'=>'login']
-        );
-        /*
-         * Connect catchall routes for all controllers.
-         *
-         * The `fallbacks` method is a shortcut for
-         *
-         * ```
-         * $builder->connect('/{controller}', ['action' => 'index']);
-         * $builder->connect('/{controller}/{action}/*', []);
-         * ```
-         *
-         * You can remove these routes once you've connected the
-         * routes you want in your application.
-         */
-        $builder->fallbacks();
+    require_once('admin_router.php');
+    
+    /*
+    * Router Admin
+    */
+    $routes->prefix('admin', function (RouteBuilder $routes){
+        $routes->connect('/', ['controller' => 'Dashboard', 'action' => 'index'],['_name'=>'admin_dashboard']);
+        $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+        $routes->connect('/users', ['controller' => 'Users', 'action' => 'index'],['_name'=>'admin_user_index']);
+        $routes->connect('/users/add', ['controller' => 'Users', 'action' => 'add'],['_name'=>'admin_user_add']);
     });
 
     /*
