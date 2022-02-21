@@ -77,6 +77,6 @@
       });
     });
   </script>
-<?= $this->Html->script(['jquery-3.3.1.slim.min','popper.min','font-awesome','feather.min'])?>
+<?= $this->Html->script(['jquery-3.3.1.slim.min','popper.min','font-awesome','feather.min','tether.min'])?>
 <?= $this->Html->script(['bootstrap.min'])?>
 
