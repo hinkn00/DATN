@@ -24,20 +24,29 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
+                        <th>Ảnh đại diện</th>
                         <th>Tên</th>
                         <th>Email</th>
                         <th>Quyền</th>
                         <th>Active</th>
+                        <th>Khác</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach($users as $user):?>
                     <tr>
                         <td><?=$user->id?></td>
-                        <td><?=$user->name?></td>
+                        <td class="td-center">
+                            <?=$this->Html->image('upload/users/'.$user->img_avatar,['class'=>'user_avatar'])?>
+                        </td>
+                        <td class="td-center"><?=$user->name?></td>
                         <td><?=$user->email?></td>
-                        <td><?=$user->role?></td>
-                        <td><?=$user->active?></td>
+                        <td class="td-center"><?=$user->role?></td>
+                        <td class="td-center"><?=$user->active?></td>
+                        <td class="td-center">
+                            <?= $this->Html->link('Sửa',['_name'=>'admin_user_edit'],['class'=>'btn btn-md btn-warning'])?>
+                            <?= $this->Html->link('Xóa',['_name'=>'admin_user_edit'],['class'=>'btn btn-md btn-danger'])?>
+                        </td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>

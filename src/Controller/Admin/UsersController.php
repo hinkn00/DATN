@@ -15,6 +15,13 @@ use Cake\Event\EventInterface;
 
 class UsersController extends AdminController
 {
+
+    var $IS_ADMIN = 0;
+    var $STATUS   = 0;
+    var $ACTIVE   = 1;
+
+
+
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -53,6 +60,7 @@ class UsersController extends AdminController
     public function add()
     {
         $this->loadModel('Users');
+        
         $user = $this->Users->newEmptyEntity();
         if($this->request->is('post')){
             // $userTable = TableRegistry::get('Users');
@@ -60,14 +68,39 @@ class UsersController extends AdminController
             $user->email = $this->request->getData('email');
             $user->password = md5($this->request->getData('password'));
             $user->role = $this->request->getData('role');
+            $user->active = $this->ACTIVE;
             $user->create_at = date('Y-m-d H:i:s');
+            //upload file on server
+            $img = $this->request->getData('img_avatar');
+            
+            $user->img_avatar = $this->uploadFile($img);
             if($this->Users->save($user)){
-                echo 'thanh cong';
-            }else{
-                echo 'fail';
+                $this->Flash->success(__('success'));
+                return $this->redirect(['action'=>'add']);
+            }
+            else{
+                $this->set('error','Thêm không thành công! Vui lòng thử lại');
             }
         }
         $this->set('user',$user);
         $this->set('title','Thêm người dùng');
+    }
+    public function edit($id = null)
+    {
+        
+    }
+    //upload avatar
+    public function uploadFile($img)
+    {
+        $tmp = $img->getStream()->getMetadata('uri');
+        $nameImg = $img->getClientFilename();
+        $ex = substr(strrchr($nameImg,'.'),1);
+        $newName = time().'_'.$nameImg;
+        if(!file_exists(WWW_ROOT.'img/upload/users/')){
+            mkdir(WWW_ROOT.'img/upload/users/', 0777, true);
+        }
+        $path = "img/upload/users/".$newName;
+        move_uploaded_file($tmp, WWW_ROOT.$path);
+        return $newName;
     }
 }

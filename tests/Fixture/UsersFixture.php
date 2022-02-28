@@ -29,8 +29,9 @@ class UsersFixture extends TestFixture
                 'role' => 'Lorem ip',
                 'active' => 1,
                 'status' => 1,
-                'create_at' => '2022-02-17 09:38:31',
-                'modified' => '2022-02-17 09:38:31',
+                'create_at' => '2022-02-28 13:58:44',
+                'modified' => '2022-02-28 13:58:44',
+                'img_avatar' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();
