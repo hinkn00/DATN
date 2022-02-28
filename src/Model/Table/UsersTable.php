@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
 
 class UsersTable extends Table
 {
+ 
     public function initialize(array $config): void
     {
         parent::initialize($config);
@@ -21,6 +22,7 @@ class UsersTable extends Table
         $this->addBehavior('Timestamp');
     }
 
+    
     public function validationDefault(Validator $validator): Validator
     {
         $validator
@@ -29,15 +31,19 @@ class UsersTable extends Table
 
         $validator
             ->scalar('name')
-            ->maxLength('name', 50)
+            ->maxLength('name', 50, 'Tên không vượt quá 50 ký tự')
             ->requirePresence('name', 'create')
-            ->notEmptyString('name');
+            ->notEmptyString('name','Vui lòng không để trống tên');
 
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->notEmptyString('email','Vui lòng nhập email trước khi thêm')
+            ->add('email', 'unique', [
+                'rule' => 'validateUnique',
+                'message' => 'Email này đã tồn tại',
+                'provider' => 'table'
+            ]);
 
         $validator
             ->boolean('email_verified')
@@ -65,7 +71,7 @@ class UsersTable extends Table
             ->scalar('role')
             ->maxLength('role', 10)
             ->requirePresence('role', 'create')
-            ->notEmptyString('role');
+            ->notEmptyString('role', 'Vui lòng chọn quyền cho tài khoản');
 
         $validator
             ->boolean('active')
@@ -81,20 +87,32 @@ class UsersTable extends Table
             ->dateTime('create_at')
             ->allowEmptyDateTime('create_at');
 
+        $validator
+            ->allowEmptyFile('img_avatar')
+            ->notEmptyString('img_avatar','Vui lòng chọn ảnh')
+            ->add('img_avatar',[
+                'mimeType' => [
+                    'rule' => ['mimeType', ['image/jpg','image/png','image/jpeg'] ],
+                    'message' => 'Avatar chỉ có dạng jpg, png, jpeg'
+                ],
+                'fileSize' => [
+                    'rule' => ['fileSize', '<=', '1MB'],
+                    'message' => 'Hình ảnh chỉ nhỏ hơn hoặc bằng 1MB'
+                ]
+            ]);
+
         return $validator;
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
+    
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
+        $rules->add($rules->isUnique(['email']), ['errorField' => 'email','message'=>'Email đã tồn tại']);
 
         return $rules;
+    }
+
+    public function isValidRole($value, array $context): bool{
+        return in_array($value, ['admin','member'], true);
     }
 }

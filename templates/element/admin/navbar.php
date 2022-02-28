@@ -1,5 +1,5 @@
 <div class="col-md-3 col-lg-2 sidebar-offcanvas pt-3" id="sidebar" role="navigation">
-   <ul class="nav flex-column pl-1">
+   <ul class="nav flex-column pl-1" style="height: 100vh">
       <li class="nav-item"><a class="nav-link <?= $this->request->getParam('controller') == 'Dashboard' ? 'active' : ''?>" href="<?php echo $this->Url->build(['_name'=>'admin_dashboard'])?>"><i class="fa-solid fa-gauge-high" id="dashboard"></i> Bảng điều khiển</a></li>
       <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-tags"></i>&nbsp;Danh mục phim</a></li>
       <li class="nav-item">
