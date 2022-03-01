@@ -41,7 +41,8 @@ return static function (RouteBuilder $routes) {
         $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
         $routes->connect('/users', ['controller' => 'Users', 'action' => 'index'],['_name'=>'admin_user_index']);
         $routes->connect('/users/add', ['controller' => 'Users', 'action' => 'add'],['_name'=>'admin_user_add']);
-        $routes->connect('/users/edit', ['controller' => 'Users', 'action' => 'edit'],['_name'=>'admin_user_edit']);
+        $routes->connect('/users/edit/{id}', ['controller' => 'Users', 'action' => 'edit'],['_name'=>'admin_user_edit']);
+        $routes->connect('/users/delete/{id}', ['controller' => 'Users', 'action' => 'delete'],['_name'=>'admin_users_delete']);
     });
 
     /*

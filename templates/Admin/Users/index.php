@@ -44,8 +44,14 @@
                         <td class="td-center"><?=$user->role?></td>
                         <td class="td-center"><?=$user->active?></td>
                         <td class="td-center">
-                            <?= $this->Html->link('Sửa',['_name'=>'admin_user_edit'],['class'=>'btn btn-md btn-warning'])?>
-                            <?= $this->Html->link('Xóa',['_name'=>'admin_user_edit'],['class'=>'btn btn-md btn-danger'])?>
+                            <a href=<?= $this->URL->build(array('controller'=>'Users','action' => 'edit','id' => $user->id))?> class="btn btn-warning">Sửa</a>
+                            <?= $this->Form->postLink(__('Xóa'),
+                                ['_name'=>'admin_users_delete', 'id'=>$user->id],
+                                [
+                                    'confirm'=>__('Bạn có chắc muốn xóa người dùng có tên "{0}" không?',$user->name),
+                                    'class' => 'btn btn-danger',
+                                ]
+                                )?>
                         </td>
                     </tr>
                     <?php endforeach;?>
@@ -68,3 +74,34 @@
       </div>
    </div>
 </div>
+
+<script>
+    function alert(){
+        console.log('click dc');
+    }
+</script>
+<?php $flash = $this->Flash->render();
+    if($flash):
+?>
+    <script>
+        $(document).ready(function(){
+            Swal.fire({
+                icon: `success`,
+                title: `Xóa thành công`,
+                timer: 5000
+            })
+        })
+    </script>
+<?php endif;?>  
+<?php if(isset($error)):?>
+    <script>
+        $(document).ready(function(){
+            Swal.fire({
+                icon: `error`,
+                title: `Vui lòng thử lại. Xóa không thành công!`,
+                timer: 5000
+            })
+        })
+    </script>
+<?php endif;?> 
+<?php echo $this->Html->script(['admin/users','sweetalert2'])?>
