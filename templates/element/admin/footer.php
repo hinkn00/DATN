@@ -78,5 +78,6 @@
     });
   </script>
 <?= $this->Html->script(['jquery-3.3.1.slim.min','popper.min','font-awesome','feather.min','tether.min','bootstrap.min'])?>
-<?= $this->Html->script(['jquery.validate.min'])?>
+<?= $this->Html->script(['jquery.validate.min','additional-methods.min'])?>
+
 
