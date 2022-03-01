@@ -3,9 +3,10 @@
       <div class="col-lg-12 col-md-12">
         <h2 class="sub-header mb-3" style="display:flex">Quản lý người dùng</h2>
         <div class="box-tools" style=" width:100%; display:flex; justify-content: center">
-            <form action="<?php echo $this->Url->build(['_name'=>'admin_users_search'])?>" method="get">
+            <form action="<?php echo $this->Url->build(['action'=>'index'])?>" method="get">
                 <div class="input-group input-group-sm" style="width: 50vw;">
-                    <input type="text" name="query" class="form-control pull-right" id="query" placeholder="Nhập nội dung tìm kiếm">
+                    <input type="text" name="query" class="form-control pull-right" id="query" placeholder="Nhập nội dung tìm kiếm" 
+                    value="<?= !empty($this->request->getQuery('query')) ? $this->request->getQuery('query') : ''?>">
                     <div class="input-group-btn">
                         <button type="submit" class="btn btn-primary search-icon" style="
                             border-top-right-radius: 7px 7px;
@@ -22,9 +23,9 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a href="<?= $this->Url->build(array('_name'=>'admin_user_index'))?>" class="dropdown-item <?= count($users) == 10 ? 'active': ''?>">10</a>
-                    <a href="?limit=25" class="dropdown-item <?= count($users) == 25 ? 'active': ''?>">25</a>
-                    <a href="?limit=50" class="dropdown-item <?= count($users) == 50 ? 'active': ''?>">50</a>
-                    <a href="?limit=100" class="dropdown-item <?= count($users) == 100 ? 'active': ''?>">100</a>
+                    <a href=".?limit=25" class="dropdown-item <?= count($users) == 25 ? 'active': ''?>">25</a>
+                    <a href=".?limit=50" class="dropdown-item <?= count($users) == 50 ? 'active': ''?>">50</a>
+                    <a href=".?limit=100" class="dropdown-item <?= count($users) == 100 ? 'active': ''?>">100</a>
                 </div>
             </div>
             <div class="pull-right mb-2">

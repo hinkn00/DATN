@@ -155,4 +155,13 @@ class UsersController extends AdminController
         move_uploaded_file($tmp, WWW_ROOT.$path);
         return $newName;
     }
+
+    public function search()
+    {
+        $param_limit = $this->request->getParam('limit');
+        $this->loadModel('UsersBase');
+        $users = $this->paginate($this->UsersBase->find('all'),array('limit'=> isset($param_limit)? $param_limit : '10'));
+        $this->set('users',$users);
+        $this->set('title','Từ khóa: ');
+    }
 }

@@ -121,6 +121,17 @@ td{
     margin-bottom:5px; 
     margin-right:5px
 }
+
+.search-icon{
+    width: 80px;
+    cursor: pointer;
+}
+.search-icon:hover{
+    background-color: #5584ad;
+}
+#query{
+    text-align: center;
+}
 /* #cancel a:hover {
     color: white;
 } */
