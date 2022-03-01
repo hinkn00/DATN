@@ -92,7 +92,7 @@ body.modal-open {
     background-size: 55px 55px;
 }
 
-label.error, #email-error.error-message{
+label.error, .error-message{
     color: red;
     font-size: 14px;
     font-weight: 500;
