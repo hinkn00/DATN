@@ -12,7 +12,6 @@ body.modal-open {
     padding-left: 0;
     padding-top: 0;
     background-color: #212529;
-    height: 100vh;
 }
 
 /*
@@ -72,6 +71,7 @@ body.modal-open {
 
 #file {
     border: 2px dashed #92b0b3 !important;
+    cursor: pointer
 }
 .files:before {
     position: absolute;
@@ -90,6 +90,36 @@ body.modal-open {
     padding: 95px 0 0 100%;
     background: url("../../img/download.png") top center no-repeat #fff;
     background-size: 55px 55px;
+}
+
+label.error, .error-message{
+    color: red;
+    font-size: 14px;
+    font-weight: 500;
+}
+th{
+    text-align: center;
+}
+td{
+    font-size: 16px;
+    font-weight: 400;
+}
+.td-center {
+    text-align: center; 
+    vertical-align: middle;
+}
+.user_avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.show_img_append{
+    border-radius: 50%; 
+    border: 1px solid #ddd; 
+    width: 100px; 
+    height: 100px; 
+    margin-bottom:5px; 
+    margin-right:5px
 }
 /* #cancel a:hover {
     color: white;

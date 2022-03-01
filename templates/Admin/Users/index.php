@@ -24,20 +24,35 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
+                        <th>Ảnh đại diện</th>
                         <th>Tên</th>
                         <th>Email</th>
                         <th>Quyền</th>
                         <th>Active</th>
+                        <th>Khác</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach($users as $user):?>
                     <tr>
                         <td><?=$user->id?></td>
-                        <td><?=$user->name?></td>
+                        <td class="td-center">
+                            <?=$this->Html->image('upload/users/'.$user->img_avatar,['class'=>'user_avatar'])?>
+                        </td>
+                        <td class="td-center"><?=$user->name?></td>
                         <td><?=$user->email?></td>
-                        <td><?=$user->role?></td>
-                        <td><?=$user->active?></td>
+                        <td class="td-center"><?=$user->role?></td>
+                        <td class="td-center"><?=$user->active?></td>
+                        <td class="td-center">
+                            <a href=<?= $this->URL->build(array('controller'=>'Users','action' => 'edit','id' => $user->id))?> class="btn btn-warning">Sửa</a>
+                            <?= $this->Form->postLink(__('Xóa'),
+                                ['_name'=>'admin_users_delete', 'id'=>$user->id],
+                                [
+                                    'confirm'=>__('Bạn có chắc muốn xóa người dùng có tên "{0}" không?',$user->name),
+                                    'class' => 'btn btn-danger',
+                                ]
+                                )?>
+                        </td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>
@@ -59,3 +74,34 @@
       </div>
    </div>
 </div>
+
+<script>
+    function alert(){
+        console.log('click dc');
+    }
+</script>
+<?php $flash = $this->Flash->render();
+    if($flash):
+?>
+    <script>
+        $(document).ready(function(){
+            Swal.fire({
+                icon: `success`,
+                title: `Xóa thành công`,
+                timer: 5000
+            })
+        })
+    </script>
+<?php endif;?>  
+<?php if(isset($error)):?>
+    <script>
+        $(document).ready(function(){
+            Swal.fire({
+                icon: `error`,
+                title: `Vui lòng thử lại. Xóa không thành công!`,
+                timer: 5000
+            })
+        })
+    </script>
+<?php endif;?> 
+<?php echo $this->Html->script(['admin/users','sweetalert2'])?>

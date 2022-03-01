@@ -1,4 +1,4 @@
-<footer class="container-fluid" style="background:#212529; color:#fff">
+<footer class="container-fluid" style="background:#212529; color:#fff; width: 100%">
       <p class="text-right small">©2022 - wesite make by TungNT</p>
 </footer>
   <!-- Modal -->
@@ -77,6 +77,7 @@
       });
     });
   </script>
-<?= $this->Html->script(['jquery-3.3.1.slim.min','popper.min','font-awesome','feather.min','tether.min'])?>
-<?= $this->Html->script(['bootstrap.min'])?>
+<?= $this->Html->script(['jquery-3.3.1.slim.min','popper.min','font-awesome','feather.min','tether.min','bootstrap.min'])?>
+<?= $this->Html->script(['jquery.validate.min','additional-methods.min'])?>
+
 
