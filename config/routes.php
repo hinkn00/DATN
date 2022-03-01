@@ -43,6 +43,7 @@ return static function (RouteBuilder $routes) {
         $routes->connect('/users/add', ['controller' => 'Users', 'action' => 'add'],['_name'=>'admin_user_add']);
         $routes->connect('/users/edit/{id}', ['controller' => 'Users', 'action' => 'edit'],['_name'=>'admin_user_edit']);
         $routes->connect('/users/delete/{id}', ['controller' => 'Users', 'action' => 'delete'],['_name'=>'admin_users_delete']);
+        $routes->connect('/users/search', ['controller' => 'Users', 'action' => 'search'],['_name'=>'admin_users_search']);
     });
 
     /*
