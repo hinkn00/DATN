@@ -1,3 +1,17 @@
+//responsive
+$(window).resize(function(){
+ 
+    var width = $(window).width();
+    
+    if (width <= 768){
+        $('div.input-search').removeClass('input-group');
+        $('div.input-search .button-search').removeClass('input-group-btn');
+    }
+    else{
+        $('div.input-search').addClass('input-group');
+        $('div.input-search .button-search').addClass('input-group-btn');
+    }
+});
 $().ready(function(){
     $.validator.addMethod(
         "filesize",

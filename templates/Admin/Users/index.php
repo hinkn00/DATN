@@ -3,10 +3,10 @@
       <div class="col-lg-12 col-md-12">
         <h2 class="sub-header mb-3" style="display:flex">Quản lý người dùng</h2>
         <div class="box-tools" style=" width:100%; display:flex; justify-content: center">
-            <form action="<?php echo $this->Url->build(['_name'=>'admin_users_search'])?>" method="get">
-                <div class="input-group input-group-sm" style="width: 50vw;">
-                    <input type="text" name="query" class="form-control pull-right" id="query" placeholder="Nhập nội dung tìm kiếm">
-                    <div class="input-group-btn">
+            <form action="<?php echo $this->Url->build(['action'=>'search'],['id'=>'frmSearch'])?>" method="get">
+                <div class="input-search input-group" style="width: 50vw;">
+                    <input type="text" name="query" class="form-control pull-right" id="query" placeholder="Nhập nội dung tìm kiếm" >
+                    <div class="button-search input-group-btn">
                         <button type="submit" class="btn btn-primary search-icon" style="
                             border-top-right-radius: 7px 7px;
                             border-bottom-right-radius: 7px 7px;
@@ -57,7 +57,7 @@
                         <td class="td-center"><?=$user->role?></td>
                         <td class="td-center"><?=$user->active?></td>
                         <td class="td-center">
-                            <a href=<?= $this->URL->build(array('controller'=>'Users','action' => 'edit','id' => $user->id))?> class="btn btn-warning">Sửa</a>
+                            <a href=<?= $this->URL->build(array('controller'=>'Users','action' => 'edit','id' => $user->id))?> class="btn btn-warning" id="edit-btn">Sửa</a>
                             <?= $this->Form->postLink(__('Xóa'),
                                 ['_name'=>'admin_users_delete', 'id'=>$user->id],
                                 [
