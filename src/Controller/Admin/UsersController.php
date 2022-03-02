@@ -51,9 +51,7 @@ class UsersController extends AdminController
 
     public function index()
     {
-        $param_limit = $this->request->getParam('limit');
-        $this->loadModel('UsersBase');
-        $users = $this->paginate($this->UsersBase->find('all'),array('limit'=> isset($param_limit)? $param_limit : '10'));
+        $users = $this->paginateAll();
         $this->set('users',$users);
         $this->set('title','Quản lý users');
     }
@@ -158,10 +156,16 @@ class UsersController extends AdminController
 
     public function search()
     {
-        $param_limit = $this->request->getParam('limit');
-        $this->loadModel('UsersBase');
-        $users = $this->paginate($this->UsersBase->find('all'),array('limit'=> isset($param_limit)? $param_limit : '10'));
+        $search = $this->request->getQuery('query');
+        $this->loadModel('Users');
+        $result = $this->Users->search($search);
+        // debug($result);die;
+        if($result){
+            $users = $this->paginateSearch($result);
+        } else{
+            $users = '';
+        }
         $this->set('users',$users);
-        $this->set('title','Từ khóa: ');
+        $this->set('title','Từ khóa tìm kiếm: '.$search);
     }
 }
