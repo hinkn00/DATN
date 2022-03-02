@@ -132,6 +132,24 @@ td{
 #query{
     text-align: center;
 }
+
+.query{
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+}
+.input-search{
+    margin-bottom: 5px;
+}
 /* #cancel a:hover {
     color: white;
 } */
@@ -202,4 +220,18 @@ td{
     -o-transform: rotate(-44deg);
     -ms-transform: rotate(-44deg);
     transform: rotate(-44deg);
+}
+
+@media screen and (max-width: 1085px) {
+    #edit-btn.btn{
+        margin-bottom: 3px;
+    }
+}
+@media all and (max-width: 768px) {
+    .search-icon{
+        margin-top: 5px;
+        width: 100%;
+        border-radius: 7px;
+        transition: 1s;
+    }
 }
