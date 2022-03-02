@@ -12,6 +12,11 @@
             ['controller'=>'Pages', 'action'=>'login'],
             ['_name'=>'login']
         );
+        $builder->connect(
+            '/users/profile',
+            ['controller'=>'Members','action'=>'profile'],
+            ['_name'=>'users_profile']
+        );
 
         $builder->fallbacks();
     });
