@@ -9,7 +9,7 @@
         $builder->connect('/pages/*', 'Pages::display');
         $builder->connect(
             '/login',
-            ['controller'=>'Pages', 'action'=>'login'],
+            ['controller'=>'Members', 'action'=>'login'],
             ['_name'=>'login']
         );
         $builder->connect(
