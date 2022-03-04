@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
-</head>
+<?= $this->element('client/head')?>
 <body>
-    <?= $this->Flash->render() ?>
-    <?= $this->fetch('content') ?>
+<!--preloading-->
+<div id="preloader">
+    <?= $this->Html->image('default/logo1.png',['class'=>'logo','width'=>119,'height'=>'58'])?>>
+    <div id="status">
+        <span>1</span>
+        <span>2</span>
+    </div>
+</div>
+<!--end of preloading-->
+<?= $this->element('login')?>
+<?= $this->element('register')?>
+
+<?= $this->element('client/header')?>
+
+<?= $this->fetch('content')?>
+<?= $this->element('client/footer')?>
 </body>
 </html>
