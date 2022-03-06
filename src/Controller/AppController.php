@@ -16,6 +16,7 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
 use Cake\Controller\Controller;
 
 /**
@@ -43,11 +44,33 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Auth',[
+            'logoutRedirect' => [
+                'controller' => 'Pages',
+                'action' => 'home'
+            ],
+        ]);
 
+        $member_info = $this->_getMemberLogin();
+        $this->set(compact('member_info'));
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+    }
+    public function beforeFilter(EventInterface $event) {
+        parent::beforeFilter($event);
+        $this->Auth->allow();
+    }
+
+    public function _getMemberLogin()
+    {
+        return !empty($this->Auth->user()) ? $this->Auth->user() : '';
+    }
+
+    public function isCheckLogin()
+    {
+        return !empty($this->Auth->user()) ? true : false;
     }
 }

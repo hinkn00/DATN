@@ -38,6 +38,6 @@ class AppView extends View
     public function initialize(): void
     {
         $this->loadHelper("Paginator",['templates' => 'Hepler/paginator-templates']);
-        $this->loadHelper('Admin');
+        $this->loadHelper('Breadcrumbs',['templates' => 'Hepler/breadCrumbs-templates']);
     }
 }

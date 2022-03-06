@@ -105,7 +105,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                         <ul>
                         <?php if (version_compare(PHP_VERSION, '7.2.0', '>=')) : ?>
                             <li class="bullet success"><?= $this->Html->link('Đăng nhập',['_name'=>'login'],['style'=>'text-decoration:none'])?></li>
-                            <li class="bullet success"><?= $this->Html->link('Profile',['_name'=>'users_profile'],['style'=>'text-decoration:none'])?></li>
+                            <li class="bullet success"><?= $this->Html->link('Profile',['_name'=>'member_profile','id'=> $member_info['id']??403],['style'=>'text-decoration:none'])?></li>
                             <li class="bullet success"><?= $this->Html->link('Admin',['_name'=>'admin_dashboard'],['style'=>'text-decoration:none'])?></li>
                         <?php endif; ?>
                         </ul>

@@ -1,3 +1,4 @@
+
 <header class="ht-header">
 	<div class="container">
 		<nav class="navbar navbar-default navbar-custom">
@@ -91,8 +92,13 @@
 							</ul>
 						</li>                
 						<li><a href="#">Help</a></li>
-						<li class="loginLink"><a href="#">đăng nhập</a></li>
-						<li class="btn signupLink"><a href="#">đăng ký</a></li>
+						<?php
+						if(!empty($member_info)):?>
+							<li class="logoutLink"><a href="<?= $this->Url->build(['_name'=>'users_logout'])?>">đăng xuất</a></li>
+						<?php else:?>
+							<li class="loginLink"><a href="#">đăng nhập</a></li>
+							<li class="btn signupLink"><a href="#">đăng ký</a></li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->

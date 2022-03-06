@@ -61,10 +61,11 @@ class UsersController extends AdminController
         
         $user = $this->UsersBase->newEmptyEntity();
         if($this->request->is('post')){
+            $haser = new DefaultPasswordHasher();
             // $userTable = TableRegistry::get('Users');
             $user->name = $this->request->getData('name');
             $user->email = $this->request->getData('email');
-            $user->password = md5($this->request->getData('password'));
+            $user->password = $haser->hash($this->request->getData('password'));
             $user->role = $this->request->getData('role');
             $user->active = $this->ACTIVE;
             $user->create_at = date('Y-m-d H:i:s');
