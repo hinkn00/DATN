@@ -4,18 +4,23 @@
 
     $routes->scope('/', function (RouteBuilder $builder) {
  
-        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home'],['_name'=>'home']);
 
         $builder->connect('/pages/*', 'Pages::display');
         $builder->connect(
-            '/login',
+            '/users/login',
             ['controller'=>'Members', 'action'=>'login'],
             ['_name'=>'login']
         );
         $builder->connect(
-            '/users/profile',
+            '/users/profile/{id}',
             ['controller'=>'Members','action'=>'profile'],
-            ['_name'=>'users_profile']
+            ['_name'=>'member_profile']
+        );
+        $builder->connect(
+            '/users/logout',
+            ['controller'=>'Members','action'=>'logout'],
+            ['_name'=>'users_logout']
         );
 
         $builder->fallbacks();

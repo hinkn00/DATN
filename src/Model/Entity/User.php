@@ -43,8 +43,8 @@ class User extends Entity
         'role' => true,
         'active' => true,
         'status' => true,
-        'create_at' => true,
-        'modified' => true,
+        // 'create_at' => false,
+        // 'modified' => false,
         'img_avatar' => true,
     ];
 
@@ -55,5 +55,7 @@ class User extends Entity
      */
     protected $_hidden = [
         'password',
+        'create_at',
+        'modified'
     ];
 }

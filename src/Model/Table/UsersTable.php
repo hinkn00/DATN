@@ -22,4 +22,17 @@ class UsersTable extends UsersBaseTable{
         $data = $this->find('all',$options);
         return $data;
     }
+
+    public function checkEmailUsers($email)
+    {
+        $options = [
+            'filed' => ['email','active'],
+            'conditions' => array(
+                "email" => $email,
+                'active' => 1
+            )
+        ];
+        $data = $this->find('all',$options)->first();
+        return $data;
+    }
 }

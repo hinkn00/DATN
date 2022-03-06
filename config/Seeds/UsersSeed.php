@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Migrations\AbstractSeed;
-
+use Cake\Auth\DefaultPasswordHasher;
 /**
  * Users seed.
  */
@@ -20,6 +20,7 @@ class UsersSeed extends AbstractSeed
      */
     public function run()
     {
+        $hasher = new DefaultPassWordHasher();
         $data = [];
         $faker = Faker\Factory::create();
         for ($i = 0; $i < 100; $i++) {
@@ -27,13 +28,15 @@ class UsersSeed extends AbstractSeed
                 'name'          => $faker->name,
                 'email'         => $faker->unique()->email,
                 'email_verified'=> '1',
-                'password'      => md5('123456789'),
+                'password'      => $hasher->hash('123456789'),
                 'remember_token'=> $faker->sha1(),
                 'is_admin'      => 0,
                 'role'          => 'member',
-                'active'        => 0,
+                'active'        => 1,
+                'status'        => 0,
                 'create_at'     => Date('Y-m-d H:i:s'),
-                'modified'     => Date('Y-m-d H:i:s'),
+                'modified'      => Date('Y-m-d H:i:s'),
+                'img_avatar'    => 'default.jpg'
             ];
         }
         $table = $this->table('users');

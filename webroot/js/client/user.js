@@ -2,10 +2,9 @@ $('#formLogin button').on('click', function(){
     email = $('#email').val();
     password = $('#password').val();
     _csrfToken = $('input[name=_csrfToken]').val();
-    console.log(_csrfToken);
-    console.log(password);
+
     $.ajax({
-        url:  "/login",
+        url:  "/users/login",
         type: 'post',
         dataType: 'json',
         data: {
@@ -13,8 +12,7 @@ $('#formLogin button').on('click', function(){
             email: email,
             password: password,
         },
-        success : function(result){
-            alert(result);
-        }
+    }).done(function(data){
+        location.reload();
     });
 });

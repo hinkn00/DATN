@@ -1,14 +1,38 @@
-<?php $this->assign('title', $title); ?>
+<?php $this->assign('title', 'Hồ sơ cá nhân'); ?>
+<style>
+	.avatar{
+		height:125px; 
+		width:125px; 
+		border-radius:50%
+	}
+</style>
 <div class="hero user-hero">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1>Edward kennedy’s profile</h1>
-					<ul class="breadcumb">
-						<li class="active"><a href="#">Home</a></li>
-						<li> <span class="ion-ios-arrow-right"></span>Profile</li>
-					</ul>
+					<h1>Thông tin: <?= $member_info['name'] ?? ''?></h1>
+					<?php 
+						$this->Breadcrumbs->add([
+							[
+								'title' => 'Trang chủ', 
+								'url' => ['controller' => 'Pages', 'action' => 'home'], 
+								'options' => [
+									'class' => 'active'
+								]
+							],
+							[
+								'title'=> $member_info['name'] ?? '',
+								'options' => [
+									'innerAttrs' => [
+										'class' => "ion-ios-arrow-right"
+									]
+								]
+
+							]
+						]);
+						echo $this->Breadcrumbs->render();
+					?>
 				</div>
 			</div>
 		</div>
@@ -20,7 +44,8 @@
 			<div class="col-md-3 col-sm-12 col-xs-12">
 				<div class="user-information">
 					<div class="user-img">
-						<a href="#"><?= $this->Html->image('default/user-img.png')?><br></a>
+					<!-- Để tạm sau xóa điều kiện -->
+					<a href="#"><?= $this->Html->image('upload/users/'.($member_info['img_avatar'] ?? 'default.jpg'),['class'=>'avatar'])?><br></a>
 						<a href="#" class="redbtn">Change avatar</a>
 					</div>
 					<div class="user-fav">
@@ -34,81 +59,116 @@
 					<div class="user-fav">
 						<p>Others</p>
 						<ul>
-							<li><a href="#">Change password</a></li>
-							<li><a href="#">Log out</a></li>
+							<li><a href="#">Thay đổi mật khẩu</a></li>
+							<li><a href="<?= $this->Url->build(['_name'=>'users_logout'])?>">Đăng xuất</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
-					<form action="#" class="user">
-						<h4>01. Profile details</h4>
+					<?=$this->Form->create(null,[
+						'class'=>'user',
+						'action' => '/users/profile/'.($member_info['id']??403)
+					])?>
+						<h4>01. Thông tin cá nhân</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>Username</label>
-								<input type="text" placeholder="edwardkennedy">
+								<?= $this->Form->control('name',[
+									'label'=>'Tên người dùng', 
+									'placeholder'=> $member_info['name'] ?? ''
+									])
+								?>
 							</div>
 							<div class="col-md-6 form-it">
-								<label>Email Address</label>
-								<input type="text" placeholder="edward@kennedy.com">
+								<?= $this->Form->control('email',[
+									'label'=>'Địa chỉ Email', 
+									'placeholder'=> $member_info['email'] ?? ''
+									])
+								?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>First Name</label>
-								<input type="text" placeholder="Edward ">
+								<?= $this->Form->control('number_phone',[
+									'label'=>'Số điện thoại', 
+									'placeholder'=> '0123456789'
+									])
+								?>
 							</div>
 							<div class="col-md-6 form-it">
-								<label>Last Name</label>
-								<input type="text" placeholder="Kennedy">
+								<?= $this->Form->control('role',[
+									'label'=>'Thành viên', 
+									'placeholder'=> $member_info['role'] ?? '',
+									'disabled' => true,
+									'style' => 'background-color:#233A50; color: #abb7c4'
+									])
+								?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>Country</label>
-								<select>
-								  <option value="united">United States</option>
-								  <option value="saab">Others</option>
-								</select>
+								<?= $this->Form->control('country',[
+									'label'=>'Đất nước', 
+									'options'=> [
+										'united' => 'United States',
+										'saab' => 'Others'
+									],
+									])
+								?>
 							</div>
 							<div class="col-md-6 form-it">
-								<label>State</label>
-								<select>
-								  <option value="united">New York</option>
-								  <option value="saab">Others</option>
-								</select>
+								<?= $this->Form->control('city',[
+									'label'=>'Thành phố', 
+									'options'=> [
+										'united' => 'New York',
+										'saab' => 'Others'
+									],
+									])
+								?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-2">
-								<input class="submit" type="submit" value="save">
+								<?= $this->Form->input('update_submit', ['value'=>'Cập nhật','type'=>'submit','class'=>'submit'])?>
 							</div>
 						</div>	
-					</form>
+					<?= $this->Form->end()?>
 					<form action="#" class="password">
-						<h4>02. Change password</h4>
+						<h4>02. Thay đổi mật khẩu</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>Old Password</label>
-								<input type="text" placeholder="**********">
+								<?= $this->Form->control('old_password',[
+									'label'=>'Mật khẩu cũ',
+									'type' =>'password',
+									'placeholder'=> '**********'
+									])
+								?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>New Password</label>
-								<input type="text" placeholder="***************">
+								<?= $this->Form->control('new_password',[
+									'label'=>'Mật khẩu mới',
+									'type' =>'password',
+									'placeholder'=> "***************"
+									])
+								?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>Confirm New Password</label>
-								<input type="text" placeholder="*************** ">
+								<?= $this->Form->control('cf_password',[
+									'label'=>'Nhập lại mật khẩu mới',
+									'type' =>'password',
+									'placeholder'=> "***************"
+									])
+								?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-2">
-								<input class="submit" type="submit" value="change">
+								<?= $this->Form->input('update_submit', ['value'=>'Thay đổi','type'=>'submit','class'=>'submit'])?>
 							</div>
 						</div>	
 					</form>
