@@ -43,10 +43,37 @@ class MembersController extends AppController{
             $member = $this->UsersBase->patchEntity($member, [
                 'name' => $this->request->getData('name'),
             ]);
-
             if($this->UsersBase->save($member)){
                 $this->Auth->setUser($member);
                 return $this->redirect(['controller' => 'Members', 'action' => 'profile', 'id'=> $id]); exit();
+            }
+        }
+    }
+
+    public function changePassword($id = null)
+    {
+             
+        $id = $this->request->getParam('id');
+        $this->loadModel('UsersBase');
+        $member = $this->UsersBase->get($id);
+
+        // if(!$this->isCheckLogin()){
+        //     return $this->redirect(['controller'=>'Pages','action'=>'home']);
+        // }
+
+        $haser = new DefaultPasswordHasher();
+        $new_pass = $this->request->getData('new_password');
+        $old_pass = $this->request->getData('old_password');
+
+        if($this->request->is(['post','put'])){
+            if($haser->check($old_pass, $member->password)){
+                $member = $this->UsersBase->patchEntity($member, [
+                    'password' => $haser->hash($new_pass),
+                ]);
+                if($this->UsersBase->save($member)){
+                    $this->Auth->setUser($member);
+                    return $this->redirect(['controller' => 'Members', 'action' => 'profile', 'id'=> $id]); exit();
+                }
             }
         }
     }

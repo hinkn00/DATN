@@ -69,7 +69,7 @@
 				<div class="form-style-1 user-pro" action="#">
 					<?=$this->Form->create(null,[
 						'class'=>'user',
-						'action' => '/users/profile/'.($member_info['id']??403)
+						'action' => '/users/profile/'.($member_info['id']??1)
 					])?>
 						<h4>01. Thông tin cá nhân</h4>
 						<div class="row">
@@ -110,20 +110,16 @@
 							<div class="col-md-6 form-it">
 								<?= $this->Form->control('country',[
 									'label'=>'Đất nước', 
-									'options'=> [
-										'united' => 'United States',
-										'saab' => 'Others'
-									],
+									'id'=>'country',
+									'options'=> [],
 									])
 								?>
 							</div>
 							<div class="col-md-6 form-it">
 								<?= $this->Form->control('city',[
 									'label'=>'Thành phố', 
-									'options'=> [
-										'united' => 'New York',
-										'saab' => 'Others'
-									],
+									'id' => 'city',
+									'options'=> [],
 									])
 								?>
 							</div>
@@ -134,7 +130,10 @@
 							</div>
 						</div>	
 					<?= $this->Form->end()?>
-					<form action="#" class="password">
+					<?=$this->Form->create(null,[
+						'class'=>'password',
+						'action' => '/users/change-password/'.($member_info['id']??1)
+					])?>
 						<h4>02. Thay đổi mật khẩu</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
@@ -171,7 +170,7 @@
 								<?= $this->Form->input('update_submit', ['value'=>'Thay đổi','type'=>'submit','class'=>'submit'])?>
 							</div>
 						</div>	
-					</form>
+					<?= $this->Form->end()?>
 				</div>
 			</div>
 		</div>
