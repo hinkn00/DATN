@@ -18,6 +18,16 @@
             ['_name'=>'member_profile']
         );
         $builder->connect(
+            '/users/change-password/{id}',
+            ['controller'=>'Members','action'=>'changePassword'],
+            ['_name'=>'member_changePass']
+        );
+        $builder->connect(
+            '/users/change-avatar/{id}',
+            ['controller'=>'Members','action'=>'changeAvatar'],
+            ['_name'=>'member_changeAvatar']
+        );
+        $builder->connect(
             '/users/logout',
             ['controller'=>'Members','action'=>'logout'],
             ['_name'=>'users_logout']

@@ -43,6 +43,7 @@ class User extends Entity
         'role' => true,
         'active' => true,
         'status' => true,
+        'profile' => true,
         // 'create_at' => false,
         // 'modified' => false,
         'img_avatar' => true,

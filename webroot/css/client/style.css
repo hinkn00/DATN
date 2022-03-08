@@ -8249,6 +8249,9 @@ footer .ft-copyright {
     padding-left: 125px;
     padding-right: 125px;
   }
+  .user-hero .hero-ct h1 {
+    margin-left: -10px;
+  }
 }
 @media (max-width: 767px) {
   footer .ft-copyright {
