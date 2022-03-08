@@ -58,3 +58,4 @@
 <!-- end of footer section-->
 
 <?= $this->Html->script(['font-awesome','client/plugins', 'client/plugins2', 'client/custom']) ?>
+<?= $this->Html->script(['jquery.validate.min','additional-methods.min'])?>
