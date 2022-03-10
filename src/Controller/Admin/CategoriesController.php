@@ -27,7 +27,6 @@ class CategoriesController extends AdminController{
         $categories = $this->Categories->newEmptyEntity();
         if($this->request->is('post')){
             $categories = $this->Categories->patchEntity($categories, $this->request->getData());
-            $categories->modified = date("Y-m-d");
             if($this->Categories->save($categories)){
                 $this->Flash->success(__('success'));
                 return $this->redirect(['_name'=>'admin_categories_add']);
@@ -44,7 +43,6 @@ class CategoriesController extends AdminController{
         $category = $this->Categories->getSlugOfCategories($slug);
         if($this->request->is(['post','put'])){
             $category = $this->Categories->patchEntity($category, $this->request->getData());
-            $category->created = date("Y-m-d");
             $category->modified = date("Y-m-d");
             if($this->Categories->save($category)){
                 $this->Flash->success(__('success'));
