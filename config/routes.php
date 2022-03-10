@@ -44,6 +44,11 @@ return static function (RouteBuilder $routes) {
         $routes->connect('/users/edit/{id}', ['controller' => 'Users', 'action' => 'edit'],['_name'=>'admin_user_edit']);
         $routes->connect('/users/delete/{id}', ['controller' => 'Users', 'action' => 'delete'],['_name'=>'admin_users_delete']);
         $routes->connect('/users/search', ['controller' => 'Users', 'action' => 'search'],['_name'=>'admin_users_search']);
+        $routes->connect('/categories/create', ['controller' => 'Categories', 'action' => 'add'],['_name'=>'admin_categories_add']);
+        $routes->connect('/categories/home', ['controller' => 'Categories', 'action' => 'index'],['_name'=>'admin_categories_index']);
+        $routes->connect('/categories/{slug}/edit', ['controller' => 'Categories', 'action' => 'edit'],['_name'=>'admin_categories_edit']);
+        $routes->connect('/categories/delete/{id}', ['controller' => 'Categories', 'action' => 'delete'],['_name'=>'admin_categories_delete']);
+        $routes->connect('/categories/search', ['controller' => 'Categories', 'action' => 'search'],['_name'=>'admin_categories_search']);
     });
 
     /*

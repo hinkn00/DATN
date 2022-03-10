@@ -1,9 +1,10 @@
+<?php $this->assign('title', 'Quản lý danh mục');?>
 <div class="col-md-9 col-lg-10 main mt-3">
    <div class="row mb-3">
       <div class="col-lg-12 col-md-12">
-        <h2 class="sub-header mb-3" style="display:flex">Quản lý người dùng</h2>
+        <h2 class="sub-header mb-3" style="display:flex">Quản lý danh mục</h2>
         <div class="box-tools" style=" width:100%; display:flex; justify-content: center">
-            <form action="<?php echo $this->Url->build(['action'=>'search'],['id'=>'frmSearch'])?>" method="get">
+            <form action="<?php echo $this->Url->build(['_name'=>'admin_categories_search'])?>" method="get">
                 <div class="input-search input-group" style="width: 50vw;">
                     <input type="text" name="query" class="form-control pull-right" id="query" placeholder="Nhập nội dung tìm kiếm" >
                     <div class="button-search input-group-btn">
@@ -21,14 +22,14 @@
                     Danh sách hiển thị
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a href="<?= $this->Url->build(array('_name'=>'admin_user_index'))?>" class="dropdown-item <?= count($users) == 10 ? 'active': ''?>">10</a>
-                    <a href="?limit=25" class="dropdown-item <?= count($users) == 25 ? 'active': ''?>">25</a>
-                    <a href="?limit=50" class="dropdown-item <?= count($users) == 50 ? 'active': ''?>">50</a>
-                    <a href="?limit=100" class="dropdown-item <?= count($users) == 100 ? 'active': ''?>">100</a>
+                    <a href="<?= $this->Url->build(array('_name'=>'admin_categories_index'))?>" class="dropdown-item <?= count($categories) == 10 ? 'active': ''?>">10</a>
+                    <a href="?limit=25" class="dropdown-item <?= count($categories) == 25 ? 'active': ''?>">25</a>
+                    <a href="?limit=50" class="dropdown-item <?= count($categories) == 50 ? 'active': ''?>">50</a>
+                    <a href="?limit=100" class="dropdown-item <?= count($categories) == 100 ? 'active': ''?>">100</a>
                 </div>
             </div>
             <div class="pull-right mb-2">
-                <a href="<?= $this->Url->build(array('_name'=>'admin_user_add'))?>" class="btn btn-sm btn-outline-primary w-10 btn-add"><i class="fa-solid fa-user-plus"></i></a>
+                <a href="<?= $this->Url->build(array('_name'=>'admin_categories_add'))?>" class="btn btn-sm btn-outline-primary w-10 btn-add"><i class="fa-solid fa-plus"></i></a>
                 <a class="btn btn-sm btn-outline-primary w-10 btn-down"><i class="fa-solid fa-download"></i></a>
             </div>
        </div>
@@ -37,31 +38,33 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
-                        <th>Ảnh đại diện</th>
-                        <th>Tên</th>
-                        <th>Email</th>
-                        <th>Quyền</th>
-                        <th>Active</th>
+                        <th>Tên danh mục</th>
+                        <th>Tên không dấu</th>
+                        <th>Mô tả</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày tạo</th>
+                        <th>Ngày sửa</th>
                         <th>Khác</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($users as $user):?>
+                    <?php foreach($categories as $cate):?>
                     <tr>
-                        <td><?=$user->id?></td>
-                        <td class="td-center">
-                            <?=$this->Html->image('upload/users/'.$user->img_avatar,['class'=>'user_avatar'])?>
+                        <td><?= $cate->id ?></td>
+                        <td><?= $cate->title?></td>
+                        <td>
+                            <?= $cate->slug?>
                         </td>
-                        <td class="td-center"><?=$user->name?></td>
-                        <td><?=$user->email?></td>
-                        <td class="td-center"><?=$user->role?></td>
-                        <td class="td-center"><?=$user->active?></td>
+                        <td><?php echo html_entity_decode($cate->description)?></td>
+                        <td><?= $cate->status == 0 ? "Ẩn": "Hiện" ?></td>
+                        <td><?= $cate->created->format('Y-m-d')?></td>
+                        <td><?= $cate->modified->format('Y-m-d')?></td>
                         <td class="td-center">
-                            <a href=<?= $this->URL->build(array('controller'=>'Users','action' => 'edit','id' => $user->id))?> class="btn btn-warning" id="edit-btn">Sửa</a>
+                            <a href=<?= $this->URL->build(array("_name"=>'admin_categories_edit','slug' => $cate->slug))?> class="btn btn-warning" id="edit-btn">Sửa</a>
                             <?= $this->Form->postLink(__('Xóa'),
-                                ['_name'=>'admin_users_delete', 'id'=>$user->id],
+                                ['_name'=>'admin_categories_delete', 'id'=>$cate->id],
                                 [
-                                    'confirm'=>__('Bạn có chắc muốn xóa người dùng có tên "{0}" không?',$user->name),
+                                    'confirm'=>__('Bạn có chắc muốn xóa người dùng có tên "{0}" không?',$cate->title),
                                     'class' => 'btn btn-danger',
                                 ]
                                 )?>
@@ -112,4 +115,4 @@
         })
     </script>
 <?php endif;?> 
-<?php echo $this->Html->script(['admin/users','sweetalert2'])?>
+<?php echo $this->Html->script(['admin/category','sweetalert2'])?>

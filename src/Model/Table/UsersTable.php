@@ -7,7 +7,6 @@ class UsersTable extends UsersBaseTable{
     // hàm xử lý
     public function search($search)
     {
-        // debug($search);die;
         $options = array(
             'field' => '*',
             'conditions' => array(

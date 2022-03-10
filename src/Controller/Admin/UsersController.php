@@ -51,7 +51,9 @@ class UsersController extends AdminController
 
     public function index()
     {
-        $users = $this->paginateAll();
+        $this->loadModel('UsersBase');
+        $user_list = $this->UsersBase->find('all');
+        $users = $this->paginateAll($user_list);
         $this->set('users',$users);
         $this->set('title','Quản lý users');
     }
@@ -158,9 +160,10 @@ class UsersController extends AdminController
     public function search()
     {
         $search = $this->request->getQuery('query');
+        
         $this->loadModel('Users');
         $result = $this->Users->search($search);
-        // debug($result);die;
+
         if($result){
             $users = $this->paginateSearch($result);
         } else{

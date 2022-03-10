@@ -80,11 +80,6 @@
    </div>
 </div>
 
-<script>
-    function alert(){
-        console.log('click dc');
-    }
-</script>
 <?php $flash = $this->Flash->render();
     if($flash):
 ?>

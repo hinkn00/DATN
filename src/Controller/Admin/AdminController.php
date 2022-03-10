@@ -59,10 +59,9 @@ class AdminController extends Controller
     //     return $this->Auth->User('role');
     // }
 
-    function paginateAll(){
-        $this->loadModel('UsersBase');
+    function paginateAll($user_list){
         $limit = $this->request->getParam('limit');
-        return $this->paginate($this->UsersBase->find('all'),array('limit'=> !empty($limit)? $limit : '10'));
+        return $this->paginate($user_list, array('limit'=> !empty($limit)? $limit : '10'));
     }
     public function paginateSearch($options)
     {
