@@ -1,10 +1,10 @@
-<?php $this->assign('title', 'Quản lý danh mục');?>
+<?php $this->assign('title','Quản lý thể loại')?>
 <div class="col-md-9 col-lg-10 main mt-3">
    <div class="row mb-3">
       <div class="col-lg-12 col-md-12">
-        <h2 class="sub-header mb-3" style="display:flex">Quản lý danh mục</h2>
+        <h2 class="sub-header mb-3" style="display:flex">Quản lý thể loại</h2>
         <div class="box-tools" style=" width:100%; display:flex; justify-content: center">
-            <form action="<?php echo $this->Url->build(['_name'=>'admin_categories_search'])?>" method="get">
+            <form action="<?php echo $this->Url->build(['_name'=>'admin_genre_search'])?>" method="get">
                 <div class="input-search input-group" style="width: 50vw;">
                     <input type="text" name="query" class="form-control pull-right" id="query" placeholder="Nhập nội dung tìm kiếm" >
                     <div class="button-search input-group-btn">
@@ -22,14 +22,14 @@
                     Danh sách hiển thị
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a href="<?= $this->Url->build(array('_name'=>'admin_categories_index'))?>" class="dropdown-item <?= count($categories) == 10 ? 'active': ''?>">10</a>
-                    <a href="?limit=25" class="dropdown-item <?= count($categories) == 25 ? 'active': ''?>">25</a>
-                    <a href="?limit=50" class="dropdown-item <?= count($categories) == 50 ? 'active': ''?>">50</a>
-                    <a href="?limit=100" class="dropdown-item <?= count($categories) == 100 ? 'active': ''?>">100</a>
+                    <a href="<?= $this->Url->build(array('_name'=>'admin_genre_home'))?>" class="dropdown-item <?= count($genres) == 10 ? 'active': ''?>">10</a>
+                    <a href="?limit=25" class="dropdown-item <?= count($genres) == 25 ? 'active': ''?>">25</a>
+                    <a href="?limit=50" class="dropdown-item <?= count($genres) == 50 ? 'active': ''?>">50</a>
+                    <a href="?limit=100" class="dropdown-item <?= count($genres) == 100 ? 'active': ''?>">100</a>
                 </div>
             </div>
             <div class="pull-right mb-2">
-                <a href="<?= $this->Url->build(array('_name'=>'admin_categories_add'))?>" class="btn btn-sm btn-outline-primary w-10 btn-add"><i class="fa-solid fa-plus"></i></a>
+                <a href="<?= $this->Url->build(array('_name'=>'admin_genre_create'))?>" class="btn btn-sm btn-outline-primary w-10 btn-add"><i class="fa-solid fa-plus"></i></a>
                 <a class="btn btn-sm btn-outline-primary w-10 btn-down"><i class="fa-solid fa-download"></i></a>
             </div>
        </div>
@@ -38,7 +38,7 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
-                        <th>Tên danh mục</th>
+                        <th>Tên tiêu đề</th>
                         <th>Tên không dấu</th>
                         <th>Mô tả</th>
                         <th>Trạng thái</th>
@@ -48,23 +48,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($categories as $cate):?>
+                    <?php foreach($genres as $genre):?>
                     <tr>
-                        <td><?= $cate->id ?></td>
-                        <td><?= $cate->title?></td>
+                        <td><?= $genre->id ?></td>
+                        <td><?= $genre->title?></td>
                         <td>
-                            <?= $cate->slug?>
+                            <?= $genre->slug?>
                         </td>
-                        <td><?php echo html_entity_decode($cate->description)?></td>
-                        <td><?= $cate->status == 0 ? "Ẩn": "Hiện" ?></td>
-                        <td><?= $cate->created->format('Y-m-d')?></td>
-                        <td><?= $cate->modified->format('Y-m-d')?></td>
+                        <td><?php echo html_entity_decode($genre->description)?></td>
+                        <td><?= $genre->status == 0 ? "Ẩn": "Hiện" ?></td>
+                        <td><?= $genre->created->format('Y-m-d')?></td>
+                        <td><?= $genre->modified->format('Y-m-d')?></td>
                         <td class="td-center">
-                            <a href=<?= $this->URL->build(array("_name"=>'admin_categories_edit','slug' => $cate->slug))?> class="btn btn-warning" id="edit-btn">Sửa</a>
+                            <a href=<?= $this->URL->build(array("_name"=>'admin_genre_edit','slug' => $genre->slug))?> class="btn btn-warning" id="edit-btn">Sửa</a>
                             <?= $this->Form->postLink(__('Xóa'),
-                                ['_name'=>'admin_categories_delete', 'id'=>$cate->id],
+                                ['_name'=>'admin_genre_delete', 'id'=> $genre->id],
                                 [
-                                    'confirm'=>__('Bạn có chắc muốn xóa danh mục "{0}" không?',$cate->title),
+                                    'confirm'=>__('Bạn có chắc muốn xóa tiêu đề "{0}" không?',$genre->title),
                                     'class' => 'btn btn-danger',
                                 ]
                                 )?>

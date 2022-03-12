@@ -20,14 +20,14 @@
 						<li class="hidden">
 							<a href="#page-top"></a>
 						</li>
-						<li class="dropdown first">
+						<li class="dropdown first" style="margin-bottom: 10px">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
 							Thể loại <i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
 							<ul class="dropdown-menu level1">
-								<li><a href="index-2.html">Home 01</a></li>
-								<li><a href="homev2.html">Home 02</a></li>
-								<li><a href="homev3.html">Home 03</a></li>
+								<?php foreach($genres as $genre):?>
+									<li><a href="#"><?= $genre->title?></a></li>
+								<?php endforeach;?>
 							</ul>
 						</li>
 						<?php foreach($categories as $category):?>

@@ -5,8 +5,8 @@
       <li class="nav-item">
          <a class="nav-link" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i class="fa-solid fa-tag"></i> Thể loại phim&#9662;</a>
          <ul class="list-unstyled flex-column pl-3 collapse" id="submenu1" aria-expanded="false">
-            <li class="nav-item"><a class="nav-link" href="">Thêm mới</a></li>
-            <li class="nav-item"><a class="nav-link" href="">Danh sách</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= $this->Url->build(['_name'=>'admin_genre_create'])?>">Thêm mới</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= $this->Url->build(['_name'=>'admin_genre_home'])?>">Danh sách</a></li>
          </ul>
       </li>
       <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-earth-asia"></i> Quốc gia</a></li>
