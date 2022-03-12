@@ -20,17 +20,18 @@
 						<li class="hidden">
 							<a href="#page-top"></a>
 						</li>
+						<li class="dropdown first">
+							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
+							Thể loại <i class="fa fa-angle-down" aria-hidden="true"></i>
+							</a>
+							<ul class="dropdown-menu level1">
+								<li><a href="index-2.html">Home 01</a></li>
+								<li><a href="homev2.html">Home 02</a></li>
+								<li><a href="homev3.html">Home 03</a></li>
+							</ul>
+						</li>
 						<?php foreach($categories as $category):?>
-							<li class="dropdown first">
-								<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
-								<?= $category->title ?> <i class="fa fa-angle-down" aria-hidden="true"></i>
-								</a>
-								<ul class="dropdown-menu level1">
-									<li><a href="index-2.html">Home 01</a></li>
-									<li><a href="homev2.html">Home 02</a></li>
-									<li><a href="homev3.html">Home 03</a></li>
-								</ul>
-							</li>
+							<li><a href="#"><?= $category->title ?></a></li>
 						<?php endforeach;?>
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">              
