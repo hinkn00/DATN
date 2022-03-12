@@ -26,6 +26,9 @@ class AppController extends Controller
 
         $categories = $this->_getCategory();
         $this->set(compact('categories'));
+
+        $genres = $this->_getGenre();
+        $this->set(compact('genres'));
     }
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
@@ -48,6 +51,18 @@ class AppController extends Controller
         $data = $this->Categories->find('all', [
             'conditions' => [
                 'Category.status' => 1
+            ]
+        ]);
+
+        return $data;
+    }
+
+    public function _getGenre()
+    {
+        $this->loadModel('Genres');
+        $data = $this->Genres->find('all', [
+            'conditions' => [
+                'Genre.status' => 1
             ]
         ]);
 

@@ -49,6 +49,11 @@ return static function (RouteBuilder $routes) {
         $routes->connect('/categories/{slug}/edit', ['controller' => 'Categories', 'action' => 'edit'],['_name'=>'admin_categories_edit']);
         $routes->connect('/categories/delete/{id}', ['controller' => 'Categories', 'action' => 'delete'],['_name'=>'admin_categories_delete']);
         $routes->connect('/categories/search', ['controller' => 'Categories', 'action' => 'search'],['_name'=>'admin_categories_search']);
+        $routes->connect('/genres/home', ['controller' => 'Genres', 'action' => 'index'],['_name'=>'admin_genre_home']);
+        $routes->connect('/genres/create', ['controller' => 'Genres', 'action' => 'add'],['_name'=>'admin_genre_create']);
+        $routes->connect('/genres/{slug}/edit', ['controller' => 'Genres', 'action' => 'edit'],['_name'=>'admin_genre_edit']);
+        $routes->connect('/genres/delete/{id}', ['controller' => 'Genres', 'action' => 'delete'],['_name'=>'admin_genre_delete']);
+        $routes->connect('/genres/search', ['controller' => 'Genres', 'action' => 'search'],['_name'=>'admin_genre_search']);
     });
 
     /*
