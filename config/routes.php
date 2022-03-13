@@ -38,22 +38,35 @@ return static function (RouteBuilder $routes) {
         // $routes->applyMiddleware('csrf');
 
         $routes->connect('/', ['controller' => 'Dashboard', 'action' => 'index'],['_name'=>'admin_dashboard']);
+       
+        //User route
         $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
         $routes->connect('/users', ['controller' => 'Users', 'action' => 'index'],['_name'=>'admin_user_index']);
         $routes->connect('/users/add', ['controller' => 'Users', 'action' => 'add'],['_name'=>'admin_user_add']);
         $routes->connect('/users/edit/{id}', ['controller' => 'Users', 'action' => 'edit'],['_name'=>'admin_user_edit']);
         $routes->connect('/users/delete/{id}', ['controller' => 'Users', 'action' => 'delete'],['_name'=>'admin_users_delete']);
         $routes->connect('/users/search', ['controller' => 'Users', 'action' => 'search'],['_name'=>'admin_users_search']);
+        
+        //Category route
         $routes->connect('/categories/create', ['controller' => 'Categories', 'action' => 'add'],['_name'=>'admin_categories_add']);
         $routes->connect('/categories/home', ['controller' => 'Categories', 'action' => 'index'],['_name'=>'admin_categories_index']);
         $routes->connect('/categories/{slug}/edit', ['controller' => 'Categories', 'action' => 'edit'],['_name'=>'admin_categories_edit']);
         $routes->connect('/categories/delete/{id}', ['controller' => 'Categories', 'action' => 'delete'],['_name'=>'admin_categories_delete']);
         $routes->connect('/categories/search', ['controller' => 'Categories', 'action' => 'search'],['_name'=>'admin_categories_search']);
+        
+        //Genre route
         $routes->connect('/genres/home', ['controller' => 'Genres', 'action' => 'index'],['_name'=>'admin_genre_home']);
         $routes->connect('/genres/create', ['controller' => 'Genres', 'action' => 'add'],['_name'=>'admin_genre_create']);
         $routes->connect('/genres/{slug}/edit', ['controller' => 'Genres', 'action' => 'edit'],['_name'=>'admin_genre_edit']);
         $routes->connect('/genres/delete/{id}', ['controller' => 'Genres', 'action' => 'delete'],['_name'=>'admin_genre_delete']);
         $routes->connect('/genres/search', ['controller' => 'Genres', 'action' => 'search'],['_name'=>'admin_genre_search']);
+       
+       //Country route
+        $routes->connect('/countries/home', ['controller' => 'Countries', 'action' => 'index'],['_name'=>'admin_countries_home']);
+        $routes->connect('/countries/create', ['controller' => 'Countries', 'action' => 'add'],['_name'=>'admin_countries_add']);
+        $routes->connect('/countries/{slug}/edit', ['controller' => 'Countries', 'action' => 'edit'],['_name'=>'admin_countries_edit']);
+        $routes->connect('/countries/delete/{id}', ['controller' => 'Countries', 'action' => 'delete'],['_name'=>'admin_countries_delete']);
+        $routes->connect('/countries/search', ['controller' => 'Countries', 'action' => 'view'],['_name'=>'admin_countries_search']);
     });
 
     /*
