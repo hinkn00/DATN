@@ -8,6 +8,11 @@ use Cake\Controller\Controller;
 
 class AppController extends Controller
 {
+    public function beforeFilter(EventInterface $event) {
+        parent::beforeFilter($event);
+        $this->Auth->allow();
+    }
+
     public function initialize(): void
     {
         parent::initialize();
@@ -29,10 +34,10 @@ class AppController extends Controller
 
         $genres = $this->_getGenre();
         $this->set(compact('genres'));
-    }
-    public function beforeFilter(EventInterface $event) {
-        parent::beforeFilter($event);
-        $this->Auth->allow();
+        
+        $countries = $this->_getCountry();
+        $this->set(compact('countries'));
+
     }
 
     public function _getMemberLogin()
@@ -63,6 +68,18 @@ class AppController extends Controller
         $data = $this->Genres->find('all', [
             'conditions' => [
                 'Genre.status' => 1
+            ]
+        ]);
+
+        return $data;
+    }
+
+    public function _getCountry()
+    {
+        $this->loadModel('Countries');
+        $data = $this->Countries->find('all', [
+            'conditions' => [
+                'Country.country_status' => 1
             ]
         ]);
 

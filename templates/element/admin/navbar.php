@@ -9,7 +9,7 @@
             <li class="nav-item"><a class="nav-link" href="<?= $this->Url->build(['_name'=>'admin_genre_home'])?>">Danh sách</a></li>
          </ul>
       </li>
-      <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-earth-asia"></i> Quốc gia</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= $this->Url->build(['controller'=>'Countries' , 'action'=>'index'])?>"><i class="fa-solid fa-earth-asia"></i> Quốc gia</a></li>
       <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-clapperboard"></i> Phim</a></li>
       <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-video"></i> Tập phim</a></li>
       <li class="nav-item">

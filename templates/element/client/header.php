@@ -30,9 +30,21 @@
 								<?php endforeach;?>
 							</ul>
 						</li>
+
 						<?php foreach($categories as $category):?>
 							<li><a href="#"><?= $category->title ?></a></li>
 						<?php endforeach;?>
+
+						<li class="dropdown first" style="margin-bottom: 10px">
+							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
+							Quốc gia <i class="fa fa-angle-down" aria-hidden="true"></i>
+							</a>
+							<ul class="dropdown-menu level1">
+								<?php foreach($countries as $country):?>
+									<li><a href="#"><?= $country->country_name?></a></li>
+								<?php endforeach;?>
+							</ul>
+						</li>
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">              
 						<li><a href="#">Help</a></li>
