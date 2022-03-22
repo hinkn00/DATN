@@ -20,6 +20,10 @@ class CountriesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('MoviesInfo', [
+            'foreignKey' => 'country_id',
+        ]);
     }
 
     public function validationDefault(Validator $validator): Validator
@@ -83,5 +87,17 @@ class CountriesTable extends Table
 
         $data = $this->find('all',$options);
         return $data;
+    }
+
+    public function listCountry()
+    {
+        return $this->find('list',[
+            'keyField' => 'id',
+            'valueField' => 'country_name',
+            'conditions' => [
+                'Country.country_status <> 0'
+            ],
+            'recursive' => -1            
+        ]);
     }
 }

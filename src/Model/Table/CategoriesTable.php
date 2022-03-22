@@ -20,6 +20,10 @@ class CategoriesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('MoviesInfo', [
+            'foreignKey' => 'category_id',
+        ]);
     }
 
     public function validationDefault(Validator $validator): Validator
@@ -84,5 +88,17 @@ class CategoriesTable extends Table
 
         $data = $this->find('all',$options);
         return $data;
+    }
+
+    public function listCategory()
+    {
+        return $this->find('list',[
+            'keyField' => 'id',
+            'valueField' => 'title',
+            'conditions' => [
+                'status <> 0' 
+            ],
+            'recursive' => -1            
+        ]);
     }
 }

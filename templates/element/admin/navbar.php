@@ -10,7 +10,7 @@
          </ul>
       </li>
       <li class="nav-item"><a class="nav-link" href="<?= $this->Url->build(['controller'=>'Countries' , 'action'=>'index'])?>"><i class="fa-solid fa-earth-asia"></i> Quốc gia</a></li>
-      <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-clapperboard"></i> Phim</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= $this->Url->build(['_name'=>'admin_movies_home'])?>"><i class="fa-solid fa-clapperboard"></i> Phim</a></li>
       <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-video"></i> Tập phim</a></li>
       <li class="nav-item">
         <a href="<?php echo $this->Url->build(['_name'=>'admin_user_index'])?>" class="nav-link <?= $this->request->getParam('controller') == 'Users' ? 'active' : ''?>">
