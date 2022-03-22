@@ -70,4 +70,24 @@ class MoviesTable extends Table
 
         return $data;
     }
+
+    public function search($search)
+    {
+        $options = array(
+            'field' => '*',
+            'conditions' => array(
+                'OR' => array(
+                    array('Movie.m_name LIKE' => '%'.$search.'%'),
+                    array('Movie.m_slug LIKE' => '%'.$search.'%'),
+                    array('Movie.m_desc LIKE' => '%'.$search.'%'),
+                )
+            ),
+            'contain' => [
+                'MoviesInfo'
+            ]
+        );
+
+        $data = $this->find('all',$options);
+        return $data;
+    }
 }

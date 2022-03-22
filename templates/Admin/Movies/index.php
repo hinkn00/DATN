@@ -33,8 +33,8 @@
                 <a class="btn btn-sm btn-outline-primary w-10 btn-down"><i class="fa-solid fa-download"></i></a>
             </div>
        </div>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+        <div class="table-responsive" id="movie_scroll">
+            <table class="table table-striped table-bordered" id="movie_table">
                 <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
@@ -55,12 +55,18 @@
                     <?php foreach($movies as $movie):?>
                         <tr>
                             <td><?= $movie->id ?></td>
-                            <td></td>
-                            <td><?= $movie->m_name?></td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <?= $this->Html->link(__($movie->m_name),["_name"=>'admin_movies_edit','slug' => $movie->m_slug])?>
+                            </td>
                             <td>
                                 <?= $movie->m_slug?>
                             </td>
-                            <td><?php echo html_entity_decode($movie->m_desc) ?></td>
+                            <td>
+                                <div id="desc_respon">
+                                    <?php echo html_entity_decode($movie->m_desc) ?>
+                                </div>
+                            </td>
                             <td><?php echo h($movie->movies_info->m_status) == 0 ? "Ẩn" : "Hiện"; ?></td>
                             <td><?php echo h($movie->category_title) ?></td>
                             <td><?php echo h($movie->genre_title) ?></td>

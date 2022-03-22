@@ -82,11 +82,23 @@ class MoviesController extends AdminController
 
     public function view($id = null)
     {
-        $movie = $this->Movies->get($id, [
-            'contain' => ['MoviesInfo'],
-        ]);
+        $this->setModel();
 
-        $this->set(compact('movie'));
+        $search = $this->request->getQuery('query');
+        $result = $this->Movies->search($search);
+
+        $movies =  null;
+        if($result){
+            $movies = $this->paginateSearch($result);
+        } else{
+            $movies = '';
+        }
+
+        $this->_getCategoriesTitle($movies);
+        $this->_getGenreTitle($movies);
+        $this->_getCountryTitle($movies);
+
+        $this->set(compact('movies'));
     }
 
     public function add()

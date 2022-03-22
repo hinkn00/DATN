@@ -71,7 +71,7 @@ body.modal-open {
 
 #file {
     border: 2px dashed #92b0b3 !important;
-    cursor: pointer
+    cursor: pointer;
 }
 .files:before {
     position: absolute;
@@ -92,63 +92,107 @@ body.modal-open {
     background-size: 55px 55px;
 }
 
-label.error, .error-message{
+label.error,
+.error-message {
     color: red;
     font-size: 14px;
     font-weight: 500;
 }
-th{
+th {
     text-align: center;
 }
-td{
+td {
     font-size: 16px;
     font-weight: 400;
 }
 .td-center {
-    text-align: center; 
+    text-align: center;
     vertical-align: middle;
 }
-.user_avatar{
+.user_avatar {
     width: 80px;
     height: 80px;
     border-radius: 50%;
 }
-.show_img_append{
-    border-radius: 50%; 
-    border: 1px solid #ddd; 
-    width: 100px; 
-    height: 100px; 
-    margin-bottom:5px; 
-    margin-right:5px
+.show_img_append {
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 5px;
+    margin-right: 5px;
 }
 
-.search-icon{
+.search-icon {
     width: 80px;
     cursor: pointer;
 }
-.search-icon:hover{
+.search-icon:hover {
     background-color: #5584ad;
 }
-#query{
+#query {
     text-align: center;
 }
 
-.query{
-    display:inline-block;
-    padding:0.35em 1.2em;
-    border:0.1em solid #FFFFFF;
-    margin:0 0.3em 0.3em 0;
-    border-radius:0.12em;
+.query {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #ffffff;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
     box-sizing: border-box;
-    text-decoration:none;
-    font-family:'Roboto',sans-serif;
-    font-weight:300;
-    color:#FFFFFF;
-    text-align:center;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    text-align: center;
     transition: all 0.2s;
 }
-.input-search{
+.input-search {
     margin-bottom: 5px;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    min-width: max-content;
+}
+
+#movie_scroll.table-responsive::-webkit-scrollbar {
+    height: 5px; /* height of horizontal scrollbar ← You're missing this */
+    border: 1px solid #d5d5d5;
+}
+#movie_scroll.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+#movie_scroll.table-responsive::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 5px;
+}
+#movie_scroll.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+#desc_respon {
+    width: 25em;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+#desc_respon::-webkit-scrollbar {
+    width: 5px;
+    border: 1px solid #d5d5d5;
+}
+#desc_respon::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+#desc_respon::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 5px;
+}
+#movie_table.table tr td #desc_respon::-webkit-scrollbar-thumb:hover {
+    background: #888;
 }
 /* #cancel a:hover {
     color: white;
@@ -222,13 +266,18 @@ td{
     transform: rotate(-44deg);
 }
 
+@media screen and (max-width: 1280px) {
+    #edit-btn.btn {
+        margin-bottom: 3px;
+    }
+}
 @media screen and (max-width: 1085px) {
-    #edit-btn.btn{
+    #edit-btn.btn {
         margin-bottom: 3px;
     }
 }
 @media all and (max-width: 768px) {
-    .search-icon{
+    .search-icon {
         margin-top: 5px;
         width: 100%;
         border-radius: 7px;
