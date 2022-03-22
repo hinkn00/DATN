@@ -65,7 +65,6 @@ class AdminController extends Controller
     }
     public function paginateSearch($options)
     {
-        $this->loadModel('Users');
         return $this->paginate($options,array('limit' => '10'));
     }
 }

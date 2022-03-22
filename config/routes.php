@@ -67,6 +67,13 @@ return static function (RouteBuilder $routes) {
         $routes->connect('/countries/{slug}/edit', ['controller' => 'Countries', 'action' => 'edit'],['_name'=>'admin_countries_edit']);
         $routes->connect('/countries/delete/{id}', ['controller' => 'Countries', 'action' => 'delete'],['_name'=>'admin_countries_delete']);
         $routes->connect('/countries/search', ['controller' => 'Countries', 'action' => 'view'],['_name'=>'admin_countries_search']);
+
+        //movies
+        $routes->connect('/movies/home', ['controller' => 'Movies', 'action' => 'index'],['_name'=>'admin_movies_home']);
+        $routes->connect('/movies/create', ['controller' => 'Movies', 'action' => 'add'],['_name'=>'admin_movies_add']);
+        $routes->connect('/movies/{slug}/edit', ['controller' => 'Movies', 'action' => 'edit'],['_name'=>'admin_movies_edit']);
+        $routes->connect('/movies/delete/{id}', ['controller' => 'Movies', 'action' => 'delete'],['_name'=>'admin_movies_delete']);
+        $routes->connect('/movies/search', ['controller' => 'Movies', 'action' => 'view'],['_name'=>'admin_movies_search']);
     });
 
     /*

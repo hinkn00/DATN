@@ -2,7 +2,7 @@
 <div class="col-md-9 col-lg-10 main mt-3">
     <div class="row mb-3">
         <div class="col-md-6 col-lg-6">
-            <h2 class="sub-header">Thêm danh mục</h2>
+            <h2 class="sub-header">Thêm quốc gia</h2>
         </div>
         <div class="col-md-6 col-lg-6">
             <div class="pull-right">
