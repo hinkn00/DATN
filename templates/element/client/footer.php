@@ -3,7 +3,7 @@
 	<!-- <div class="container">
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
-				 <a href="#"><?= $this->Html->image('default/logo1.png',['class'=>'logo'])?></a>
+				 <a href="#"><?php //echo $this->Html->image('default/logo1.png',['class'=>'logo'])?></a>
 				 <p>5th Avenue st, manhattan<br>
 				New York, NY 10001</p>
 				<p>Call us: <a href="#">(+01) 202 342 6789</a></p>

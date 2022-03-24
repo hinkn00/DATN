@@ -4,8 +4,8 @@
 
     $routes->scope('/', function (RouteBuilder $builder) {
  
-        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home'],['_name'=>'home']);
-
+        $builder->connect('/home', ['controller' => 'Pages', 'action' => 'display', 'home'],['_name'=>'home']);
+        $builder->connect('/',['controller'=>'Pages','action'=>'index'],['_name'=>'index']);
         $builder->connect('/pages/*', 'Pages::display');
         $builder->connect(
             '/users/login',
