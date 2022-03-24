@@ -70,7 +70,9 @@ class MoviesController extends AdminController
             'contain' => ['MoviesInfo']
         ]);
 
-        $movies = $this->paginateAll($movie);
+        $movies = $this->paginate($movie, array(
+            "limit"=> 3
+        ));
         
         $this->_getCategoriesTitle($movies);
         $this->_getGenreTitle($movies);
@@ -89,7 +91,9 @@ class MoviesController extends AdminController
 
         $movies =  null;
         if($result){
-            $movies = $this->paginateSearch($result);
+            $movies = $this->paginate($result, array(
+                "limit"=> 3
+            ));
         } else{
             $movies = '';
         }

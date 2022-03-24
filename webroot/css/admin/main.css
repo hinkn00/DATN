@@ -160,13 +160,14 @@ td {
 }
 
 #movie_scroll.table-responsive::-webkit-scrollbar {
-    height: 10px; /* height of horizontal scrollbar ← You're missing this */
+    height: 10px;
 }
 #movie_scroll.table-responsive::-webkit-scrollbar-track {
     background: #fff;
 }
 #movie_scroll.table-responsive::-webkit-scrollbar-thumb {
-    background: #d8d6d6;
+    /* background: #d8d6d6; */
+    background: rgb(240, 238, 238);
     border-radius: 5px;
 }
 #movie_scroll.table-responsive::-webkit-scrollbar-thumb:hover {
