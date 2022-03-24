@@ -160,14 +160,13 @@ td {
 }
 
 #movie_scroll.table-responsive::-webkit-scrollbar {
-    height: 5px; /* height of horizontal scrollbar ← You're missing this */
-    border: 1px solid #d5d5d5;
+    height: 10px; /* height of horizontal scrollbar ← You're missing this */
 }
 #movie_scroll.table-responsive::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #fff;
 }
 #movie_scroll.table-responsive::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: #d8d6d6;
     border-radius: 5px;
 }
 #movie_scroll.table-responsive::-webkit-scrollbar-thumb:hover {
