@@ -33,7 +33,7 @@
                 <a class="btn btn-sm btn-outline-primary w-10 btn-down"><i class="fa-solid fa-download"></i></a>
             </div>
        </div>
-        <div class="table-responsive" id="movie_scroll">
+        <div class="table-responsive" id="movie_scroll" style="margin-bottom: 5px;">
             <table class="table table-striped table-bordered" id="movie_table">
                 <thead class="thead-inverse">
                     <tr>
