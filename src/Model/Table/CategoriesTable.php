@@ -23,6 +23,8 @@ class CategoriesTable extends Table
 
         $this->hasMany('MoviesInfo', [
             'foreignKey' => 'category_id',
+            'table' => 'movies_info',
+            'alias' => 'MoviesInfo'
         ]);
     }
 
@@ -113,19 +115,27 @@ class CategoriesTable extends Table
                     'MoviesInfo.category_id ='=> $idCate
                 ]
             ),
+            array(
+                'table' => 'movies',
+                'alias' => 'Movie',
+                'type' => 'inner',
+                'conditions' => [
+                    'Movie.id = MoviesInfo.movie_id'
+                ]
+            ),
         );
 
         $options = array(
-            'field' => '*',
+            'field' => ['Movie.id'],
             'conditions' => array(
-                "Category.title = $categoryTitle",
-                "Category.id = $idCate"
+                'OR'=>[
+                    "Category.title =" => $categoryTitle,
+                    "Category.id =" => $idCate
+                ]
             ),
-            // 'order' => [
-            //     'Category.modified' => 'desc'
-            // ],
-            // 'joins' => $joins,
-            
+            'order' => [
+                'Category.modified' => 'desc'
+            ],            
         );
         $data = $this->find('all',$options);
 

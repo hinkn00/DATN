@@ -14,6 +14,5 @@ class Movie extends Entity
         'movies_info' => true,
         'created' => true,
         'modified' => true,
-        'movies_info' => true,
     ];
 }

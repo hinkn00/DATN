@@ -14,6 +14,5 @@ class Category extends Entity
         'status' => true,
         'created' => true,
         'modified' => true,
-        'movies_info' => true
     ];
 }
