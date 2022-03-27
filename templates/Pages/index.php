@@ -143,8 +143,10 @@
 					<ul class="tab-links-2" id="tab-links-cate">
 						<?php foreach($categories as $index => $cate):?>                      
                             <?php if($index < 4):?>
-								<input type="hidden" id="cate_id" value="<?= $cate->id?>">
-                                <li class="<?= $index+1 == 2 ? 'active' : ''?>"><a href="#tab2<?= $index+1?>">#<?= $cate->title?></a></li> 
+                                <li class="<?= $index+1 == 2 ? 'active' : ''?>">
+                                    <input type="hidden" class="cate_id" value="<?= $cate->id?>">
+                                    <a href="#tab2<?= $index+1?>">#<?= $cate->title?></a>
+                                </li> 
                             <?php endif;?>
                         <?php endforeach;?>
 					</ul>
@@ -298,13 +300,16 @@
 	})
 
 	var ajaxMovieByCategory = function(category){
-		idCate = $('#tab-links-cate').children('#cate_id').val();
-		
+        let idCate = '';
+        if($('#tab-links-cate li').hasClass('active')){
+			idCate = $('#tab-links-cate').children('li.active').find('input[type=hidden].cate_id').text();
+		}
+        console.log(idCate);
 		return $.ajax({
 			url: "<?php echo $this->Url->build(['_name'=>'getMoviesByCategory'])?>",
 			type: 'GET',
 			data: {
-				idCate: idCate,
+				// idCate: idCate,  
 				categoryTitle: getValue
 			},
 		});

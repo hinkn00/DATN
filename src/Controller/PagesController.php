@@ -17,14 +17,6 @@ class PagesController extends AppController
         parent::beforeFilter($event);
         $home_page = true;
         $this->set('home_page', $home_page);
-        $cateTitle = $this->request->getQuery('categoryTitle');
-        $cateId = $this->request->getQuery('idCate');
-        $cate = $this->Categories->getMoviesByCategory('Phim hot',10);
-
-        echo "<pre>";
-        echo json_encode($cate);
-        echo "</pre>";
-        die;
     }
     public function beforeRender(EventInterface $event)
     {
@@ -79,7 +71,7 @@ class PagesController extends AppController
             $movies = [
                 'category' => []
             ];
-
+            
             foreach($categoryMovie as $cate){
                 $movies['category'][] = [
                     'title' => $cate->title,
