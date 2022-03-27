@@ -37,9 +37,9 @@ class MembersController extends AppController{
             'contain' => ['Profiles']
         ]);
         $this->set('member',$member);
-        // if(!$this->isCheckLogin()){
-        //     return $this->redirect(['controller'=>'Pages','action'=>'home']);
-        // }
+        if(!$this->isCheckLogin()){
+            return $this->redirect(['controller'=>'Pages','action'=>'index']);
+        }
 
         if($this->request->is(['post','put'])){
             $member = $this->UsersBase->patchEntity($member, [

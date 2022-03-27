@@ -20,7 +20,7 @@
 						<li class="hidden">
 							<a href="#page-top"></a>
 						</li>
-						<li class="dropdown first" style="margin-bottom: 10px">
+						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
 							Thể loại <i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
@@ -35,7 +35,7 @@
 							<li><a href="#"><?= $category->title ?></a></li>
 						<?php endforeach;?>
 
-						<li class="dropdown first" style="margin-bottom: 10px">
+						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
 							Quốc gia <i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
@@ -47,9 +47,9 @@
 						</li>
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">              
-						<li><a href="#">Help</a></li>
 						<?php
 						if(!empty($member_info)):?>
+							<li><a href="<?= $this->Url->build(['_name'=>'member_profile','id'=> $member_info['id']])?>">Thông tin</a></li>
 							<li class="logoutLink"><a href="<?= $this->Url->build(['_name'=>'users_logout'])?>">đăng xuất</a></li>
 						<?php else:?>
 							<li class="loginLink"><a href="#">đăng nhập</a></li>

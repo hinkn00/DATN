@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1>Thông tin: <?= $member_info['name'] ?? ''?></h1>
+					<h1>Thông tin: <?= $member_info['name']?></h1>
 					<?php 
 						$this->Breadcrumbs->add([
 							[
@@ -38,7 +38,7 @@
 								]
 							],
 							[
-								'title'=> $member_info['name'] ?? '',
+								'title'=> $member_info['name'],
 								'options' => [
 									'innerAttrs' => [
 										'class' => "ion-ios-arrow-right"
@@ -61,7 +61,7 @@
 				<div class="user-information">
 					<div class="user-img">
 					<!-- Để tạm sau xóa điều kiện -->
-					<a href="#"><?= $this->Html->image('upload/users/'.($member_info['img_avatar'] ?? 'default.jpg'),['class'=>'avatar'])?><br></a>
+					<a href="#"><?= $this->Html->image('upload/users/'.($member_info['img_avatar']),['class'=>'avatar'])?><br></a>
 						<a href="#" class="redbtn" data-toggle="modal" data-target="#changeAvatar">Change avatar</a>
 					</div>
 					<div class="user-fav">
@@ -86,21 +86,21 @@
 					<?=$this->Form->create(null,[
 						'class'=>'user',
 						'id' => 'infoFrm',
-						'action' => '/users/profile/'.($member_info['id']??1)
+						'action' => '/users/profile/'.($member_info['id'])
 					])?>
 						<h4>01. Thông tin cá nhân</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<?= $this->Form->control('name',[
 									'label'=>'Tên người dùng', 
-									'placeholder'=> $member_info['name'] ?? ''
+									'placeholder'=> $member_info['name']
 									])
 								?>
 							</div>
 							<div class="col-md-6 form-it">
 								<?= $this->Form->control('email',[
 									'label'=>'Địa chỉ Email', 
-									'placeholder'=> $member_info['email'] ?? '',
+									'placeholder'=> $member_info['email'],
 									'disabled' => true,
 									'style' => 'background-color:#233A50; color: #abb7c4'
 									])
@@ -118,7 +118,7 @@
 							<div class="col-md-6 form-it">
 								<?= $this->Form->control('role',[
 									'label'=>'Thành viên', 
-									'placeholder'=> $member_info['role'] ?? '',
+									'placeholder'=> $member_info['role'],
 									'disabled' => true,
 									'style' => 'background-color:#233A50; color: #abb7c4'
 									])
@@ -156,7 +156,7 @@
 					<?=$this->Form->create(null,[
 						'class'=>'password',
 						'id'=>'passwordFrm',
-						'action' => '/users/change-password/'.($member_info['id']??1)
+						'action' => '/users/change-password/'.($member_info['id'])
 					])?>
 						<h4>02. Thay đổi mật khẩu</h4>
 						<div class="row">
@@ -213,10 +213,10 @@
 		<?php
 			echo $this->Form->create(null,[
 				'id'=>'changeFrm',
-				'action' => '/users/change-avatar/'.($member_info['id']??1),
+				'action' => '/users/change-avatar/'.($member_info['id']),
 				'type' => 'file'
 			]);
-			echo $this->Html->image('upload/users/'.($member_info['img_avatar'] ?? 'defaul.jpg'),['style'=>'width:80px; height: 80px; border-radius: 50%; margin-bottom: 5px','title'=>'ảnh hiện tại']);
+			echo $this->Html->image('upload/users/'.($member_info['img_avatar']),['style'=>'width:80px; height: 80px; border-radius: 50%; margin-bottom: 5px','title'=>'ảnh hiện tại']);
 			echo $this->Form->control('img_change',[
 				'label'=>'Thay ảnh đại diện',
 				'type'=>'file',

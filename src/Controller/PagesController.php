@@ -13,6 +13,19 @@ use Cake\Event\EventInterface;
 
 class PagesController extends AppController
 {
+    public function beforeFilter(EventInterface $event) {
+        parent::beforeFilter($event);
+        $home_page = true;
+        $this->set('home_page', $home_page);
+        $cateTitle = $this->request->getQuery('categoryTitle');
+        $cateId = $this->request->getQuery('idCate');
+        $cate = $this->Categories->getMoviesByCategory('Phim hot',10);
+
+        echo "<pre>";
+        echo json_encode($cate);
+        echo "</pre>";
+        die;
+    }
     public function beforeRender(EventInterface $event)
     {
         parent::beforeRender($event);
@@ -48,6 +61,32 @@ class PagesController extends AppController
 
     public function index()
     {
-        $this->viewBuilder()->setLayout('default');
+        $movieOfCategory = 'Phim theo danh mục';
+        $category= $this->Categories->find('all');
+        // echo "<pre>";
+        // echo json_encode($category);
+        // echo "</pre>";die;
+        $this->set('movieCategory', $movieOfCategory);
+    }
+
+    public function getMoviesByCategory()
+    {
+        $this->autoRender = false;
+        if($this->request->is('ajax')){
+            $cateTitle = $this->request->getQuery('categoryTitle');
+            $cateId = $this->request->getQuery('idCate');
+            $categoryMovie = $this->Categories->getMoviesByCategory($cateTitle,$cateId);
+            $movies = [
+                'category' => []
+            ];
+
+            foreach($categoryMovie as $cate){
+                $movies['category'][] = [
+                    'title' => $cate->title,
+                ];
+            }
+            return $this->response->withType("application/json")->withStringBody(json_encode(compact('categoryMovie')));
+        }
+        return "";
     }
 }

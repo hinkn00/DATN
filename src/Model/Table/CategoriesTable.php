@@ -101,4 +101,34 @@ class CategoriesTable extends Table
             'recursive' => -1            
         ]);
     }
+
+    public function getMoviesByCategory($categoryTitle, $idCate)
+    {
+        $joins = array(
+            array(
+                'table' => 'movies_info',
+                'alias' => 'MoviesInfo',
+                'type' => 'inner',
+                'conditions' => [
+                    'MoviesInfo.category_id ='=> $idCate
+                ]
+            ),
+        );
+
+        $options = array(
+            'field' => '*',
+            'conditions' => array(
+                "Category.title = $categoryTitle",
+                "Category.id = $idCate"
+            ),
+            // 'order' => [
+            //     'Category.modified' => 'desc'
+            // ],
+            // 'joins' => $joins,
+            
+        );
+        $data = $this->find('all',$options);
+
+        return $data;
+    }
 }
