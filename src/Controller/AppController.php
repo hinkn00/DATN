@@ -22,7 +22,7 @@ class AppController extends Controller
         $this->loadComponent('Auth',[
             'logoutRedirect' => [
                 'controller' => 'Pages',
-                'action' => 'home'
+                'action' => 'index'
             ],
         ]);
 
@@ -56,6 +56,9 @@ class AppController extends Controller
         $data = $this->Categories->find('all', [
             'conditions' => [
                 'Category.status' => 1
+            ],
+            'order' => [
+                'Category.id' => 'desc'
             ]
         ]);
 
