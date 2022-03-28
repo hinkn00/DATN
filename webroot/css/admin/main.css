@@ -182,6 +182,7 @@ td {
 
 #desc_respon::-webkit-scrollbar {
     width: 5px;
+    height: 5px;
     border: 1px solid #d5d5d5;
 }
 #desc_respon::-webkit-scrollbar-track {

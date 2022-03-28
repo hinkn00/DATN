@@ -55,9 +55,7 @@ class PagesController extends AppController
     {
         $movieOfCategory = 'Phim theo danh mục';
         $category= $this->Categories->find('all');
-        // echo "<pre>";
-        // echo json_encode($category);
-        // echo "</pre>";die;
+
         $this->set('movieCategory', $movieOfCategory);
     }
 
@@ -68,16 +66,26 @@ class PagesController extends AppController
             $cateTitle = $this->request->getQuery('categoryTitle');
             $cateId = $this->request->getQuery('idCate');
             $categoryMovie = $this->Categories->getMoviesByCategory($cateTitle,$cateId);
+            
             $movies = [
-                'category' => []
+                'Category' => []
             ];
             
-            foreach($categoryMovie as $cate){
-                $movies['category'][] = [
-                    'title' => $cate->title,
-                ];
+            if(!$categoryMovie->isEmpty()){
+                foreach($categoryMovie as $cate){
+                    $movies['Category'][] = [
+                        'id' => $cate->id,
+                        'title' => $cate->title,
+                        'slug' => $cate->slug,
+                        'movie_name' => $cate->Movie['m_name']
+
+                    ];
+                }
+                return $this->response->withType("application/json")->withStringBody(json_encode(compact('movies')));
+                exit();
             }
-            return $this->response->withType("application/json")->withStringBody(json_encode(compact('categoryMovie')));
+            $movies['Category'] = ['notification'=>'Không có phim'];
+            return $this->response->withType("application/json")->withStringBody(json_encode(compact('movies')));
         }
         return "";
     }

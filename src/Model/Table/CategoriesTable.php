@@ -104,7 +104,7 @@ class CategoriesTable extends Table
         ]);
     }
 
-    public function getMoviesByCategory($categoryTitle, $idCate)
+    public function getMoviesByCategory($categoryTitle, $idCate = 2)
     {
         $joins = array(
             array(
@@ -126,7 +126,7 @@ class CategoriesTable extends Table
         );
 
         $options = array(
-            'field' => ['Movie.id'],
+            'fields' => ['Movie.m_name','Category.title','Category.slug','Category.id'],
             'conditions' => array(
                 'OR'=>[
                     "Category.title =" => $categoryTitle,
@@ -137,7 +137,7 @@ class CategoriesTable extends Table
                 'Category.modified' => 'desc'
             ],            
         );
-        $data = $this->find('all',$options);
+        $data = $this->find('all',$options)->join($joins);
 
         return $data;
     }

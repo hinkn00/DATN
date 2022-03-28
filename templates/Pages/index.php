@@ -150,15 +150,15 @@
                             <?php endif;?>
                         <?php endforeach;?>
 					</ul>
-				    <div class="tab-content">
+				    <div class="tab-content" id="tab-content-cate">
 				        <div id="tab21" class="tab">
 				            <div class="row">
-                                <div class="slick-multiItem">
-                                    <?php for($i = 0; $i < 8; $i++):?>
+                                <div class="slick-multiItem category">
+                                    <!-- <?php //for($i = 0; $i < 9; $i++):?>
                                         <div class="slide-it">
                                             <div class="movie-item">
                                                 <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item7.jpg',['width'=>185,'height'=>284])?>
+                                                <? //echo $this->Html->image('default/mv-item7.jpg',['width'=>185,'height'=>284])?>
                                                 </div> 
                                                 <div class="hvr-inner">
                                                     <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
@@ -169,18 +169,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php endfor;?>
+                                    <?php //endfor;?> -->
 				            	</div>
 				            </div>
 				        </div>
 				        <div id="tab22" class="tab active">
 				           <div class="row">
-                                <div class="slick-multiItem">
-                                    <?php for($i = 0; $i < 9; $i++):?>
+                                <div class="slick-multiItem category" id="ItemContent">
+                                    <!-- <?php //for($i = 0; $i < 9; $i++):?>
                                         <div class="slide-it">
                                             <div class="movie-item">
                                                 <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item1.jpg',['width'=>185,'height'=>284])?>
+                                                    <?php //echo $this->Html->image('default/mv-item1.jpg',['width'=>185,'height'=>284])?>
                                                 </div> 
                                                 <div class="hvr-inner">
                                                     <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
@@ -191,18 +191,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php endfor;?>
+                                    <?php //endfor;?> -->
 				            	</div>
 				            </div>
 				        </div>
 				        <div id="tab23" class="tab">
 				        	<div class="row">
-                                <div class="slick-multiItem">
-                                    <?php for($i = 0; $i < 9; $i++):?>
+                                <div class="slick-multiItem category">
+                                    <!-- <?php //for($i = 0; $i < 9; $i++):?>
                                         <div class="slide-it">
                                             <div class="movie-item">
                                                 <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item7.jpg',['width'=>185,'height'=>284])?>
+                                                <?php //echo $this->Html->image('default/mv-item7.jpg',['width'=>185,'height'=>284])?>
                                                 </div> 
                                                 <div class="hvr-inner">
                                                     <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
@@ -213,18 +213,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php endfor;?>
+                                    <?php //endfor;?> -->
 				            	</div>
 				            </div>
 			       	 	</div>
 			       	 	 <div id="tab24" class="tab">
 				        	<div class="row">
-                                <div class="slick-multiItem">
-                                    <?php for($i = 0; $i < 8; $i++):?>
+                                <div class="slick-multiItem category">
+                                    <!-- <?php //for($i = 0; $i < 9; $i++):?>
                                         <div class="slide-it">
                                             <div class="movie-item">
                                                 <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item1.jpg',['width'=>185,'height'=>284])?>
+                                                <?php //echo $this->Html->image('default/mv-item7.jpg',['width'=>185,'height'=>284])?>
                                                 </div> 
                                                 <div class="hvr-inner">
                                                     <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
@@ -235,7 +235,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php endfor;?>
+                                    <?php //endfor;?> -->
 				            	</div>
 				            </div>
 			       	 	</div>
@@ -292,6 +292,7 @@
 	})
 
 	$('#tab-links-cate').click(function(){
+        $('.slick-multiItem.category').empty();
 		let category = categoryTitle();
 		this.ajax = ajaxMovieByCategory(category);
 		this.ajax.done(function(data){
@@ -302,20 +303,47 @@
 	var ajaxMovieByCategory = function(category){
         let idCate = '';
         if($('#tab-links-cate li').hasClass('active')){
-			idCate = $('#tab-links-cate').children('li.active').find('input[type=hidden].cate_id').text();
+			idCate = $('#tab-links-cate').children('li.active').find('input[type=hidden].cate_id').attr('value');
 		}
-        console.log(idCate);
+        
 		return $.ajax({
 			url: "<?php echo $this->Url->build(['_name'=>'getMoviesByCategory'])?>",
 			type: 'GET',
 			data: {
-				// idCate: idCate,  
+				idCate: idCate,  
 				categoryTitle: getValue
 			},
 		});
 	}	
 
-	function doneFunc(){
-		alert("hmmmmmmm");
+	var doneFunc = function(data){
+		$('#ItemContent').append(data);
+        let list_movies = data.movies['Category'];
+		let category = categoryTitle();
+        var html = '';
+        $.each(list_movies, function(index, movie_list){
+            if(list_movies['notification']){
+                $('.slick-multiItem.category').append(`<p>${list_movies['notification']}</p>`)
+            }
+            html = `
+                <div class="slide-it">
+                    <div class="movie-item">
+                        <div class="mv-img">
+                            <img src="img/default/mv-item7.jpg" width="185" height="284"/>"
+                        </div> 
+                        <div class="hvr-inner">
+                            <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
+                        </div>
+                        <div class="title-in">
+                            <h6><a href="#">hihi</a></h6>
+                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            if(category == movie_list['title']){
+                $('.slick-multiItem.category').append(html)
+            }
+        })
 	}
 </script>
