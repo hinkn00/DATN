@@ -153,30 +153,54 @@
 				    <div class="tab-content" id="tab-content-cate">
                         <div id="tab21" class="tab">
                             <div class="row">
-                                
+                                <div class="slick-multiItem">
+                                    <!-- <div class="slide-it">
+                                        
+                                    </div> -->
+                                </div>
                             </div>
 				        </div>
 				        <div id="tab22" class="tab active">
                             <div class="row">
-                                
+                                <div class="slick-multiItem">
+                                    <!-- <div class="slide-it">
+                                        
+                                    </div> -->
+                                    <?php for($i = 0; $i < 8; $i++):?>
+                                        <div class="slide-it">
+                                            <div class="movie-item">
+                                                <div class="mv-img">
+                                                    <?= $this->Html->image('default/mv-item1.jpg',['width'=>185,'height'=>284])?>
+                                                </div> 
+                                                <div class="hvr-inner">
+                                                    <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
+                                                </div>
+                                                <div class="title-in">
+                                                    <h6><a href="#">Interstellar</a></h6>
+                                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endfor;?>
+                                </div>
                             </div>
 				        </div>
 				        <div id="tab23" class="tab">
                             <div class="row">
-                                <!-- <div class="slick-multiItem">
-                                    <div class="slide-it">
+                                <div class="slick-multiItem">
+                                    <!-- <div class="slide-it">
                                         
-                                    </div>
-                                </div> -->
+                                    </div> -->
+                                </div>
                             </div>
 			       	 	</div>
 			       	 	 <div id="tab24" class="tab">
                             <div class="row">
-                                <!-- <div class="slick-multiItem">
-                                    <div class="slide-it">
+                                <div class="slick-multiItem">
+                                    <!-- <div class="slide-it">
                                         
-                                    </div>
-                                </div> -->
+                                    </div> -->
+                                </div>
                             </div>
 			       	 	</div>
 				    </div>
@@ -252,9 +276,10 @@
 		})
 	})
 
-	$('#tab-links-cate a').click(function(){
+	$('#tab-links-cate a').click(function(e){
+        e.preventDefault();
         let href = $(this).attr('href');
-        $(href).find('.row').empty();
+        $(href).find('.row .slick-multiItem').empty();
 		category = categoryName($(this).text());
         let idCate = $(this).parent().find('input[type=hidden].cate_id').attr('value');
 
@@ -271,13 +296,40 @@
 			type: 'GET',
 			data: {
 				idCate: idCate,  
-				categoryTitle: getValue
+				categoryTitle: category
 			},
 		});
 	}	
 
 	var doneFunc = function(data, href){
-        $(href).find('.row').append(data);
+        var html = '';
+        list_movies = data.movies['Category'];
+        var options = {
+            arrows: false,
+            slidesToShow: 1,
+            variableWidth: true,
+            centerPadding: '10px'
+        }
+        $.each(list_movies, function(index, movie) {
+            html = '<div class="slide-it">';
+                html += '<div class="movie-item">';
+                    html += '<div class="mv-img">';
+                     html += '<image src="img/default/mv-item1.jpg" width="185" height="284"/>';
+                    html += '</div>';
+                    html += '<div class="hvr-inner">';
+                        html += '<a href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>';
+                    html += '</div>';
+                    html += '<div class="title-in">';
+                        html += '<h6><a href="#">'+movie['movie_name']+'</a></h6>';
+                        html += '<p><i class="ion-android-star"></i><span>7.4</span> /10</p>';
+                    html += '</div>';
+                html += '</div>';
+            html += '</div>';
+
+            $(href+'.tab').find('.row .slick-multiItem').append(html);
+        })
+
+
 		
 	}
 </script>
