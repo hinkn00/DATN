@@ -11,20 +11,20 @@
 			</div>
 	    	<div  class="slick-multiItemSlider">
 				<?php for($i = 1; $i <= 8; $i++):?>
-	    		<div class="movie-item">
-	    			<div class="mv-img">
-	    				<a href="#">
-                            <?= $this->Html->image('default/slider'.($i <= 4 ? $i : 1).'.jpg',['width'=>285, 'height'=>437])?>
-                        </a>
-	    			</div>
-	    			<div class="title-in">
-	    				<div class="cate">
-	    					<span class="blue"><a href="#">Sci-fi</a></span>
-	    				</div>
-	    				<h6><a href="#">Interstellar</a></h6>
-	    				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-	    			</div>
-	    		</div>
+                    <div class="movie-item">
+                        <div class="mv-img">
+                            <a href="#">
+                                <?= $this->Html->image('default/slider'.($i <= 4 ? $i : 1).'.jpg',['width'=>285, 'height'=>437])?>
+                            </a>
+                        </div>
+                        <div class="title-in">
+                            <div class="cate">
+                                <span class="blue"><a href="#">Sci-fi</a></span>
+                            </div>
+                            <h6><a href="#">Interstellar</a></h6>
+                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                        </div>
+                    </div>
 				<?php endfor;?>
 	    	</div>
 	    </div>
@@ -34,107 +34,6 @@
 	<div class="container">
 		<div class="row ipad-width">
 			<div class="col-md-8">
-				<div class="title-hd">
-					<h2>Đề cử cho bạn</h2>
-				</div>
-				<div class="tabs">
-					<ul class="tab-links">
-						<li class="active"><a href="#tab1">#Phổ biến</a></li>
-						<li><a href="#tab2"> #Mới nhất</a></li>
-						<li><a href="#tab3">  #Đánh giá tốt  </a></li>
-						<li><a href="#tab4"> #Xem nhiều</a></li>                        
-					</ul>
-				    <div class="tab-content">
-				        <div id="tab1" class="tab active">
-				            <div class="row">
-				            	<div class="slick-multiItem">
-				            		<?php for($i = 0; $i < 8; $i++):?>
-                                        <div class="slide-it">
-                                            <div class="movie-item">
-                                                <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item7.jpg',['width'=>185,'height'=>284])?>
-                                                </div> 
-                                                <div class="hvr-inner">
-                                                    <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
-                                                </div>
-                                                <div class="title-in">
-                                                    <h6><a href="#">Interstellar</a></h6>
-                                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endfor;?>
-				            	</div>
-				            </div>
-				        </div>
-				        <div id="tab2" class="tab">
-				           <div class="row">
-				            	<div class="slick-multiItem">
-                                    <?php for($i = 0; $i < 8; $i++):?>
-                                        <div class="slide-it">
-                                            <div class="movie-item">
-                                                <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item1.jpg',['width'=>185,'height'=>284])?>
-                                                </div> 
-                                                <div class="hvr-inner">
-                                                    <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
-                                                </div>
-                                                <div class="title-in">
-                                                    <h6><a href="#">Interstellar</a></h6>
-                                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endfor;?>
-				            	</div>
-				            </div>
-				        </div>
-				        <div id="tab3" class="tab">
-				        	<div class="row">
-                                <div class="slick-multiItem">
-                                    <?php for($i = 0; $i < 8; $i++):?>
-                                        <div class="slide-it">
-                                            <div class="movie-item">
-                                                <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item7.jpg',['width'=>185,'height'=>284])?>
-                                                </div> 
-                                                <div class="hvr-inner">
-                                                    <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
-                                                </div>
-                                                <div class="title-in">
-                                                    <h6><a href="#">Interstellar</a></h6>
-                                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endfor;?>
-				            	</div>
-				            </div>
-			       	 	</div>
-			       	 	<div id="tab4" class="tab">
-				        	<div class="row">
-                                <div class="slick-multiItem">
-                                    <?php for($i = 0; $i < 8; $i++):?>
-                                        <div class="slide-it">
-                                            <div class="movie-item">
-                                                <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item1.jpg',['width'=>185,'height'=>284])?>
-                                                </div> 
-                                                <div class="hvr-inner">
-                                                    <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
-                                                </div>
-                                                <div class="title-in">
-                                                    <h6><a href="#">Interstellar</a></h6>
-                                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endfor;?>
-				            	</div>
-				            </div>
-			       	 	</div>
-				    </div>
-				</div>
 				<?php foreach($categories as $cate):?>
                     <div class="title-hd">
                         <h2><?= $cate->title?></h2>

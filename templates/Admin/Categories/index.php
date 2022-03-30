@@ -130,19 +130,27 @@
     });
 
     var ajaxChange = function(id_arr){
-        $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                url: '<?= $this->Url->build(['_name'=>'admin_change_number_category']);?>',
-                dataType: "json",
-                type: "POST",
-                data: {
-                    ids: id_arr
-                }
-        }).done(function(data){
-            alert('Sắp xếp thành công');
-        });
+        fetch("<?php echo $this->Url->build(['_name'=>'admin_change_number_category']);?>",
+        {
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+            },
+            method: "POST",
+            body: JSON.stringify({ids: id_arr})
+        })
+        .then(function(res){ 
+            Swal.fire({
+                icon: `success`,
+                title: `Sắp xếp thành công!`,
+                timer: 5000
+            })
+            .then(function(){
+                location.reload(); 
+            }); 
+        })
+        .catch(function(res){ console.log(res) })
     }
 </script>
 <?php echo $this->Html->script(['admin/category','sweetalert2'])?>
