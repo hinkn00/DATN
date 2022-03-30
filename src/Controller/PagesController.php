@@ -23,6 +23,11 @@ class PagesController extends AppController
         parent::beforeRender($event);
     }
 
+    public function setModel()
+    {
+        $this->loadModel('Categories');
+        $this->loadModel('Movies');
+    }
     public function display(string ...$path): ?Response
     {
         if (!$path) {
@@ -53,70 +58,16 @@ class PagesController extends AppController
 
     public function index()
     {
-        $movieOfCategory = 'Phim theo danh mục';
-        $category= $this->Categories->find('all');
-
-        $this->set('movieCategory', $movieOfCategory);
-    }
-
-    public function getMoviesByCategory()
-    {
-        $this->autoRender = false;
-        if($this->request->is('get')){
-            $cateTitle = $this->request->getQuery('categoryTitle');
-            $cateId = $this->request->getQuery('idCate');
-            $categoryMovie = $this->Categories->getMoviesByCategory($cateTitle,$cateId);
-            
-            // $output = '';
-            // foreach($categoryMovie as $cate){
-            //     $output .= '
-            //         <div class="slide-it">
-            //             <div class="movie-item">
-            //                 <div class="mv-img">
-            //                     <image src="img/default/mv-item1.jpg" width="185" height="284"/>                                
-            //                 </div> 
-            //                 <div class="hvr-inner">
-            //                     <a href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
-            //                 </div>
-            //                 <div class="title-in">
-            //                     <h6><a href="#">'.$cate->Movie['m_name'].'</a></h6>
-            //                     <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-            //                 </div>
-            //             </div>   
-            //         </div>            
-            //     ';
-            // }
-
-            // if(empty($output)){
-            //     echo "Không có phim";
-            //     die;
-            // }
-            // echo $output;
-
-            $movies = [
-                'Category' => []
-            ];
-            
-            if(empty($categoryMovie)){
-                
-                $movies['Category'][] = ['notification'=>'Không có phim'];
-                return $this->response->withType("application/json")->withStringBody(json_encode(compact('movies')));
-                exit();
-            }
-
-            foreach($categoryMovie as $cate){
-                $movies['Category'][] = [
-                    'id' => $cate->id,
-                    'title' => $cate->title,
-                    'slug' => $cate->slug,
-                    'movie_name' => $cate->Movie['m_name']
-                ];
-            }
-            
-            return $this->response->withType("application/json")->withStringBody(json_encode(compact('movies')));
-        }
-        return "";
-
-        // echo "";
+        $this->setModel();
+        $movies = $this->Movies->find('all',[
+            'contain' => [
+                'MoviesInfo'
+            ]
+        ]);
+        // echo "<pre>";
+        // echo json_encode($movies);
+        // echo "</pre>";
+        // die;
+        $this->set('categoryMovie', $movies);
     }
 }

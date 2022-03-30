@@ -17,7 +17,7 @@ class CategoriesController extends AdminController{
 
     public function index()
     {
-        $categoryList = $this->Categories->find('all');
+        $categoryList = $this->Categories->find('all',['order'=>'Category.number asc']);
         $categories = $this->paginateAll($categoryList);
         $this->set('categories', $categories);
     }
@@ -81,5 +81,15 @@ class CategoriesController extends AdminController{
             $categories = '';
         }
         $this->set('categories',$categories);
+    }
+
+    public function changeNumberCategory()
+    {
+        $ids = $this->request->getData('ids');
+
+        if($this->request->is(['post','put'])){
+            debug($ids);
+            die;
+        }
     }
 }

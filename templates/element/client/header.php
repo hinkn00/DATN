@@ -30,11 +30,6 @@
 								<?php endforeach;?>
 							</ul>
 						</li>
-
-						<?php foreach($categories as $category):?>
-							<li><a href="#"><?= $category->title ?></a></li>
-						<?php endforeach;?>
-
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
 							Quốc gia <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -45,6 +40,9 @@
 								<?php endforeach;?>
 							</ul>
 						</li>
+						<?php foreach($categories as $category):?>
+							<li><a href="#"><?= $category->title ?></a></li>
+						<?php endforeach;?>
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">              
 						<?php

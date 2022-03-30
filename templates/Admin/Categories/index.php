@@ -47,10 +47,10 @@
                         <th>Khác</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="sortTable">
                     <?php foreach($categories as $cate):?>
-                    <tr>
-                        <td><?= $cate->id ?></td>
+                    <tr id="<?= $cate->id?>">
+                        <td><?= $cate->number + 1 ?></td>
                         <td><?= $cate->title?></td>
                         <td>
                             <?= $cate->slug?>
@@ -115,4 +115,34 @@
         })
     </script>
 <?php endif;?> 
+<script>
+    var csrfToken = $('meta[name="csrfToken"]').attr('content');
+    var id_arr = [];
+    $("#sortTable").sortable({
+        placeholder: 'ui-state-highlight',
+        update: function(event, ui){
+            $('#sortTable tr').each(function(){
+                id_arr.push($(this).attr('id'));
+            })
+
+            ajaxChange(id_arr);
+        }
+    });
+
+    var ajaxChange = function(id_arr){
+        $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                url: '<?= $this->Url->build(['_name'=>'admin_change_number_category']);?>',
+                dataType: "json",
+                type: "POST",
+                data: {
+                    ids: id_arr
+                }
+        }).done(function(data){
+            alert('Sắp xếp thành công');
+        });
+    }
+</script>
 <?php echo $this->Html->script(['admin/category','sweetalert2'])?>
