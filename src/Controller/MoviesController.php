@@ -9,8 +9,8 @@ class MoviesController extends AppController
 {
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
-        $check_loader = true;
-        $this->set('check_loader', $check_loader);
+        // $check_loader = true;
+        // $this->set('check_loader', $check_loader);
     }
 
     public function index()
