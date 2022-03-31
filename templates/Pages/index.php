@@ -1,4 +1,12 @@
 <?php $this->assign('title','Trang chủ')?>
+<style>
+    .mb-15{
+        margin-bottom: 15px !important;
+    }
+    .slider{
+        background: url(../../img/default/slider-bg.jpg) no-repeat;
+    }
+</style>
 <div class="slider movie-items">
 	<div class="container">
 		<div class="row">
@@ -10,22 +18,22 @@
 				<a href="#"><i class="ion-social-youtube"></i></a>
 			</div>
 	    	<div  class="slick-multiItemSlider">
-				<?php for($i = 1; $i <= 8; $i++):?>
+				<?php foreach($categoryMovie as $i => $cate):?>
                     <div class="movie-item">
                         <div class="mv-img">
                             <a href="#">
-                                <?= $this->Html->image('default/slider'.($i <= 4 ? $i : 1).'.jpg',['width'=>285, 'height'=>437])?>
+                                <?= $this->Html->image('default/slider'.($i < 4 ? $i+1 : 1).'.jpg',['width'=>285, 'height'=>437])?>
                             </a>
                         </div>
                         <div class="title-in">
                             <div class="cate">
                                 <span class="blue"><a href="#">Sci-fi</a></span>
                             </div>
-                            <h6><a href="#">Interstellar</a></h6>
+                            <h6><a  href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$cate->m_slug,"id"=>$cate->id]);?>"><?= $cate->m_name?></a></h6>
                             <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
                         </div>
                     </div>
-				<?php endfor;?>
+				<?php endforeach;?>
 	    	</div>
 	    </div>
 	</div>
@@ -40,18 +48,18 @@
                         <a href="#" class="viewall">tất cả <i class="ion-ios-arrow-right"></i></a>
                     </div>
 
-                    <div class="cate-movie">
+                    <div class="cate-movie mb-15">
                         <div class="row">
-                            <div class="slick-multiItem">
-                                <?php foreach($categoryMovie as $cate_movie):?>
+                            <div class="slick-multiItemSlider">
+                                <?php foreach($categoryMovie as $index=>$cate_movie):?>
                                     <?php if($cate->id == $cate_movie->movies_info->category_id):?>
                                         <div class="slide-it">
                                             <div class="movie-item">
                                                 <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item7.jpg',['width'=>185,'height'=>284])?>
+                                                    <?= $this->Html->image('default/mv-item'.($index < 4? 1 : 7).'.jpg',['width'=>185,'height'=>284])?>
                                                 </div> 
                                                 <div class="hvr-inner">
-                                                    <a  href="moviesingle.html"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
+                                                    <a  href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$cate_movie->m_slug,"id"=>$cate_movie->id]);?>"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
                                                 </div>
                                                 <div class="title-in">
                                                     <h6><a href="#"><?php echo $cate_movie->m_name?></a></h6>

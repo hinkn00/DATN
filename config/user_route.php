@@ -33,5 +33,8 @@
             ['_name'=>'users_logout']
         );
 
+
+        //movies details
+        $builder->connect('/{slug}/{id}',["controller"=>"Movies","action"=>"details"],["_name"=>"movies_details"]);
         $builder->fallbacks();
     });

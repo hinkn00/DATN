@@ -12,7 +12,7 @@
 							<span></span>
 						</div>
 				    </div>
-				    <a href="#"><?= $this->Html->image('default/logo1.png',['class'=>'logo','width'=>119,'height'=>'58'])?></a>
+				    <a href="/"><?= $this->Html->image('default/logo1.png',['class'=>'logo','width'=>119,'height'=>'58'])?></a>
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">

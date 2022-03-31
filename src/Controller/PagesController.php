@@ -15,8 +15,8 @@ class PagesController extends AppController
 {
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
-        $home_page = true;
-        $this->set('home_page', $home_page);
+        $check_loader = true;
+        $this->set('check_loader', $check_loader);
     }
     public function beforeRender(EventInterface $event)
     {
