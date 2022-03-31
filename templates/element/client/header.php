@@ -41,7 +41,7 @@
 							</ul>
 						</li>
 						<?php foreach($categories as $category):?>
-							<li><a href="#"><?= $category->title ?></a></li>
+							<li><a href="<?php echo $this->Url->build(['_name'=>'category_details','slug'=>$category->slug])?>"><?= $category->title ?></a></li>
 						<?php endforeach;?>
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">              
