@@ -58,7 +58,7 @@ class AppController extends Controller
                 'Category.status' => 1
             ],
             'order' => [
-                'Category.id' => 'desc'
+                'Category.number' => 'asc'
             ]
         ]);
 

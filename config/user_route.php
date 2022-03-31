@@ -6,7 +6,6 @@
  
         $builder->connect('/home', ['controller' => 'Pages', 'action' => 'display', 'home'],['_name'=>'home']);
         $builder->connect('/',['controller'=>'Pages','action'=>'index'],['_name'=>'index']);
-        $builder->connect('/movies/getMoviesByCategory',['controller'=>'Pages','action'=>'getMoviesByCategory'],['_name'=>'getMoviesByCategory']);
         $builder->connect('/pages/*', 'Pages::display');
         $builder->connect(
             '/users/login',
@@ -34,5 +33,8 @@
             ['_name'=>'users_logout']
         );
 
+
+        //movies details
+        $builder->connect('/{slug}/{id}',["controller"=>"Movies","action"=>"details"],["_name"=>"movies_details"]);
         $builder->fallbacks();
     });

@@ -47,10 +47,10 @@
                         <th>Khác</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="sortTable">
                     <?php foreach($categories as $cate):?>
-                    <tr>
-                        <td><?= $cate->id ?></td>
+                    <tr id="<?= $cate->id?>">
+                        <td><?= $cate->number + 1 ?></td>
                         <td><?= $cate->title?></td>
                         <td>
                             <?= $cate->slug?>
@@ -115,4 +115,42 @@
         })
     </script>
 <?php endif;?> 
+<script>
+    var csrfToken = $('meta[name="csrfToken"]').attr('content');
+    var id_arr = [];
+    $("#sortTable").sortable({
+        placeholder: 'ui-state-highlight',
+        update: function(event, ui){
+            $('#sortTable tr').each(function(){
+                id_arr.push($(this).attr('id'));
+            })
+
+            ajaxChange(id_arr);
+        }
+    });
+
+    var ajaxChange = function(id_arr){
+        fetch("<?php echo $this->Url->build(['_name'=>'admin_change_number_category']);?>",
+        {
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+            },
+            method: "POST",
+            body: JSON.stringify({ids: id_arr})
+        })
+        .then(function(res){ 
+            Swal.fire({
+                icon: `success`,
+                title: `Sắp xếp thành công!`,
+                timer: 5000
+            })
+            .then(function(){
+                location.reload(); 
+            }); 
+        })
+        .catch(function(res){ console.log(res) })
+    }
+</script>
 <?php echo $this->Html->script(['admin/category','sweetalert2'])?>

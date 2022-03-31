@@ -53,6 +53,7 @@ return static function (RouteBuilder $routes) {
         $routes->connect('/categories/{slug}/edit', ['controller' => 'Categories', 'action' => 'edit'],['_name'=>'admin_categories_edit']);
         $routes->connect('/categories/delete/{id}', ['controller' => 'Categories', 'action' => 'delete'],['_name'=>'admin_categories_delete']);
         $routes->connect('/categories/search', ['controller' => 'Categories', 'action' => 'search'],['_name'=>'admin_categories_search']);
+        $routes->connect('/categories/change-number', ['controller' => 'Categories', 'action' => 'changeNumberCategory'],['_name'=>'admin_change_number_category']);
         
         //Genre route
         $routes->connect('/genres/home', ['controller' => 'Genres', 'action' => 'index'],['_name'=>'admin_genre_home']);

@@ -12,7 +12,7 @@
 							<span></span>
 						</div>
 				    </div>
-				    <a href="#"><?= $this->Html->image('default/logo1.png',['class'=>'logo','width'=>119,'height'=>'58'])?></a>
+				    <a href="/"><?= $this->Html->image('default/logo1.png',['class'=>'logo','width'=>119,'height'=>'58'])?></a>
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
@@ -30,11 +30,6 @@
 								<?php endforeach;?>
 							</ul>
 						</li>
-
-						<?php foreach($categories as $category):?>
-							<li><a href="#"><?= $category->title ?></a></li>
-						<?php endforeach;?>
-
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
 							Quốc gia <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -45,6 +40,9 @@
 								<?php endforeach;?>
 							</ul>
 						</li>
+						<?php foreach($categories as $category):?>
+							<li><a href="#"><?= $category->title ?></a></li>
+						<?php endforeach;?>
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">              
 						<?php

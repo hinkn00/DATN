@@ -17,16 +17,21 @@ class CategoriesController extends AdminController{
 
     public function index()
     {
-        $categoryList = $this->Categories->find('all');
+        $categoryList = $this->Categories->find('all',['order'=>'Category.number asc']);
         $categories = $this->paginateAll($categoryList);
         $this->set('categories', $categories);
     }
 
     public function add()
     {
+
+        $total_cate = $this->Categories->find('all')->count(); // count total record in categories
+
         $categories = $this->Categories->newEmptyEntity();
         if($this->request->is('post')){
             $categories = $this->Categories->patchEntity($categories, $this->request->getData());
+            $categories->number = $total_cate; // total_cate = [0...total_cate- 1] ==> number_new = $total_cate_now
+            //example: total_cate_now = 5 so total_cate_now has value from 0 to 4: [0,1,2,3,4] ==> number_new = 5 = total_cate_now
             if($this->Categories->save($categories)){
                 $this->Flash->success(__('success'));
                 return $this->redirect(['_name'=>'admin_categories_add']);
@@ -81,5 +86,19 @@ class CategoriesController extends AdminController{
             $categories = '';
         }
         $this->set('categories',$categories);
+    }
+
+    public function changeNumberCategory()
+    {
+        $ids = $this->request->getData('ids');
+
+        if($this->request->is(['post','put'])){
+            foreach($ids as $index => $id){
+                $category = $this->Categories->get($id);
+                $category->number = $index;
+                $this->Categories->save($category);
+            }
+            die;
+        }
     }
 }

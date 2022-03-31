@@ -15,14 +15,19 @@ class PagesController extends AppController
 {
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
-        $home_page = true;
-        $this->set('home_page', $home_page);
+        $check_loader = true;
+        $this->set('check_loader', $check_loader);
     }
     public function beforeRender(EventInterface $event)
     {
         parent::beforeRender($event);
     }
 
+    public function setModel()
+    {
+        $this->loadModel('Categories');
+        $this->loadModel('Movies');
+    }
     public function display(string ...$path): ?Response
     {
         if (!$path) {
@@ -53,40 +58,16 @@ class PagesController extends AppController
 
     public function index()
     {
-        $movieOfCategory = 'Phim theo danh mục';
-        $category= $this->Categories->find('all');
-
-        $this->set('movieCategory', $movieOfCategory);
-    }
-
-    public function getMoviesByCategory()
-    {
-        $this->autoRender = false;
-        if($this->request->is('ajax')){
-            $cateTitle = $this->request->getQuery('categoryTitle');
-            $cateId = $this->request->getQuery('idCate');
-            $categoryMovie = $this->Categories->getMoviesByCategory($cateTitle,$cateId);
-            
-            $movies = [
-                'Category' => []
-            ];
-            
-            if(!$categoryMovie->isEmpty()){
-                foreach($categoryMovie as $cate){
-                    $movies['Category'][] = [
-                        'id' => $cate->id,
-                        'title' => $cate->title,
-                        'slug' => $cate->slug,
-                        'movie_name' => $cate->Movie['m_name']
-
-                    ];
-                }
-                return $this->response->withType("application/json")->withStringBody(json_encode(compact('movies')));
-                exit();
-            }
-            $movies['Category'] = ['notification'=>'Không có phim'];
-            return $this->response->withType("application/json")->withStringBody(json_encode(compact('movies')));
-        }
-        return "";
+        $this->setModel();
+        $movies = $this->Movies->find('all',[
+            'contain' => [
+                'MoviesInfo'
+            ]
+        ]);
+        // echo "<pre>";
+        // echo json_encode($movies);
+        // echo "</pre>";
+        // die;
+        $this->set('categoryMovie', $movies);
     }
 }
