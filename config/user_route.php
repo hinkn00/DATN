@@ -36,5 +36,8 @@
 
         //movies details
         $builder->connect('/{slug}/{id}',["controller"=>"Movies","action"=>"details"],["_name"=>"movies_details"]);
+
+        //categories detail
+        $builder->connect('/category/{slug}',["controller"=>"Details","action"=>"category"],["_name"=>"category_details"]);
         $builder->fallbacks();
     });
