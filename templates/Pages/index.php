@@ -45,7 +45,7 @@
 				<?php foreach($categories as $cate):?>
                     <div class="title-hd">
                         <h2><?= $cate->title?></h2>
-                        <a href="#" class="viewall">tất cả <i class="ion-ios-arrow-right"></i></a>
+                        <a href="<?php echo $this->Url->build(['_name'=>'category_details','slug'=>$cate->slug])?>" class="viewall">tất cả <i class="ion-ios-arrow-right"></i></a>
                     </div>
 
                     <div class="cate-movie mb-15">
