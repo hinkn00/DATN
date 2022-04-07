@@ -39,5 +39,11 @@
 
         //categories detail
         $builder->connect('/category/{slug}',["controller"=>"Details","action"=>"category"],["_name"=>"category_details"]);
+
+        //countries
+        $builder->connect('/countries/{slug}',["controller"=>"Details","action"=>"countries"],["_name"=>"countries_details"]);
+        
+        //genres
+        $builder->connect('/genres/{slug}',["controller"=>"Details","action"=>"genres"],["_name"=>"genres_details"]);
         $builder->fallbacks();
     });

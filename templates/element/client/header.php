@@ -26,7 +26,7 @@
 							</a>
 							<ul class="dropdown-menu level1">
 								<?php foreach($genres as $genre):?>
-									<li><a href="#"><?= $genre->title?></a></li>
+									<li><a href="<?php echo $this->Url->build(['_name'=>'genres_details', 'slug'=>$genre->slug])?>"><?= $genre->title?></a></li>
 								<?php endforeach;?>
 							</ul>
 						</li>
@@ -36,7 +36,7 @@
 							</a>
 							<ul class="dropdown-menu level1">
 								<?php foreach($countries as $country):?>
-									<li><a href="#"><?= $country->country_name?></a></li>
+									<li><a href="<?php echo $this->Url->build(['_name'=>'countries_details','slug'=>$country->country_slug])?>"><?= $country->country_name?></a></li>
 								<?php endforeach;?>
 							</ul>
 						</li>

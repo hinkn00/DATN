@@ -48,7 +48,7 @@ class CountriesController extends AdminController
     {
         $slug = $this->request->getParam('slug');
         
-        $country = $this->Countries->getSlugOfCategories($slug);
+        $country = $this->Countries->getSlugOfCountries($slug);
         
         if ($this->request->is(['patch', 'post', 'put'])) {
             $country = $this->Countries->patchEntity($country, $this->request->getData());
