@@ -56,12 +56,12 @@ class CountriesTable extends Table
 
         return $validator;
     }
-    public function getSlugOfCategories($slug)
+    public function getSlugOfCountries($slug)
     {
         $options = [
             "field" => "*",
             "conditions" => [
-                'Country.country_slug' => $slug
+                'Country.country_slug is' => $slug
             ],
             "order" => [
                 'Country.id DESC'
