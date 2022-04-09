@@ -1,4 +1,3 @@
-
 <header class="ht-header">
 	<div class="container">
 		<nav class="navbar navbar-default navbar-custom">
@@ -43,6 +42,16 @@
 						<?php foreach($categories as $category):?>
 							<li><a href="<?php echo $this->Url->build(['_name'=>'category_details','slug'=>$category->slug])?>"><?= $category->title ?></a></li>
 						<?php endforeach;?>
+						<li class="dropdown first">
+							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
+							Năm sản xuất <i class="fa fa-angle-down" aria-hidden="true"></i>
+							</a>
+							<ul class="dropdown-menu level1">
+								<?php for($i = 2022; $i >= 1990; $i--):?>
+									<li><a href="<?php echo $this->Url->build(['_name'=>'countries_details','slug'=>$country->country_slug])?>"><?= $i?></a></li>
+								<?php endfor;?>
+							</ul>
+						</li>
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">              
 						<?php
@@ -68,3 +77,15 @@
 	    </div>
 	</div>
 </header>
+
+<script>
+	var dropdown = $('.dropdown');
+	dropdown.hover(
+		function(){
+			$(this).children('.dropdown-menu.level1').prop('style', 'display:grid; grid-template-columns:repeat(3, 1fr); min-width: 180px;');
+		},
+		function(){
+			$(this).children('.dropdown-menu.level1').prop('style','display:none');
+		}
+	);	 
+</script>
