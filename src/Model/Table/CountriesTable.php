@@ -100,4 +100,42 @@ class CountriesTable extends Table
             'recursive' => -1            
         ]);
     }
+
+    public function getMoviesByCountries($countryTitle, $idCount)
+    {
+        $joins = array(
+            array(
+                'table' => 'movies_info',
+                'alias' => 'MoviesInfo',
+                'type' => 'inner',
+                'conditions' => [
+                    'MoviesInfo.country_id ='=> $idCount
+                ]
+            ),
+            array(
+                'table' => 'movies',
+                'alias' => 'Movie',
+                'type' => 'inner',
+                'conditions' => [
+                    'Movie.id = MoviesInfo.movie_id'
+                ]
+            ),
+        );
+
+        $options = array(
+            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Country.country_name','Country.country_slug','Country.id'],
+            'conditions' => array(
+                'OR'=>[
+                    "Country.country_name =" => $countryTitle,
+                    "Country.id =" => $idCount
+                ]
+            ),
+            'order' => [
+                'Country.modified' => 'desc'
+            ],            
+        );
+        $data = $this->find('all',$options)->join($joins);
+
+        return $data;
+    }
 }

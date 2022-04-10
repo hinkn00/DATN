@@ -24,7 +24,9 @@ class MoviesController extends AppController
     public function details()
     {
         $id = $this->request->getParam('id');
-        $movie = $this->Movies->get($id);
+        $movie = $this->Movies->get($id,array(
+            'contain' => 'MoviesInfo'
+        ));
         $this->set([
             'movie'=>$movie,
         ]);

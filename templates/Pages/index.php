@@ -6,6 +6,19 @@
     .slider{
         background: url(../../img/default/slider-bg.jpg) no-repeat;
     }
+    .top--right{
+        position: absolute;
+        top:0;
+        right:0;
+    }
+    .top--left{
+        position: absolute;
+        top:0;
+        left:0;
+    }
+    .red{
+        background-color: red;
+    }
 </style>
 <div class="slider movie-items">
 	<div class="container">
@@ -58,6 +71,12 @@
                                                 <div class="mv-img">
                                                     <?= $this->Html->image('default/mv-item'.($index < 4? 1 : 7).'.jpg',['width'=>185,'height'=>284])?>
                                                 </div> 
+                                                <div class="cate top--right">
+                                                    <span class="blue"><a href="#">Sci-fi</a></span>
+                                                </div>
+                                                <div class="cate top--left">
+                                                    <span class="red"><a href="#">New</a></span>
+                                                </div>
                                                 <div class="hvr-inner">
                                                     <a  href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$cate_movie->m_slug,"id"=>$cate_movie->id]);?>"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
                                                 </div>

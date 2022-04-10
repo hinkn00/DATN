@@ -104,7 +104,7 @@ class CategoriesTable extends Table
         ]);
     }
 
-    public function getMoviesByCategory($categoryTitle, $idCate = 2)
+    public function getMoviesByCategory($categoryTitle, $idCate)
     {
         $joins = array(
             array(
@@ -126,7 +126,7 @@ class CategoriesTable extends Table
         );
 
         $options = array(
-            'fields' => ['Movie.m_name','Category.title','Category.slug','Category.id'],
+            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Category.title','Category.slug','Category.id'],
             'conditions' => array(
                 'OR'=>[
                     "Category.title =" => $categoryTitle,
