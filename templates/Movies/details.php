@@ -145,7 +145,15 @@
                                  </div>
                                  <div class="sb-it">
                                     <h6>Thể loại:</h6>
-                                    <p><a href="#">Action, </a> <a href="#"> Sci-Fi,</a> <a href="#">Adventure</a></p>
+                                    <p><a href="#">
+                                       <?php 
+                                          foreach($genres as $genre){
+                                             if($genre->id == $movie->movies_info->genre_id){
+                                                echo h($genre->title);
+                                             }
+                                          }
+                                       ?>
+                                    </a></p>
                                  </div>
                                  <div class="sb-it">
                                     <h6>Ngày sản xuất:</h6>

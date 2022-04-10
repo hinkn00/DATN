@@ -101,4 +101,42 @@ class GenresTable extends Table
             'recursive' => -1            
         ]);
     }
+
+    public function getMoviesByGenre($genreTitle , $idGen)
+    {
+        $joins = array(
+            array(
+                'table' => 'movies_info',
+                'alias' => 'MoviesInfo',
+                'type' => 'inner',
+                'conditions' => [
+                    'MoviesInfo.genre_id ='=> $idGen
+                ]
+            ),
+            array(
+                'table' => 'movies',
+                'alias' => 'Movie',
+                'type' => 'inner',
+                'conditions' => [
+                    'Movie.id = MoviesInfo.movie_id'
+                ]
+            ),
+        );
+
+        $options = array(
+            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Genre.title','Genre.slug','Genre.id'],
+            'conditions' => array(
+                'OR'=>[
+                    "Genre.title =" => $genreTitle,
+                    "Genre.id =" => $idGen
+                ]
+            ),
+            'order' => [
+                'Genre.modified' => 'desc'
+            ],            
+        );
+        $data = $this->find('all',$options)->join($joins);
+
+        return $data;
+    }
 }
