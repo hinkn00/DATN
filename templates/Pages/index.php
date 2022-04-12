@@ -40,7 +40,7 @@
                         </div>
                         <div class="title-in">
                             <div class="cate">
-                                <span class="blue"><a href="#">Sci-fi</a></span>
+                                <span class="blue"><a href="#"><?= $cate->movies_info->resolution?></a></span>
                             </div>
                             <h6><a  href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$cate->m_slug,"id"=>$cate->id]);?>"><?= $cate->m_name?></a></h6>
                             <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
@@ -72,10 +72,10 @@
                                                     <?= $this->Html->image('default/mv-item'.($index < 4? 1 : 7).'.jpg',['width'=>185,'height'=>284])?>
                                                 </div> 
                                                 <div class="cate top--right">
-                                                    <span class="blue"><a href="#">Sci-fi</a></span>
+                                                    <span class="blue"><a href="#"><?= $cate_movie->movies_info->resolution?></a></span>
                                                 </div>
                                                 <div class="cate top--left">
-                                                    <span class="red"><a href="#">New</a></span>
+                                                    <span class="red"><a href="#"><?= $cate_movie->movies_info->subtitle?></a></span>
                                                 </div>
                                                 <div class="hvr-inner">
                                                     <a  href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$cate_movie->m_slug,"id"=>$cate_movie->id]);?>"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>

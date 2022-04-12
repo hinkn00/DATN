@@ -108,4 +108,21 @@ class MoviesTable extends Table
         
         return $data;
     }
+    public function getAllMoviesRelatedByCategoryID($category_id)
+    {
+        $options = array(
+            'field' => '*',
+            'conditions' =>[
+                'MoviesInfo.m_status = '=> 1,
+                'MoviesInfo.category_id = '=> $category_id,
+            ],
+            'contain' => [
+                'MoviesInfo'
+            ]
+        );
+
+        $data = $this->find('all',$options);
+        
+        return $data;
+    }
 }
