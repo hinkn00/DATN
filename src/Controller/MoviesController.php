@@ -27,8 +27,10 @@ class MoviesController extends AppController
         $movie = $this->Movies->get($id,array(
             'contain' => 'MoviesInfo'
         ));
+        $movies = $this->Movies->getAllMoviesRelatedByGenreID($movie->movies_info->genre_id);
         $this->set([
             'movie'=>$movie,
+            'movies' => $movies
         ]);
     }
 }

@@ -131,7 +131,8 @@ class CategoriesTable extends Table
                 'OR'=>[
                     "Category.title =" => $categoryTitle,
                     "Category.id =" => $idCate
-                ]
+                ],
+                "MoviesInfo.m_status =" => 1
             ),
             'order' => [
                 'Category.modified' => 'desc'

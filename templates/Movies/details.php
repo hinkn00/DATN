@@ -1,4 +1,6 @@
 <?php $this->assign('title','Xem Phim '.($movie->m_name))?>
+<style>
+</style>
 <div class="hero mv-single-hero">
    <div class="container">
    </div>
@@ -23,7 +25,7 @@
          </div>
          <div class="col-md-8 col-sm-12 col-xs-12">
             <div class="movie-single-ct main-content">
-               <h1 class="bd-hd"><?php echo $movie->m_name?> <span>2015</span></h1>
+               <h1 class="bd-hd"><?php echo $movie->m_name?> <span><?= @h($movie->movies_info->year)?></span></h1>
                <div class="social-btn">
                   <a href="#" class="parent-btn"><i class="ion-heart"></i> Phim yêu thích</a>
                   <div class="hover-bnt">
@@ -68,7 +70,7 @@
                         <div id="overview" class="tab active">
                            <div class="row">
                               <div class="col-md-12 col-sm-12 col-xs-12">
-                                 <p><?php echo $movie->m_desc?></p>
+                                 <?php echo $movie->m_desc?>
                               </div>
 
                            </div>
@@ -77,10 +79,10 @@
                            <div class="row">
                               <div class="rv-hd" style="margin-right: 15px;">
                                  <div class="div">
-                                    <h3>Related Movies To</h3>
-                                    <h2>Skyfall: Quantum of Spectre</h2>
+                                    <h3>Đánh giá phim</h3>
+                                    <h2><?php echo $movie->m_name?></h2>
                                  </div>
-                                 <a href="#" class="redbtn">Write Review</a>
+                                 <a href="#" class="redbtn">Viết bình luận</a>
                               </div>
                                 <?php for($i =0; $i<5; $i++):?>
                                     <div class="mv-user-review-item <?php echo $i == 4? 'last' : ''?>">
@@ -156,19 +158,24 @@
                                     </a></p>
                                  </div>
                                  <div class="sb-it">
-                                    <h6>Ngày sản xuất:</h6>
-                                    <p>May 1, 2015 (U.S.A)</p>
+                                    <h6>Năm sản xuất:</h6>
+                                    <p><?= @h($movie->movies_info->year)?></p>
                                  </div>
                                  <div class="sb-it">
                                     <h6>Thời lượng:</h6>
-                                    <p>141 min</p>
+                                    <p><?= isset($movie->movies_info->session) ? @h($movie->movies_info->session. __(' phút')): '----'?></p>
                                  </div>
                                  <div class="sb-it">
                                     <h6>Tags:</h6>
                                     <p class="tags">
-                                        <?php for($i =0; $i < 5; $i++):?>
-                                            <span class="time"><a href="#">superhero</a></span>
-                                        <?php endfor;?>
+                                       <?php if(@h($movie->movies_info->tags)):?>
+                                          <?php $hash_tag = array(); $hash_tag = explode(', ',@h($movie->movies_info->tags));?>
+                                          <?php foreach($hash_tag as $key=>$tag):?>
+                                             <span class="time"><a href="https://www.google.com/"><?= @h($tag)?></a></span>
+                                          <?php endforeach;?>
+                                       <?php else:?>
+                                          ----
+                                       <?php endif;?>
                                     </p>
                                  </div>
                                  <div class="ads">
@@ -179,46 +186,23 @@
                         </div>
                         <div id="moviesrelated" class="tab">
                            <div class="row">
-                              <h3>Related Movies To</h3>
-                              <h2>Skyfall: Quantum of Spectre</h2>
-                              <div class="topbar-filter">
-                                 <p>Found <span>12 movies</span> in total</p>
-                                 <label>Sort by:</label>
-                                 <select>
-                                    <option value="popularity">Popularity Descending</option>
-                                    <option value="popularity">Popularity Ascending</option>
-                                    <option value="rating">Rating Descending</option>
-                                    <option value="rating">Rating Ascending</option>
-                                    <option value="date">Release date Descending</option>
-                                    <option value="date">Release date Ascending</option>
-                                 </select>
-                              </div>
-                              <?php for($i = 0; $i < 5; $i++):?>
-                                 <div class="movie-item-style-2">
-                                    <?php echo $this->Html->image('default/mv-item1.jpg');?>
-                                    <div class="mv-item-infor">
-                                       <h6><a href="#">oblivion <span>(2012)</span></a></h6>
-                                       <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-                                       <p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
-                                       <p class="run-time"> Thời lượng: 2h21’    .     <span>Chất lượng: HD </span>    .     <span>Năm sản xuất: 2015</span></p>
-                                       <p>Đạo diễn: <a href="#">Joss Whedon</a></p>
-                                       <p>Diễn viên: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">  Chris Hemsworth</a></p>
+                              <h3>Đề xuất</h3>
+                              <h2>Có thể bạn quan tâm</h2>
+                              <?php foreach($movies as $movie_related):?>
+                                 <?php if($movie_related->id != $movie->id):?>
+                                    <div class="movie-item-style-2">
+                                       <?php echo $this->Html->image('default/mv-item1.jpg');?>
+                                       <div class="mv-item-infor">
+                                          <h6><a href="#"><?= $movie_related->m_name?></a></h6>
+                                          <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
+                                          <p class="describe"><?= html_entity_decode($movie_related->m_desc)?></p>
+                                          <p class="run-time"> Thời lượng: <?= isset($movie_related->movies_info->session) ? @h($movie_related->movies_info->session. __(' phút')): ''?>    .     <span>Chất lượng: <?= isset($movie_related->movies_info->resolution)?@h($movie_related->movies_info->resolution):''?> </span>    .     <span>Năm sản xuất: <?= isset($movie_related->movies_info->year)? @h($movie_related->movies_info->year):''?></span></p>
+                                          <p>Đạo diễn: <a href="#">Joss Whedon</a></p>
+                                          <p>Diễn viên: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">  Chris Hemsworth</a></p>
+                                       </div>
                                     </div>
-                                 </div>
-                              <?php endfor;?>
-                              <div class="topbar-filter">
-                                 <label>Movies per page:</label>
-                                 <select>
-                                    <option value="range">5 Movies</option>
-                                    <option value="saab">10 Movies</option>
-                                 </select>
-                                 <div class="pagination2">
-                                    <span>Page 1 of 2:</span>
-                                    <a class="active" href="#">1</a>
-                                    <a href="#">2</a>
-                                    <a href="#"><i class="ion-arrow-right-b"></i></a>
-                                 </div>
-                              </div>
+                                 <?php endif;?>
+                              <?php endforeach;?>
                            </div>
                         </div>
                      </div>

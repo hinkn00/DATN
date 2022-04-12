@@ -20,5 +20,12 @@ class Moviesinfo extends Entity
         'category' => true,
         'country' => true,
         'genre' => true,
+        'resolution' => true,
+        'subtitle' => true,
+        'tags' => true,
+        'session' =>true,
+        'year' => true,
+        'topview' => true,
+        'sesson' => true,
     ];
 }

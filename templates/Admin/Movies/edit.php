@@ -90,6 +90,91 @@
                         'required' => false
                     ))?>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?= $this->Form->control('movies_info.resolution', array(
+                            'label' => 'Chất lượng',
+                            'id' => 'resolution',
+                            'class' => 'form-control form-select',
+                            'options' => [
+                                'SD'=> 'SD',
+                                'HD'=> 'HD'
+                            ],
+                            'required' => false
+                        ))?>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <?= $this->Form->control('movies_info.session', array(
+                        'label' => 'Thời lượng',
+                        'type' => 'number',
+                        'id' => 'session',
+                        'class' => 'form-control',
+                        'required' => false
+                    ))?>
+                </div>    
+                <div class="form-group col-md-6">
+                    <?= $this->Form->control('movies_info.sesson', array(
+                        'label' => 'Phần phim',
+                        'type' => 'number',
+                        'id' => 'sesson',
+                        'class' => 'form-control',
+                        'required' => false
+                    ))?>
+                </div>    
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?= $this->Form->control('movies_info.subtitle', array(
+                            'label' => 'Phụ đề',
+                            'id' => 'subtitle',
+                            'class' => 'form-control form-select',
+                            'options' => [
+                                'vi' => 'VietSub',
+                                'en' => 'EngSub',
+                                'tm' => 'Thuyết minh'
+                            ],
+                            'required' => false
+                        ))?>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?= $this->Form->control('movies_info.year', array(
+                            'label' => 'Năm sản xuất',
+                            'id' => 'year',
+                            'class' => 'form-control form-select',
+                            'options' => [
+                                '2022' => 2022,
+                                '2021' => 2021,
+                                '2020' => 2020,
+                            ],
+                            'required' => false
+                            ))?>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?= $this->Form->control('movies_info.topview', array(
+                            'label' => 'Thứ hạng',
+                            'id' => 'year',
+                            'class' => 'form-control form-select',
+                            'options' => [
+                                'ngay'=> 'Ngày',
+                                'thang' => 'Tháng',
+                                'nam' => 'Năm'
+                            ],
+                            'required' => false
+                        ))?>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <?= $this->Form->control('movies_info.tags', array(
+                        'label' => 'Tags',
+                        'id' => 'tag',
+                        'class' => 'form-control',
+                        'required' => false
+                    ))?>
+                </div>
             </div>
         <?= $this->Form->end()?>
     </div>
@@ -120,7 +205,8 @@
 <?php endif;?> 
 <script>
   $(function () {
-    CKEDITOR.replace('m_desc')
+    CKEDITOR.replace('m_desc');
+    // CKEDITOR.replace('tag');
   })
 </script>
 <?php echo $this->Html->script(['admin/movie','sweetalert2'])?>

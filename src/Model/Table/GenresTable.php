@@ -57,6 +57,24 @@ class GenresTable extends Table
         return $validator;
     }
 
+
+    public function getAllOfGenre()
+    {
+        $options = array(
+            'field' => '*',
+            'order' => array(
+                'Genre.modified DESC'
+            ),
+            'conditions' => array(
+                'Genre.status ='=>1
+            )
+        );
+
+        $data = $this->find('all',$options);
+
+        return $data;
+    }
+
     public function getSlugOfGenres($slug)
     {
         $options = [
@@ -129,7 +147,8 @@ class GenresTable extends Table
                 'OR'=>[
                     "Genre.title =" => $genreTitle,
                     "Genre.id =" => $idGen
-                ]
+                ],
+                "MoviesInfo.m_status =" => 1
             ),
             'order' => [
                 'Genre.modified' => 'desc'
