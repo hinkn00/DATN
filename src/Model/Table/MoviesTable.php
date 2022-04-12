@@ -90,4 +90,22 @@ class MoviesTable extends Table
         $data = $this->find('all',$options);
         return $data;
     }
+
+    public function getAllMoviesRelatedByGenreID($genre_id)
+    {
+        $options = array(
+            'field' => '*',
+            'conditions' =>[
+                'MoviesInfo.m_status = '=> 1,
+                'MoviesInfo.genre_id = '=> $genre_id,
+            ],
+            'contain' => [
+                'MoviesInfo'
+            ]
+        );
+
+        $data = $this->find('all',$options);
+        
+        return $data;
+    }
 }

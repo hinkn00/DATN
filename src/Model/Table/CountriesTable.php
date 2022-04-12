@@ -128,7 +128,8 @@ class CountriesTable extends Table
                 'OR'=>[
                     "Country.country_name =" => $countryTitle,
                     "Country.id =" => $idCount
-                ]
+                ],
+                "MoviesInfo.m_status =" => 1
             ),
             'order' => [
                 'Country.modified' => 'desc'
