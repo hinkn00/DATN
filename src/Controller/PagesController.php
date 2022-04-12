@@ -62,12 +62,11 @@ class PagesController extends AppController
         $movies = $this->Movies->find('all',[
             'contain' => [
                 'MoviesInfo'
+            ],
+            'conditions' => [
+                'MoviesInfo.m_status ='=>1
             ]
         ]);
-        // echo "<pre>";
-        // echo json_encode($movies);
-        // echo "</pre>";
-        // die;
         $this->set('categoryMovie', $movies);
     }
 }

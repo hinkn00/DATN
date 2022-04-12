@@ -1,5 +1,13 @@
 <?php $this->assign('title','Xem Phim '.($movie->m_name))?>
 <style>
+   div.mv-item-infor p:nth-child(3),
+   .text-ellsip{
+      display: -webkit-box;
+      max-width: 450px;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+   }
 </style>
 <div class="hero mv-single-hero">
    <div class="container">
@@ -14,7 +22,7 @@
                <div class="movie-btn">
                   <div class="btn-transform transform-vertical red">
                      <div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Xem phim</a></div>
-                     <div><a href="https://www.youtube.com/embed/o-0hcF97wy0" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
+                     <div><a href="<?= $this->Url->build(['_name'=>'watch_movie','slug'=>$movie->m_slug])?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
                   </div>
                   <div class="btn-transform transform-vertical">
                      <div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Mua phim</a></div>
@@ -193,9 +201,10 @@
                                     <div class="movie-item-style-2">
                                        <?php echo $this->Html->image('default/mv-item1.jpg');?>
                                        <div class="mv-item-infor">
-                                          <h6><a href="#"><?= $movie_related->m_name?></a></h6>
+                                          <h6><a href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$movie_related->m_slug,"id"=>$movie_related->id]);?>"><?= $movie_related->m_name?></a></h6>
                                           <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-                                          <p class="describe"><?= html_entity_decode($movie_related->m_desc)?></p>
+                                          <!-- <p class="describe"></p> -->
+                                          <?= html_entity_decode($movie_related->m_desc)?>
                                           <p class="run-time"> Thời lượng: <?= isset($movie_related->movies_info->session) ? @h($movie_related->movies_info->session. __(' phút')): ''?>    .     <span>Chất lượng: <?= isset($movie_related->movies_info->resolution)?@h($movie_related->movies_info->resolution):''?> </span>    .     <span>Năm sản xuất: <?= isset($movie_related->movies_info->year)? @h($movie_related->movies_info->year):''?></span></p>
                                           <p>Đạo diễn: <a href="#">Joss Whedon</a></p>
                                           <p>Diễn viên: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">  Chris Hemsworth</a></p>

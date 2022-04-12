@@ -33,4 +33,13 @@ class MoviesController extends AppController
             'movies' => $movies
         ]);
     }
+
+    public function watch()
+    {
+        $slug = $this->request->getParam('slug');
+        $movie = $this->Movies->getMovieBySlug($slug);
+        $genre_movies = $this->Movies->getAllMoviesRelatedByGenreID($movie->movies_info->genre_id);
+        $category_movies = $this->Movies->getAllMoviesRelatedByCategoryID($movie->movies_info->category_id);
+        $this->set(compact('movie','genre_movies','category_movies'));
+    }
 }
