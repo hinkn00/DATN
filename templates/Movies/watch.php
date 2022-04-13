@@ -1,3 +1,4 @@
+<?php $this->assign('title', "Xem Phim ".$movie->m_name)?>
 <div class="hero common-hero">
 	<div class="container">
 		<div class="row">
@@ -45,7 +46,7 @@
                     <h1>
                         Nội dung phim
                     </h1>
-                    <?= $movie->m_desc?>
+                    <?= html_entity_decode($movie->m_desc)?>
 					<!-- share link -->
 					<div class="flex-it share-tag">
 						<div class="social-link">
@@ -100,25 +101,18 @@
 						</div>
 					</div>
 					<div class="comment-form">
-						<h4>Leave a comment</h4>
+						<h4>Viết bình luận</h4>
 						<form action="#">
 							<div class="row">
-								<div class="col-md-4">
-									<input type="text" placeholder="Your name">
-								</div>
-								<div class="col-md-4">
-									<input type="text" placeholder="Your email">
-								</div>
-								<div class="col-md-4">
-									<input type="text" placeholder="Website">
-								</div>
-							</div>
-							<div class="row">
 								<div class="col-md-12">
-									<textarea name="message" id="" placeholder="Message"></textarea>
+									<textarea name="message" id="" placeholder="Bình luận..."></textarea>
 								</div>
 							</div>
-							<input class="submit" type="submit" placeholder="submit">
+							<?php if($member_info || !empty($member_info)):?>
+								<input class="submit" type="submit" placeholder="submit">
+							<?php else:?>
+								<a href="#"><input type="button" class="submit loginLink" value="Đăng nhập để bình luận"></a>
+							<?php endif;?>
 						</form>
 					</div>
 					<!-- comment form -->
@@ -132,7 +126,7 @@
                             <?php if($value->id != $movie->id):?>
                                 <div class="recent-item">
                                     <?php echo $this->Html->image('default/mv-item1.jpg',['width'=>'80','height'=>'80']);?>
-                                    <h6 style="margin-left: 15px;"><a href="#"><?= $value->m_name?></a></h6>
+                                    <h6 style="margin-left: 15px;"><a href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$value->m_slug,"id"=>$value->id]);?>"><?= $value->m_name?></a></h6>
                                 </div>
                             <?php endif;?>
                         <?php endforeach;?>
@@ -143,7 +137,7 @@
                             <?php if($value->id != $movie->id):?>
                                 <div class="recent-item">
                                     <?php echo $this->Html->image('default/mv-item1.jpg',['width'=>'80','height'=>'80']);?>
-                                    <h6 style="margin-left: 15px;"><a href="#"><?= $value->m_name?></a></h6>
+                                    <h6 style="margin-left: 15px;"><a href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$value->m_slug,"id"=>$value->id]);?>"><?= $value->m_name?></a></h6>
                                 </div>
                             <?php endif;?>
                         <?php endforeach;?>
