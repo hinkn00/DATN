@@ -42,7 +42,7 @@
                             <div class="cate">
                                 <span class="blue"><a href="#"><?= $cate->movies_info->resolution?></a></span>
                             </div>
-                            <h6><a  href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$cate->m_slug,"id"=>$cate->id]);?>"><?= $cate->m_name?></a></h6>
+                            <h6 class="text-left"><a  href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$cate->m_slug,"id"=>$cate->id]);?>"><?= $cate->m_name?></a></h6>
                             <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
                         </div>
                     </div>

@@ -90,7 +90,7 @@
                                     <h3>Đánh giá phim</h3>
                                     <h2><?php echo $movie->m_name?></h2>
                                  </div>
-                                 <a href="#" class="redbtn">Viết bình luận</a>
+                                 <!-- <a href="#" class="redbtn">Viết bình luận</a> -->
                               </div>
                                 <?php for($i =0; $i<5; $i++):?>
                                     <div class="mv-user-review-item <?php echo $i == 4? 'last' : ''?>">
