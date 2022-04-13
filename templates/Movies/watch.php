@@ -1,4 +1,9 @@
 <?php $this->assign('title', "Xem Phim ".$movie->m_name)?>
+<style>
+	#comment_content{
+		resize:none;
+	}
+</style>
 <div class="hero common-hero">
 	<div class="container">
 		<div class="row">
@@ -60,60 +65,37 @@
 					</div>
 					<!-- comment items -->
 					<div class="comments">
-						<h4>04 Comments</h4>
-						<div class="cmt-item flex-it">
-							<img src="images/uploads/author.png" alt="">
-							<div class="author-infor">
-								<div class="flex-it2">
-									<h6><a href="#">Steve Perry</a></h6> <span class="time"> - 27 Mar 2017</span>
+						<h4><?= count($comments->toArray()) < 10 ? '0'.count($comments->toArray()) : count($comments->toArray())?> Comments</h4>
+						<?php foreach($comments as $comment):?>
+							<div class="cmt-item flex-it">
+								<img src="images/uploads/author4.png" alt="">
+								<div class="author-infor">
+									<div class="flex-it2">
+										<h6><a href="#">Margot Robbie</a></h6> <span class="time"> - <?= h($comment->created->format('d/m/Y'))?></span>
+									</div>
+									<p style="width:100%"><?= $comment->content?></p>
+									<!-- <p><a class="rep-btn" href="#">+ Reply</a></p> -->
 								</div>
-								<p>Even though Journey's classic vocalist Steve Perry didn’t reunite with the band during their Rock Hall performance (to the dismay of hopeful fans), he did offer up a touching speech.</p>
-								<p><a class="rep-btn" href="#">+ Reply</a></p>
 							</div>
-						</div>
-						<div class="cmt-item flex-it reply">
-							<img src="images/uploads/author2.png" alt="">
-							<div class="author-infor">
-								<div class="flex-it2">
-									<h6><a href="#">Joss Whedon</a></h6> <span class="time"> - 27 Mar 2017</span>
-								</div>
-								<p>Prince died not long after the 2016 Rock Hall ceremony, so this year's edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.</p>
-							</div>
-						</div>
-						<div class="cmt-item flex-it reply">
-							<img src="images/uploads/author3.png" alt="">
-							<div class="author-infor">
-								<div class="flex-it2">
-									<h6><a href="#">Dave McNary</a></h6> <span class="time"> - 27 Mar 2017</span>
-								</div>
-								<p>Blue Sky Studios is one of the world’s leading digital animation movie studios and we are proud of their commitment to stay and grow in Connecticut.</p>
-							</div>
-						</div>
-						<div class="cmt-item flex-it">
-							<img src="images/uploads/author4.png" alt="">
-							<div class="author-infor">
-								<div class="flex-it2">
-									<h6><a href="#">Margot Robbie</a></h6> <span class="time"> - 27 Mar 2017</span>
-								</div>
-								<p>Joan Baez was the sharpest of the Rock Hall inductees, singing about deportees and talking social activism as well as joking about her age and the likelihood that a good portion of the Barclays. </p>
-								<p><a class="rep-btn" href="#">+ Reply</a></p>
-							</div>
-						</div>
+						<?php endforeach;?>
 					</div>
 					<div class="comment-form">
 						<h4>Viết bình luận</h4>
-						<form action="#">
+						<?= $this->Form->create(null,['onsubmit'=>'return false','id'=>'CommentForm'])?>
+						<input type="hidden" name="id_user" value="<?= $member_info? $member_info->id: ''?>">
+						<input type="hidden" name="id_movie" value="<?= $movie? $movie->id: ''?>">
 							<div class="row">
 								<div class="col-md-12">
-									<textarea name="message" id="" placeholder="Bình luận..."></textarea>
+									<textarea name="message" id="comment_content" placeholder="Bình luận..."></textarea>
 								</div>
 							</div>
+							<p class="notifications" style="color:white"></p>
 							<?php if($member_info || !empty($member_info)):?>
-								<input class="submit" type="submit" placeholder="submit">
+								<input class="submit" type="submit" value="Bình luận">
 							<?php else:?>
 								<a href="#"><input type="button" class="submit loginLink" value="Đăng nhập để bình luận"></a>
 							<?php endif;?>
-						</form>
+						<?= $this->Form->end()?>
 					</div>
 					<!-- comment form -->
 				</div>
@@ -148,7 +130,7 @@
 							<?php if($movie->movies_info->tags):?>
                                 <?php $hash_tag= array(); $tags = explode(', ',@h($movie->movies_info->tags));?>
                                 <?php foreach($tags as $tag):?>
-                                    <li><a href="https://www.google.com/"><?= @h($tag)?></a></li>
+                                    <li><a href="https://www.google.com/"><?= html_entity_decode($tag)?></a></li>
                                 <?php endforeach;?>
                             <?php else:?>
                                 <?php echo "";?>
@@ -164,3 +146,4 @@
 	</div>
 </div>
 <!-- end of  blog detail section-->
+<?= $this->Html->script(['client/movies'])?>

@@ -5524,7 +5524,7 @@ ul {
     display: -ms-flexbox;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 @media (max-width: 767px) {
     .blog-detail-ct .flex-it {
@@ -8437,4 +8437,3 @@ footer.full-width-ft .ft-copyright {
 /*
     * CUSTOMER CSS
 */
-

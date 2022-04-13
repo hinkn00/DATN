@@ -92,33 +92,32 @@
                                  </div>
                                  <!-- <a href="#" class="redbtn">Viết bình luận</a> -->
                               </div>
-                                <?php for($i =0; $i<5; $i++):?>
+                                <?php foreach($comments as $i=>$comment):?>
                                     <div class="mv-user-review-item <?php echo $i == 4? 'last' : ''?>">
-                                 <div class="user-infor">
-                                    <?php echo $this->Html->image('default/user-img.png')?>
-                                    <div>
-                                       <h3>Impressive Special Effects and Cast</h3>
-                                        <div class="no-star">
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star last"></i>
-                                            <i class="ion-android-star last"></i>
-                                        </div>
-                                        <p class="time">
-                                            26 March 2017 by <a href="#"> johnnylee</a>
-                                        </p>
-                                        </div>
+                                       <div class="user-infor">
+                                          <?php echo $this->Html->image('default/user-img.png')?>
+                                          <div>
+                                             <h3>Đánh giá mới nhất</h3>
+                                             <div class="no-star">
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star last"></i>
+                                                <i class="ion-android-star last"></i>
+                                             </div>
+                                             <p class="time">
+                                                <?= $comment->created->format('d/m/Y')?> bởi <a href="#"> johnnylee</a>
+                                             </p>
+                                          </div>
+                                       </div>
+                                        <p><?php echo $comment->content?></p>
                                     </div>
-                                        <p>The Avengers raid a Hydra base in Sokovia commanded by Strucker and they retrieve Loki's scepter. They also discover that Strucker had been conducting experiments with the orphan twins Pietro Maximoff (Aaron Taylor-Johnson), who has super speed, and Wanda Maximoff (Elizabeth Olsen), who can control minds and project energy. Tony Stark (Robert Downey Jr.) discovers an Artificial Intelligence in the scepter and convinces Bruce Banner (Mark Ruffalo) to secretly help him to transfer the A.I. to his Ultron defense system. However, the Ultron understands that is necessary to annihilate mankind to save the planet, attacks the Avengers and flees to Sokovia with the scepter. He builds an armature for self-protection and robots for his army and teams up with the twins. The Avengers go to Clinton Barton's house to recover, but out of the blue, Nick Fury (Samuel L. Jackson) arrives and convinces them to fight against Ultron. Will they succeed? </p>
-                                        <p>"Avengers: Age of Ultron" is an entertaining adventure with impressive special effects and cast. The storyline might be better, since most of the characters do not show any chemistry. However, it is worthwhile watching this film since the amazing special effects are not possible to be described in words. Why Pietro has to die is also not possible to be explained. My vote is eight.</p>
-                                    </div>
-                                <?php endfor;?>
+                                <?php endforeach;?>
                               <div class="topbar-filter">
                                  <label>Reviews per page:</label>
                                  <select>

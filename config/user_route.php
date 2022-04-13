@@ -38,6 +38,9 @@
         $builder->connect('/{slug}/{id}',["controller"=>"Movies","action"=>"details"],["_name"=>"movies_details"]);
         $builder->connect('/movie/{slug}',["controller"=>"Movies","action"=>"watch"],["_name"=>"watch_movie"]);
 
+        //comment
+        $builder->connect('/comment/write',["controller"=>"Movies","action"=>"comments"],["_name"=>"comment_film"]);
+
         //categories detail
         $builder->connect('/category/{slug}',["controller"=>"Details","action"=>"category"],["_name"=>"category_details"]);
 

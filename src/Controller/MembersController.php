@@ -80,9 +80,9 @@ class MembersController extends AppController{
         $this->loadModel('UsersBase');
         $member = $this->UsersBase->get($id);
 
-        // if(!$this->isCheckLogin()){
-        //     return $this->redirect(['controller'=>'Pages','action'=>'home']);
-        // }
+        if(!$this->isCheckLogin()){
+            return $this->redirect(['controller'=>'Pages','action'=>'home']);
+        }
 
         $haser = new DefaultPasswordHasher();
         $new_pass = $this->request->getData('new_password');
@@ -108,9 +108,9 @@ class MembersController extends AppController{
         $this->loadModel('UsersBase');
         $member = $this->UsersBase->get($id);
 
-        // if(!$this->isCheckLogin()){
-        //     return $this->redirect(['controller'=>'Pages','action'=>'home']);
-        // }
+        if(!$this->isCheckLogin()){
+            return $this->redirect(['controller'=>'Pages','action'=>'home']);
+        }
 
         if($this->request->is(['post','put'])){
             $img = $this->request->getData('img_change');

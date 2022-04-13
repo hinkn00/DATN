@@ -23,6 +23,11 @@ class UsersBaseTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->hasOne("Profiles");
+        $this->hasMany("Comments",[
+            'foreignKey' => 'user_id',
+            'table' => 'comments',
+            'alias' => 'Comment'
+        ]);
     }
 
     
