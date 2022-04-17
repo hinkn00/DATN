@@ -2,14 +2,16 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Đăng nhập</h3>
+        <p class="notify hidden" style="color: red; font-size: 16px; font-weight: 500">hihi</p>
         <?=$this->Form->create(null, ['id'=>'formLogin', 'onsubmit'=>'return false'])?>
         	<div class="row">
         		 <label for="email">
                     Email:
-                    <?= $this->Form->input('email', array(
+                    <?= $this->Form->control('email', array(
                         'type' => 'text',
                         'placeholder' => 'Nhập địa chỉ email',
                         'id' => 'email',
+                        'label'=>false
                     ))?>
                 </label>
         	</div>
@@ -17,10 +19,11 @@
             <div class="row">
             	<label for="password">
                     Password:
-                    <?= $this->Form->input('password', array(
+                    <?= $this->Form->control('password', array(
                         'type'=>'password',
                         'id'=>'password',
                         'placeholder' => '**********',
+                        'label'=>false
                     ))?>
                 </label>
             </div>

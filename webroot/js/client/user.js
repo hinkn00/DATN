@@ -3,20 +3,45 @@ $('#formLogin button').on('click', function(){
     email = $('#email').val();
     password = $('#password').val();
     _csrfToken = $('input[name=_csrfToken]').val();
-
-    $.ajax({
-        url:  "/users/login",
-        type: 'post',
-        dataType: 'json',
-        data: {
-            _csrfToken: _csrfToken,
-            email: email,
-            password: password,
-        },
-    }).done(function(data){
-        location.reload();
+    var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+    $('#email, #password').each(function(){
+        $(this).on('change',function(){
+            $('.error-notify').addClass('hidden');
+        })
     });
+    if(email === '' || email.trim() === ''){
+        $('.error-notify').addClass('hidden');
+        $('label[for=email]').append(`<span class="error-notify" style="color:red">Vui lòng nhập địa chỉ email</span>`)
+        return;
+    }else{
+        if (!testEmail.test(email)){
+            $('.error-notify').addClass('hidden');
+            $('label[for=email]').append(`<span class="error-notify" style="color:red">Email không đúng định dạng</span>`);
+            return;
+        }else{
+            $.ajax({
+                url:  "/users/login",
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    _csrfToken: _csrfToken,
+                    email: email,
+                    password: password,
+                },
+            }).done(function(data){
+                if(data == 1){
+                    location.reload();
+                }else{
+                    $('.notify').removeClass('hidden');
+                    $('.notify').html("Tài khoản hoặc mật khẩu không chính xác")
+                }
+            });
+        }
+    }
 });
+
+//register
+
 
 //get api cities
 $ajax_api_cities = $.ajax({
@@ -212,4 +237,73 @@ $().ready(function(){
             form.submit();
         },
     });
+
+    //check register
+    $('#registerForm').validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            name : {
+                required : true,
+                maxlength: 50
+            },
+            email : {
+                required : true,
+                email : true
+            },
+            password : {
+                minlength: 8,
+                maxlength: 32,
+                required : true,
+                validatePassword: true,
+            },
+            re_password: {
+                required: true,
+                validatePassword: true,
+                equalTo: "#password_regis"
+            },
+            'profiles[phone]' : {
+                required: true,
+                phone_number: true
+            }
+        },
+        messages: {
+            name: {
+                required: "Tên khách hàng không được để trống",
+                maxlength: "Nhập tối đa 50 ký tự"
+            },
+            email : {
+                required: "Email không được để trống",
+                email: "Email sử dụng không đúng định dạng *@*.*"
+            },
+            password : {
+                minlength: "Mật khẩu ít nhất phải 8 ký tự trở lên",
+                maxlength: "Mật khẩu tối đa 32 ký tự trở xuống",
+                required: "Không bỏ trống mật khẩu",
+            },
+            re_password : {
+                required: "Không bỏ trống mật khẩu",
+                equalTo: "Mật khẩu xác nhận không trùng khớp"
+            },
+            'profiles[phone]' : {
+                required: "Số điện thoại không được để trống",
+            }
+        },
+        submitHandler: function (form, event) {
+            // form.submit()
+        },
+        
+    });
+    // .submit(function(e){
+    //     e.preventDefault();
+    //     $.ajax({
+    //         url: $(this).attr('action'),
+    //         type: $(this).attr('type'),
+    //         data: $(this).serialize(),
+    //     }).done(function(response){
+    //         alert(response)
+    //     })
+    //     return false;
+    // });
 });

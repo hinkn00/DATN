@@ -32,23 +32,39 @@ class UsersController extends AdminController
         $this->viewBuilder()->setLayout('ajax');
         $this->loadModel('Users');
         if($this->request->is('post')){
-            $check_user = $this->Users->find('all',[
-                'conditions' => array(
-                    "email" => $this->request->getData('email'),
-                    "password" => md5($this->request->getData('password')),
-                    'is_admin' => 1,
-                )
-            ])->first();
-            if($check_user){
-                echo 'co';
+            // $check_user = $this->Users->find('all',[
+            //     'conditions' => array(
+            //         "email" => $this->request->getData('email'),
+            //         "password" => md5($this->request->getData('password')),
+            //         'is_admin' => 1,
+            //     )
+            // ])->first();
+            // if($check_user){
+            //     echo 'co';
+            // }else{
+            //     echo 'khong';
+            // }
+            // die;
+            $user = $this->Auth->identify();
+            if($user){
+                if($user['active'] != 1){
+                    $this->Flash->error('Users chưa được kích hoạt. Vui lòng liên hệ quản trị viên');
+                }else{
+                    $this->Auth->setUser($user);
+                    return $this->redirect($this->Auth->redirectUrl());
+                    exit();
+                }
             }else{
-                echo 'khong';
+                $this->Flash->error('Email hoặc mật khẩu không chính xác!');
             }
-            die;
         }
         $this->set('title','Đăng nhập');
     }
 
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
     public function index()
     {
         $this->loadModel('UsersBase');

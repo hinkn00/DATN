@@ -11,7 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">    
     <?= $this->Html->css(['bootstrap.min'])?>
-    <?= $this->Html->script(['bootstrap.min','jquery.min'])?>
+    <?= $this->Html->script(['jquery.min','admin/jquery-ui'])?>
 </head>
 <body>
     <div class="wrapper fadeInDown">
@@ -22,22 +22,25 @@
             <div class="fadeIn first">
                 <?= $this->Html->image('cakephp.png',['id'=>'icon', 'alt'=>'Admin Login'])?>
             </div>
-
+            <?= $this->Flash->render()?>
             <!-- Login Form -->
-            <?= $this->Form->create()?>
+            <?= $this->Form->create(null,[
+                'id'=>'frmLogin', 
+                // 'onsubmit'=>'return false'
+            ])?>
             <?php
                 echo $this->Form->input('email',[
                     'type' => 'text',
                     'id'   => 'login',
                     'class' => 'fadeIn second',
-                    'placeholder' => 'Input Email',
+                    'placeholder' => 'Địa chỉ email',
                     'autofocus'
                 ]);
                 echo $this->Form->input('password',[
                     'type'=>'password',
                     'class' => 'fadeIn third',
                     'id' => 'password',
-                    'placeholder' => 'Password'
+                    'placeholder' => 'Mật khẩu'
                 ]);
                 echo $this->Form->input('',['type'=>'submit','class'=>'fadeIn fourth','value'=>'Đăng nhập'])
             ?>
@@ -208,4 +211,42 @@
         @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
         @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     </style>
+    <?= $this->Html->script(['bootstrap.min','jquery.validate.min','additional-methods.min'])?>
+
+    <!-- <script>
+        $().ready(function(){
+            $.validator.addMethod("validatePassword", function (value, element) {
+                return this.optional(element) || /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/i.test(value);
+            }, "Hãy nhập password từ 8 đến 16 ký tự bao gồm chữ hoa, chữ thường và ít nhất một chữ số");
+            $('#frmLogin').validate({
+                onfocusout: false,
+                onkeyup: false,
+                onclick: false,
+
+                rules:{
+                    "u_email" : {
+                        required: true,
+                        email: true,
+                        maxlength: 50,
+                    },
+                    "u_password" : {
+                        required: true,
+                    },
+                },
+
+                messages: {
+                    "u_email" : {
+                        required: "Vui lòng nhập email",
+                        email: 'Định dạng email không hợp lệ',
+                    },
+                    "u_password" : {
+                        required: "Vui lòng nhập mật khẩu",
+                    },
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                },
+            })
+        })
+    </script> -->
 </body>

@@ -20,8 +20,12 @@ $('#CommentForm input[type=submit]').on('click', function(e){
             success: function(data){
                 $('#comment_content').val('');
                 $('.notifications').html(data);
-                $('.notifications').fadeOut(5000);
-            }
-        })
+                $('.notifications').fadeOut(3000);
+
+                setTimeout(function(){
+                    window.location.reload();
+                },4000)
+            },
+        });
     }
 })

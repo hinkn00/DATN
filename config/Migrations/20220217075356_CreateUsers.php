@@ -27,7 +27,7 @@ class CreateUsers extends AbstractMigration
         ]);
         $table->addColumn('email_verified', 'boolean', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('password', 'string', [
             'default' => null,
@@ -37,24 +37,24 @@ class CreateUsers extends AbstractMigration
         $table->addColumn('remember_token', 'string', [
             'default' => null,
             'limit' => 255,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('is_admin', 'boolean', [
-            'default' => null,
+            'default' => 0,
             'null' => false,
         ]);
         $table->addColumn('role', 'string', [
-            'default' => null,
+            'default' => 'member',
             'limit' => 10,
             'null' => false,
         ]);
         $table->addColumn('active', 'boolean', [
-            'default' => null,
+            'default' => 1,
             'null' => false,
         ]);
         $table->addColumn('status', 'boolean', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('create_at', 'datetime', [
             'default' => null,

@@ -15,26 +15,28 @@ class AdminController extends Controller
         $this->viewBuilder()->setLayout('admin');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        // $this->loadComponent('Auth',[
-        //     'authenticate' => [
-        //         'Form' => [
-        //             'fields' => ['username'=>'u_email','password'=>'u_password'],
-        //             'scope' => ['verified'=> '1', 'role'=>1],
-        //             'userModel' => 'Users'
-        //         ]
-        //     ],
-        //     'loginRedirect' => [
-        //         'controller' => 'Products',
-        //         'action' => 'index'
-        //     ],
-        //     'logoutRedirect' => [
-        //         'controller' => 'Users',
-        //         'action' => 'login'
-        //     ],
-        //     // 'storage' => 'Session',
-        //     'authError' => 'Vui lòng đăng nhập trước khi truy cập',
-        // ]);
-        // $this->Auth->allow('register','login','verification');
+        $this->loadComponent('Auth',[
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username'=>'email','password'=>'password'],
+                    'scope' => ['active'=> 1],
+                    'userModel' => 'Users'
+                ]
+            ],
+            'loginRedirect' => [
+                'controller' => 'Dashboard',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login',
+                'prefix' => 'Admin'
+            ],
+            // 'storage' => 'Session',
+            'authError' => 'Vui lòng đăng nhập trước khi truy cập',
+        ]);
+
+        // $this->loadComponent('Auth');
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
@@ -43,21 +45,21 @@ class AdminController extends Controller
         //$this->loadComponent('FormProtection');
     }
     
-    // public function beforeFilter(EventInterface $event) {
-    //     parent::beforeFilter($event);
-    //     $this->Auth->allow([ 'logout']);    
+    public function beforeFilter(EventInterface $event) {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['login']);    
         
-    //     if($this->Auth->User()){
-    //         if($this->roleUser() !== 1){
-    //             header('location: /'); exit();
-    //         }
-    //     }
-    // }
+        if($this->Auth->User()){
+            if(empty($this->roleUser()) || !$this->roleUser()){
+                return $this->redirect('/');    
+            }
+        }
+    }
 
-    // public function roleUser()
-    // {
-    //     return $this->Auth->User('role');
-    // }
+    public function roleUser()
+    {
+        return $this->Auth->User('is_admin');
+    }
 
     function paginateAll($user_list){
         $limit = $this->request->getParam('limit');

@@ -65,7 +65,7 @@
 					</div>
 					<!-- comment items -->
 					<div class="comments">
-						<h4><?= count($comments->toArray()) < 10 ? '0'.count($comments->toArray()) : count($comments->toArray())?> Comments</h4>
+						<h4><?= (0 < count($comments->toArray()) && count($comments->toArray()) < 10) ? '0'.count($comments->toArray()) : count($comments->toArray())?> Comments</h4>
 						<?php foreach($comments as $comment):?>
 							<div class="cmt-item flex-it">
 								<img src="images/uploads/author4.png" alt="">

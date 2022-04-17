@@ -13,6 +13,11 @@
             ['_name'=>'login']
         );
         $builder->connect(
+            '/users/regis',
+            ['controller'=>'Members', 'action'=>'register'],
+            ['_name'=>'register']
+        );
+        $builder->connect(
             '/users/profile/{id}',
             ['controller'=>'Members','action'=>'profile'],
             ['_name'=>'member_profile']

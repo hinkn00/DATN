@@ -8,21 +8,13 @@
       <span class="navbar-toggler-icon"></span>
       </button>
    </div>
-   <div class="navbar-collapse collapse" id="collapsingNavbar">
-      <ul class="navbar-nav">
-         <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">Home</span></a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" href="#features">Features</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" href="#myAlert" data-toggle="collapse">Wow</a>
-         </li>
-      </ul>
+   <div class="navbar-collapse collapse" id="collapsingNavbar">      
       <ul class="navbar-nav ml-auto">
-         <li class="nav-item">
+         <!-- <li class="nav-item">
             <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
+         </li> -->
+         <li class="nav-item">
+            <a class="nav-link" href="<?= $this->Url->build(['_name'=>'admin_logout'])?>">Đăng xuất</a>
          </li>
       </ul>
    </div>
