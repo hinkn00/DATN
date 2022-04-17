@@ -12,6 +12,7 @@ class Movie extends Entity
         'm_slug' => true,
         'm_desc' => true,
         'movies_info' => true,
+        'comments' =>true,
         'created' => true,
         'modified' => true,
     ];

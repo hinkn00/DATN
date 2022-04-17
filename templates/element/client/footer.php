@@ -57,5 +57,5 @@
 </footer>
 <!-- end of footer section-->
 
-<?= $this->Html->script(['font-awesome','client/plugins', 'client/plugins2', 'client/custom']) ?>
+<?= $this->Html->script(['font-awesome','client/plugins', 'client/plugins2', 'client/custom','sweetalert2']) ?>
 <?= $this->Html->script(['jquery.validate.min','additional-methods.min'])?>

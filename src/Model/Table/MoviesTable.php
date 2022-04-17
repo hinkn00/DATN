@@ -26,6 +26,11 @@ class MoviesTable extends Table
             'table' => 'movies_info',
             'alias' => 'MoviesInfo'
         ]);
+        $this->hasMany('Comments', [
+            'foreignKey' => 'movie_id',
+            'table' => 'comments',
+            'alias' => 'Comment'
+        ]);
     }
 
     public function validationDefault(Validator $validator): Validator

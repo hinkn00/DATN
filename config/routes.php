@@ -41,6 +41,7 @@ return static function (RouteBuilder $routes) {
        
         //User route
         $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+        $routes->connect('/logout', ['controller' => 'Users', 'action' => 'logout'],['_name'=>'admin_logout']);
         $routes->connect('/users', ['controller' => 'Users', 'action' => 'index'],['_name'=>'admin_user_index']);
         $routes->connect('/users/add', ['controller' => 'Users', 'action' => 'add'],['_name'=>'admin_user_add']);
         $routes->connect('/users/edit/{id}', ['controller' => 'Users', 'action' => 'edit'],['_name'=>'admin_user_edit']);

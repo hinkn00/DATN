@@ -13,6 +13,11 @@
             ['_name'=>'login']
         );
         $builder->connect(
+            '/users/regis',
+            ['controller'=>'Members', 'action'=>'register'],
+            ['_name'=>'register']
+        );
+        $builder->connect(
             '/users/profile/{id}',
             ['controller'=>'Members','action'=>'profile'],
             ['_name'=>'member_profile']
@@ -37,6 +42,9 @@
         //movies details
         $builder->connect('/{slug}/{id}',["controller"=>"Movies","action"=>"details"],["_name"=>"movies_details"]);
         $builder->connect('/movie/{slug}',["controller"=>"Movies","action"=>"watch"],["_name"=>"watch_movie"]);
+
+        //comment
+        $builder->connect('/comment/write',["controller"=>"Movies","action"=>"comments"],["_name"=>"comment_film"]);
 
         //categories detail
         $builder->connect('/category/{slug}',["controller"=>"Details","action"=>"category"],["_name"=>"category_details"]);

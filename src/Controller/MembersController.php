@@ -3,8 +3,15 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Auth\DefaultPasswordHasher;
+use Cake\Utility\Security;
+use Cake\ORM\TableRegistry;
 
 class MembersController extends AppController{
+    var $IS_ADMIN = 0;
+    var $STATUS   = 0;
+    var $ACTIVE   = 1;
+
+
     public function index()
     {
         
@@ -15,11 +22,15 @@ class MembersController extends AppController{
         if($this->request->is('post')){
             $check_user = $this->Users->checkEmailUsers($this->request->getData('email'));
             $haser = new DefaultPasswordHasher();
-            if($haser->check($this->request->getData('password'),$check_user['password'])){
-                $this->Auth->setUser($check_user);
-                echo json_encode(['member'=>$check_user]);
+            if($check_user){
+                if($haser->check($this->request->getData('password'),$check_user['password'])){
+                    $this->Auth->setUser($check_user);
+                    echo "1";
+                }else{
+                    echo "0";
+                }
             }else{
-                echo '';
+                echo "0";
             }
             die;
         }
@@ -29,6 +40,44 @@ class MembersController extends AppController{
         // session_destroy();
         return $this->redirect($this->Auth->logout());
     }
+
+    public function register()
+    {
+        $this->autoRender = false;
+        // debug($this->request->getData());die;
+        $this->loadModel('UsersBase');
+        $this->loadModel('Users');
+        $user = $this->UsersBase->newEmptyEntity();
+        if($this->request->is(['post'])){
+            $haser = new DefaultPasswordHasher();
+            $user->name = $this->request->getData('name');
+            $user->email = $this->request->getData('email');
+            $user->password = $haser->hash($this->request->getData('password'));
+            $user->is_admin = 0;
+            $user->role = 'member';
+            $user->active = $this->ACTIVE;
+            $user->create_at = date('Y-m-d H:i:s');            
+            $user->img_avatar = 'default.jpg';
+            if($this->Users->save($user)){
+                $check_user = $this->Users->checkEmailUsers($this->request->getData('email'));
+                if($haser->check($this->request->getData('password'),$check_user['password'])){
+                    $this->Auth->setUser($check_user);
+                    echo "<script>alert('Đăng ký thành công'); window.history.back();</script>";
+                    exit();
+                }
+                // return $this->response->withType('application/json')
+                // ->withStringBody(json_encode(['result' => 'success']));          
+            }else{
+                // return $this->response->withType('application/json')
+                // ->withStringBody(json_encode(['result' => 'error']));
+                echo "<script>alert('Đăng ký không thành công'); window.history.back()</script>";
+                die;
+            }
+        }
+        echo "";
+        die;
+    }
+
     public function profile($id = null)
     {       
         $id = $this->request->getParam('id');
@@ -80,9 +129,9 @@ class MembersController extends AppController{
         $this->loadModel('UsersBase');
         $member = $this->UsersBase->get($id);
 
-        // if(!$this->isCheckLogin()){
-        //     return $this->redirect(['controller'=>'Pages','action'=>'home']);
-        // }
+        if(!$this->isCheckLogin()){
+            return $this->redirect(['controller'=>'Pages','action'=>'home']);
+        }
 
         $haser = new DefaultPasswordHasher();
         $new_pass = $this->request->getData('new_password');
@@ -108,9 +157,9 @@ class MembersController extends AppController{
         $this->loadModel('UsersBase');
         $member = $this->UsersBase->get($id);
 
-        // if(!$this->isCheckLogin()){
-        //     return $this->redirect(['controller'=>'Pages','action'=>'home']);
-        // }
+        if(!$this->isCheckLogin()){
+            return $this->redirect(['controller'=>'Pages','action'=>'home']);
+        }
 
         if($this->request->is(['post','put'])){
             $img = $this->request->getData('img_change');

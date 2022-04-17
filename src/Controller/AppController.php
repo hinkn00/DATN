@@ -11,6 +11,11 @@ class AppController extends Controller
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
         $this->Auth->allow();
+        if($this->Auth->User()){
+            if(!empty($this->roleUser()) || $this->roleUser()){
+                return $this->redirect('/admin');    
+            }
+        }
     }
 
     public function initialize(): void
@@ -38,6 +43,11 @@ class AppController extends Controller
         $countries = $this->_getCountry();
         $this->set(compact('countries'));
 
+    }
+
+    public function roleUser()
+    {
+        return $this->Auth->User('is_admin');
     }
 
     public function _getMemberLogin()
