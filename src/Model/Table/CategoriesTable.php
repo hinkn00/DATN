@@ -59,6 +59,20 @@ class CategoriesTable extends Table
         return $validator;
     }
 
+    public function getCountAllCategories()
+    {
+        $options = array(
+            'field' => '*',
+            'conditions' => array(
+                'Category.status ='=>1
+            )
+        );
+
+        $data = $this->find('all',$options)->count();
+
+        return $data;
+    }
+
     public function getSlugOfCategories($slug)
     {
         $options = [

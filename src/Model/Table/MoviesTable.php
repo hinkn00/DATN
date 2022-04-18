@@ -59,6 +59,23 @@ class MoviesTable extends Table
         return $validator;
     }
 
+    public function getAllMovies()
+    {
+        $options = array(
+            'field' => "*",
+            "conditions" => array(
+                'MoviesInfo.m_status =' => 1
+            ),
+            "contain" => array(
+                "MoviesInfo"
+            )
+        );
+
+        $data = $this->find("all",$options)->count();
+
+        return $data;
+    }
+
     public function getMovieBySlug($slug)
     {
         $options = array(
@@ -128,6 +145,20 @@ class MoviesTable extends Table
 
         $data = $this->find('all',$options);
         
+        return $data;
+    }
+
+    public function getMovieOfMonth($month_current, $year_current)
+    {
+        $options = [
+            'fields'=> ['created'],
+            'conditions' => [
+                'MONTH(Movie.created) =' =>$month_current,
+                'YEAR(Movie.created) ='=> $year_current
+            ],
+            'contain'=>"MoviesInfo"
+        ];
+        $data = $this->find('all',$options);
         return $data;
     }
 }

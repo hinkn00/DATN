@@ -75,6 +75,20 @@ class GenresTable extends Table
         return $data;
     }
 
+    public function getCountAllGenres()
+    {
+        $options = array(
+            'field' => '*',
+            'conditions' => array(
+                'Genre.status ='=>1
+            )
+        );
+
+        $data = $this->find('all',$options)->count();
+
+        return $data;
+    }
+
     public function getSlugOfGenres($slug)
     {
         $options = [
