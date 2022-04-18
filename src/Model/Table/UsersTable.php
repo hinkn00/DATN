@@ -5,6 +5,20 @@ use App\Model\Table\UsersBaseTable;
 use Cake\ORM\Query;
 class UsersTable extends UsersBaseTable{
     // hàm xử lý
+    public function getCountAllUsers()
+    {
+        $options = array(
+            'field' => '*',
+            'conditions' => array(),
+            'contain' => array(
+                'Profiles'
+            )
+        );
+
+        $data = $this->find('all',$options)->count();
+        return $data;
+    }
+
     public function search($search)
     {
         $options = array(

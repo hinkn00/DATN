@@ -13,4 +13,5 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">    
     <?= $this->Html->css(['bootstrap.min','font-awesome.min','admin/main','admin/jquery-ui.css'])?>
     <?= $this->Html->script(['jquery.min','admin/jquery-ui'])?>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
