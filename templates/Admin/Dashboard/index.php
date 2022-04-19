@@ -79,31 +79,83 @@ for($i=1; $i<=12; $i++){
 <!--/main col-->
 <script>
    $(function(){
-      $month_current = parseInt(`<?php echo date("m", strtotime($to_day)) ?>`);
-      $year_month = parseInt(`<?php echo date("Y", strtotime($to_day))?>`);
-      
-      $('#selectChart').val($month_current);
+      var ctx = document.getElementById('chartData').getContext('2d');
+      var chartData;
+      let month_current = parseInt(`<?php echo date("m", strtotime($to_day)) ?>`);
+      let year_month = parseInt(`<?php echo date("Y", strtotime($to_day))?>`);
+      $.ajax({
+        url : '<?php echo $this->Url->build(['_name'=>'admin_graph'])?>',
+        type: 'post',
+        dataType:'json',
+        data:{
+            _csrfToken: $("meta[name=csrfToken]").attr('content'),
+           month: month_current,
+           year:  year_month
+        },
+        success: function(response){
+            const labels = response.count_value_month.value;
+            const data = {
+               labels: labels,
+               datasets: [{
+                  label: 'Tổng số phim',
+                  data: response.count_value_month.count,
+                  fill: false,
+                  borderColor: 'rgb(75, 192, 192)',
+                  tension: 0.1
+               }]
+            };
+            const config = {
+               type: 'line',
+               data: data,
+            };
+            chartData = new Chart($('#chartData'), config);
+        },
+         error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+         }
+      });
+      $('#selectChart').val(month_current);
       
       $('#selectChart').on('change', function(){
          //ajax(Chưa viết gì hết)
+         $.ajax({
+         url : '<?php echo $this->Url->build(['_name'=>'admin_graph'])?>',
+         type: 'post',
+         dataType:'json',
+         data:{
+            _csrfToken: $("meta[name=csrfToken]").attr('content'),
+            month: $(this).val(),
+            year:  year_month
+         },
+         success: function(response){            
+            chartData.data.labels = response.count_value_month.value;
+            chartData.data.datasets.forEach((dataset) => {
+               dataset.data = response.count_value_month.count;
+            });
+            chartData.update();
+         },
+         error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+         }
+         });
       })
    })
 
-   const ctx = document.getElementById('chartData').getContext('2d');
-   const labels = <?php echo json_encode($month)?>;
-   const data = {
-      labels: labels,
-      datasets: [{
-         label: 'Tổng số phim: ',
-         data: <?php echo json_encode($count_value_month)?>,
-         fill: false,
-         borderColor: 'rgb(75, 192, 192)',
-         tension: 0.1
-      }]
-   };
-   const config = {
-      type: 'line',
-      data: data,
-   };
-   const chartData = new Chart(ctx, config);
+   // const ctx = document.getElementById('chartData').getContext('2d');
+   // const labels = <?php //echo json_encode($month)?>;
+   // const data = {
+   //    labels: labels,
+   //    datasets: [{
+   //       label: 'Tổng số phim: ',
+   //       data: <?php //echo json_encode($count_value_month)?>,
+   //       fill: false,
+   //       borderColor: 'rgb(75, 192, 192)',
+   //       tension: 0.1
+   //    }]
+   // };
+   // const config = {
+   //    type: 'line',
+   //    data: data,
+   // };
+   // const chartData = new Chart(ctx, config);
 </script>

@@ -129,3 +129,19 @@ $().ready(function(){
         },
     });
 });
+$(".files").attr('data-before', "Kéo thả ảnh tại đây hoặc chọn ảnh bỏ vào");
+$('input[type="file"]').change(function (e) {
+    var fileName = e.target.files[0].name;
+    $(".files").attr('data-before', fileName);
+
+});
+
+$('#file').change(function () {
+    var fileImg = $('input#file').val();
+    if (fileImg != '') {        
+        $('.box-pre-thumb').removeClass('hidden');
+        $('.box-pre-thumb').addClass('form-group');
+        $('.box-pre-thumb').html(`<p><strong>Ảnh xem trước</strong></p>`)
+        $('.box-pre-thumb').append(`<img src="${URL.createObjectURL(event.target.files[0])}" width="98" height="150"/>`)
+    }
+})
