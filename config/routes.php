@@ -38,6 +38,7 @@ return static function (RouteBuilder $routes) {
         // $routes->applyMiddleware('csrf');
 
         $routes->connect('/', ['controller' => 'Dashboard', 'action' => 'index'],['_name'=>'admin_dashboard']);
+        $routes->connect('/admin/ajaxGraph', ['controller' => 'Dashboard', 'action' => 'ajaxGraph'],['_name'=>'admin_graph']);
        
         //User route
         $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);

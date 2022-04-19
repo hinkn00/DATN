@@ -175,6 +175,15 @@
                         ))?>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group files">
+                        <!-- <label for="file">Chọn avatar </label>  -->
+                        <?php echo $this->Form->label('Thumbnail'); ?>
+                        <?php echo $this->Form->file('thumb', ['class'=>'form-control', 'id'=>"file", 'required' => false]); ?>
+                        <!-- <input id="file" name="img_avatar" type="file" class="form-control" /> -->
+                    </div>
+                </div>
+                <div class="box-pre-thumb hidden ml-3"></div>
             </div>
         <?= $this->Form->end()?>
     </div>

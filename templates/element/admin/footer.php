@@ -78,7 +78,7 @@
     });
   </script>
 
-<?= $this->Html->script(['jquery-3.3.1.slim.min','popper.min','font-awesome','feather.min','tether.min','bootstrap.min','admin/ckeditor/ckeditor.js'])?>
+<?= $this->Html->script(['popper.min','font-awesome','feather.min','tether.min','bootstrap.min','admin/ckeditor/ckeditor.js'])?>
 <?= $this->Html->script(['admin/main',])?>
 <?= $this->Html->script(['jquery.validate.min','additional-methods.min'])?>
 
