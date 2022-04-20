@@ -35,7 +35,10 @@
                     <div class="movie-item">
                         <div class="mv-img">
                             <a href="#">
-                                <?= $this->Html->image('default/slider'.($i < 4 ? $i+1 : 1).'.jpg',['width'=>285, 'height'=>437])?>
+                                <?= $this->Html->image(!empty($cate->thumb)?$cate->thumb:'default/slider'.($i < 4 ? $i+1 : 1).'.jpg',[
+                                    'style'=>'width:274px;height:420px',
+                                    // 'width'=>285, 'height'=>437
+                                ])?>
                             </a>
                         </div>
                         <div class="title-in">
@@ -69,7 +72,10 @@
                                         <div class="slide-it">
                                             <div class="movie-item">
                                                 <div class="mv-img">
-                                                    <?= $this->Html->image('default/mv-item'.($index < 4? 1 : 7).'.jpg',['width'=>185,'height'=>284])?>
+                                                    <?= $this->Html->image(!empty($cate_movie->thumb)?$cate_movie->thumb:'default/mv-item'.($index < 4? 1 : 7).'.jpg',[
+                                                        'style'=>'width:162px; height:249px',
+                                                        // 'width'=>185,'height'=>284
+                                                    ])?>
                                                 </div> 
                                                 <div class="cate top--right">
                                                     <span class="blue"><a href="#"><?= $cate_movie->movies_info->resolution?></a></span>

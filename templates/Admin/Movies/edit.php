@@ -11,9 +11,9 @@
             </div>
         </div>
         <hr class="w-95">
-        <?= $this->Form->create($movie,['id'=>'frmEdit'])?>
-            <div class="row ml-3 mr-3">
-                <div class="form-group col-md-6">
+        <?= $this->Form->create($movie,['id'=>'frmEdit','type'=>'file'])?>
+        <div class="row ml-3 mr-3">
+            <div class="form-group col-md-6">
                     <?= $this->Form->control('m_name', array(
                         'label' => 'Tên phim',
                         'id' => 'title',
@@ -69,29 +69,6 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <?= $this->Form->control('movies_info.m_status', array(
-                            'label' => 'Trạng thái',
-                            'id' => 'm_status',
-                            'class' => 'form-control form-select',
-                            'options' => [
-                                '0'=> 'Ẩn',
-                                '1'=>'Hiện'
-                            ],
-                            'empty'=>'--------- Trạng thái hiển thị ---------',
-                            'required' => false
-                        ))?>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <?= $this->Form->control('m_desc', array(
-                        'label' => 'Mô tả',
-                        'id' => 'description',
-                        'class' => 'form-control',
-                        'required' => false
-                    ))?>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
                         <?= $this->Form->control('movies_info.resolution', array(
                             'label' => 'Chất lượng',
                             'id' => 'resolution',
@@ -103,6 +80,14 @@
                             'required' => false
                         ))?>
                     </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <?= $this->Form->control('m_desc', array(
+                        'label' => 'Mô tả',
+                        'id' => 'description',
+                        'class' => 'form-control',
+                        'required' => false
+                    ))?>
                 </div>
                 <div class="form-group col-md-6">
                     <?= $this->Form->control('movies_info.session', array(
@@ -175,6 +160,30 @@
                         'required' => false
                     ))?>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?= $this->Form->control('movies_info.m_status', array(
+                            'label' => 'Trạng thái',
+                            'id' => 'm_status',
+                            'class' => 'form-control form-select',
+                            'options' => [
+                                '0'=> 'Ẩn',
+                                '1'=>'Hiện'
+                            ],
+                            'empty'=>'--------- Trạng thái hiển thị ---------',
+                            'required' => false
+                        ))?>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group files">
+                        <!-- <label for="file">Chọn avatar </label>  -->
+                        <?php echo $this->Form->label('Thumbnail'); ?>
+                        <?php echo $this->Form->file('thumb_nail', ['class'=>'form-control', 'id'=>"file", 'required' => false]); ?>
+                        <!-- <input id="file" name="img_avatar" type="file" class="form-control" /> -->
+                    </div>
+                </div>
+                <div class="box-pre-thumb hidden ml-3"></div>
             </div>
         <?= $this->Form->end()?>
     </div>

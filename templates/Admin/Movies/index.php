@@ -60,7 +60,7 @@
                     <?php foreach($movies as $movie):?>
                         <tr>
                             <td><?= $movie->id ?></td>
-                            <td>&nbsp;</td>
+                            <td><?= $this->Html->image($movie->thumb, ['width'=>98,'height'=>150])?></td>
                             <td>
                                 <?= $this->Html->link(__($movie->m_name),["_name"=>'admin_movies_edit','slug' => $movie->m_slug])?>
                             </td>

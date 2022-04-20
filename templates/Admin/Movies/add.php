@@ -11,7 +11,7 @@
             </div>
         </div>
         <hr class="w-95">
-        <?= $this->Form->create($movie,['id'=>'frmAdd'])?>
+        <?= $this->Form->create($movie,['id'=>'frmAdd','type'=>'file'])?>
             <div class="row ml-3 mr-3">
             <div class="form-group col-md-6">
                     <?= $this->Form->control('m_name', array(
@@ -179,7 +179,7 @@
                     <div class="form-group files">
                         <!-- <label for="file">Chọn avatar </label>  -->
                         <?php echo $this->Form->label('Thumbnail'); ?>
-                        <?php echo $this->Form->file('thumb', ['class'=>'form-control', 'id'=>"file", 'required' => false]); ?>
+                        <?php echo $this->Form->file('thumb_nail', ['class'=>'form-control', 'id'=>"file", 'required' => false]); ?>
                         <!-- <input id="file" name="img_avatar" type="file" class="form-control" /> -->
                     </div>
                 </div>
