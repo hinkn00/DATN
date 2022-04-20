@@ -7,6 +7,12 @@ use App\Controller\Admin\AdminController;
 
 class MoviesController extends AdminController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('AWS');
+    }
+
     public function setModel()
     {
         $this->loadModel('Countries');
@@ -119,7 +125,21 @@ class MoviesController extends AdminController
         
         $movie = $this->Movies->newEmptyEntity();
         if ($this->request->is('post')) {
+            $attachment = $this->request->getData('thumb_nail');
             $movie = $this->Movies->patchEntity($movie, $this->request->getData());
+            if($attachment){
+                $options = [
+                    'Bucket'       => 'pj-movies',//bucket on s3
+                    'Key'          => 'uploads/thumbs/'.time().'_'.$attachment->getClientFilename(),//path of s3: folder/file
+                    'SourceFile'   => $attachment->getStream()->getMetadata('uri'),//tmp
+                    'ContentType'  => $attachment->getClientMediaType(),//type
+                    'ACL'          => 'public-read',//public file after upload
+                    'StorageClass' => 'REDUCED_REDUNDANCY'
+                ];
+                $objects = $this->AWS->s3->putObject($options);
+
+                $movie->thumb =  $objects['ObjectURL'];
+            }
             if($this->Movies->save($movie)){
                 $this->Flash->success(__('success'));
                 return $this->redirect(['_name'=>'admin_movies_add']);
