@@ -35,7 +35,7 @@
                     <div class="movie-item">
                         <div class="mv-img">
                             <a href="#">
-                                <?= $this->Html->image(!empty($cate->thumb)?$cate->thumb:'default/slider'.($i < 4 ? $i+1 : 1).'.jpg',[
+                                <?= $this->Html->image(!empty($cate->thumb)?$url_s3."uploads/thumbs/".$cate->thumb:'default/slider'.($i < 4 ? $i+1 : 1).'.jpg',[
                                     'style'=>'width:274px;height:420px',
                                     // 'width'=>285, 'height'=>437
                                 ])?>
@@ -72,7 +72,7 @@
                                         <div class="slide-it">
                                             <div class="movie-item">
                                                 <div class="mv-img">
-                                                    <?= $this->Html->image(!empty($cate_movie->thumb)?$cate_movie->thumb:'default/mv-item'.($index < 4? 1 : 7).'.jpg',[
+                                                    <?= $this->Html->image(!empty($cate_movie->thumb)?$url_s3."uploads/thumbs/".$cate_movie->thumb:'default/mv-item'.($index < 4? 1 : 7).'.jpg',[
                                                         'style'=>'width:162px; height:249px',
                                                         // 'width'=>185,'height'=>284
                                                     ])?>

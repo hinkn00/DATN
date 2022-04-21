@@ -123,7 +123,7 @@ class CountriesTable extends Table
         );
 
         $options = array(
-            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Country.country_name','Country.country_slug','Country.id'],
+            'fields' => ['Movie.id','Movie.m_name','Movie.thumb','Movie.m_slug','Country.country_name','Country.country_slug','Country.id'],
             'conditions' => array(
                 'OR'=>[
                     "Country.country_name =" => $countryTitle,

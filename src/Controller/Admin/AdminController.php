@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 
 use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
-
+use Cake\Core\Configure;
 
 class AdminController extends Controller 
 {
@@ -13,6 +13,10 @@ class AdminController extends Controller
     {
         parent::initialize();
         $this->viewBuilder()->setLayout('admin');
+        
+        $url_s3 = Configure::read('s3_base');
+        $this->set('url_s3',$url_s3);
+
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Auth',[

@@ -140,7 +140,7 @@ class CategoriesTable extends Table
         );
 
         $options = array(
-            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Category.title','Category.slug','Category.id'],
+            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Movie.thumb','Category.title','Category.slug','Category.id'],
             'conditions' => array(
                 'OR'=>[
                     "Category.title =" => $categoryTitle,

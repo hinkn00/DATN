@@ -6,7 +6,7 @@ use Cake\Database\Driver\Mysql;
 use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
-
+use Cake\Core\Configure;
 return [
     /*
      * Debug Level:
@@ -56,6 +56,7 @@ return [
         'dir' => 'src',
         'webroot' => 'webroot',
         'wwwRoot' => WWW_ROOT,
+        Configure::write('s3_base','https://pj-movies.s3.ap-southeast-1.amazonaws.com/'),
         //'baseUrl' => env('SCRIPT_NAME'),
         'fullBaseUrl' => false,
         'imageBaseUrl' => 'img/',

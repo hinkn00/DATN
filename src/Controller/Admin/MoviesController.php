@@ -128,9 +128,10 @@ class MoviesController extends AdminController
             $attachment = $this->request->getData('thumb_nail');
             $movie = $this->Movies->patchEntity($movie, $this->request->getData());
             if($attachment){
+                $name = time().'_'.$attachment->getClientFilename();
                 $options = [
                     'Bucket'       => 'pj-movies',//bucket on s3
-                    'Key'          => 'uploads/thumbs/'.time().'_'.$attachment->getClientFilename(),//path of s3: folder/file
+                    'Key'          => 'uploads/thumbs/'.$name,//path of s3: folder/file
                     'SourceFile'   => $attachment->getStream()->getMetadata('uri'),//tmp
                     'ContentType'  => $attachment->getClientMediaType(),//type
                     'ACL'          => 'public-read',//public file after upload
@@ -138,7 +139,8 @@ class MoviesController extends AdminController
                 ];
                 $objects = $this->AWS->s3->putObject($options);
 
-                $movie->thumb =  $objects['ObjectURL'];
+                // $movie->thumb =  $objects['ObjectURL'];
+                $movie->thumb =  $name;
             }
             if($this->Movies->save($movie)){
                 $this->Flash->success(__('success'));
@@ -198,7 +200,9 @@ class MoviesController extends AdminController
                 'MoviesInfo.movie_id' => $movie->movies_info->movie_id
             )
         ])->first();
-
+        // if ($this->AWS->s3->doesObjectExist('pj-movies', 'uploads/thumbs/'.$movie->thumb)) {
+        //     $result = $this->AWS->s3->deleteObject(array('Bucket' => 'pj-movies', 'Key' => 'uploads/thumbs/'.$movie->thumb));
+        // }
         if($this->Movies->delete($movie) && $this->MoviesInfo->delete($movie_info)){
             $this->Flash->success(__('success'));
             return $this->redirect(['_name'=>'admin_movies_home']);

@@ -5,7 +5,7 @@ namespace App\Controller;
 
 use Cake\Event\EventInterface;
 use Cake\Controller\Controller;
-
+use Cake\Core\Configure;
 class AppController extends Controller
 {
     public function beforeFilter(EventInterface $event) {
@@ -42,6 +42,9 @@ class AppController extends Controller
         
         $countries = $this->_getCountry();
         $this->set(compact('countries'));
+
+        $url_s3 = Configure::read('s3_base');
+        $this->set('url_s3',$url_s3);
 
     }
 

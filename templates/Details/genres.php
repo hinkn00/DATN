@@ -46,7 +46,7 @@
 				<div class="flex-wrap-movielist mv-grid-fw">
 					<?php foreach($genre_movies as $genre_movie):?>					
                         <div class="movie-item-style-2 movie-item-style-1">
-                            <?php echo $this->Html->image('default/mv-item1.jpg');?>
+                            <?php echo $this->Html->image(!empty($genre_movie->Movie['thumb'])?$url_s3."uploads/thumbs/".$genre_movie->Movie['thumb']:'default/mv-item1.jpg',['style'=>'width:170px;height:261px']);?>
 							<div class="hvr-inner">
 	            				<a  href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$genre_movie->Movie['m_slug'],"id"=>$genre_movie->Movie['id']]);?>"> Chi tiết <i class="ion-android-arrow-dropright"></i> </a>
 	            			</div>

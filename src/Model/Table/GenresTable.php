@@ -156,7 +156,7 @@ class GenresTable extends Table
         );
 
         $options = array(
-            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Genre.title','Genre.slug','Genre.id'],
+            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Movie.thumb','Genre.title','Genre.slug','Genre.id'],
             'conditions' => array(
                 'OR'=>[
                     "Genre.title =" => $genreTitle,

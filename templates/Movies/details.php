@@ -18,7 +18,7 @@
       <div class="row ipad-width2">
          <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="movie-img sticky-sb">
-               <?php echo $this->Html->image(!empty($movie->thumb)?$movie->thumb:"default/movie-single.jpg",['style'=>'width:330px; height:506px'])?>
+               <?php echo $this->Html->image(!empty($movie->thumb)? $url_s3."uploads/thumbs/".$movie->thumb:"default/movie-single.jpg",['style'=>'width:330px; height:506px'])?>
                <div class="movie-btn">
                   <div class="btn-transform transform-vertical red">
                      <div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Xem phim</a></div>
@@ -198,7 +198,7 @@
                               <?php foreach($movies as $movie_related):?>
                                  <?php if($movie_related->id != $movie->id):?>
                                     <div class="movie-item-style-2">
-                                       <?php echo $this->Html->image(!empty($movie_related->thumb)?$movie_related->thumb:'default/mv-item1.jpg',['style'=>'width:185px; height:284px']);?>
+                                       <?php echo $this->Html->image(!empty($movie_related->thumb)?$url_s3."uploads/thumbs/".$movie_related->thumb:'default/mv-item1.jpg',['style'=>'width:185px; height:284px']);?>
                                        <div class="mv-item-infor">
                                           <h6><a href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$movie_related->m_slug,"id"=>$movie_related->id]);?>"><?= $movie_related->m_name?></a></h6>
                                           <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>

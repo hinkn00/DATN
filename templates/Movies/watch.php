@@ -107,7 +107,7 @@
 						<?php foreach ($category_movies as $key => $value):?>
                             <?php if($value->id != $movie->id):?>
                                 <div class="recent-item">
-									<?php echo $this->Html->image(!empty($value->thumb)?$value->thumb:'default/mv-item1.jpg',['style'=>'width:80px;height:122px']);?>
+									<?php echo $this->Html->image(!empty($value->thumb)?$url_s3."uploads/thumbs/".$value->thumb:'default/mv-item1.jpg',['style'=>'width:80px;height:122px']);?>
                                     <h6 style="margin-left: 15px;"><a href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$value->m_slug,"id"=>$value->id]);?>"><?= $value->m_name?></a></h6>
                                 </div>
                             <?php endif;?>
@@ -118,7 +118,7 @@
 						<?php foreach ($genre_movies as $key => $value):?>
                             <?php if($value->id != $movie->id):?>
                                 <div class="recent-item">
-                                    <?php echo $this->Html->image(!empty($value->thumb)?$value->thumb:'default/mv-item1.jpg',['style'=>'width:80px;height:122px']);?>
+                                    <?php echo $this->Html->image(!empty($value->thumb)?$url_s3."uploads/thumbs/".$value->thumb:'default/mv-item1.jpg',['style'=>'width:80px;height:122px']);?>
                                     <h6 style="margin-left: 15px;"><a href="<?php echo $this->Url->build(["_name"=>"movies_details","slug"=>$value->m_slug,"id"=>$value->id]);?>"><?= $value->m_name?></a></h6>
                                 </div>
                             <?php endif;?>
