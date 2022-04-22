@@ -94,4 +94,11 @@ return static function (RouteBuilder $routes) {
      * });
      * ```
      */
+
+    $routes->scope('/', function (RouteBuilder $routes) {
+        $routes->setExtensions(['json']);
+        $routes->resources('Api',function (RouteBuilder $routes) {
+            $routes->resources('Movies', ['prefix' => 'Api']);
+        });
+    });
 };
