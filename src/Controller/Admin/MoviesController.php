@@ -127,7 +127,7 @@ class MoviesController extends AdminController
         if ($this->request->is('post')) {
             $attachment = $this->request->getData('thumb_nail');
             $movie = $this->Movies->patchEntity($movie, $this->request->getData());
-            if($attachment){
+            if($attachment->getError() == 0){
                 $name = time().'_'.$attachment->getClientFilename();
                 $options = [
                     'Bucket'       => 'pj-movies',//bucket on s3
@@ -171,7 +171,23 @@ class MoviesController extends AdminController
         $movie = $this->Movies->getMovieBySlug($slug);
         
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $attachment = $this->request->getData('thumb_nail');
             $movie = $this->Movies->patchEntity($movie, $this->request->getData());
+            if($attachment->getError() == 0){
+                $name = time().'_'.$attachment->getClientFilename();
+                $options = [
+                    'Bucket'       => 'pj-movies',//bucket on s3
+                    'Key'          => 'uploads/thumbs/'.$name,//path of s3: folder/file
+                    'SourceFile'   => $attachment->getStream()->getMetadata('uri'),//tmp
+                    'ContentType'  => $attachment->getClientMediaType(),//type
+                    'ACL'          => 'public-read',//public file after upload
+                    'StorageClass' => 'REDUCED_REDUNDANCY'
+                ];
+                $objects = $this->AWS->s3->putObject($options);
+
+                // $movie->thumb =  $objects['ObjectURL'];
+                $movie->thumb =  $name;
+            }
             $movie->modified = date("Y-m-d");
             $movie->movies_info->modified = date("Y-m-d");
 
@@ -201,7 +217,7 @@ class MoviesController extends AdminController
             )
         ])->first();
         // if ($this->AWS->s3->doesObjectExist('pj-movies', 'uploads/thumbs/'.$movie->thumb)) {
-        //     $result = $this->AWS->s3->deleteObject(array('Bucket' => 'pj-movies', 'Key' => 'uploads/thumbs/'.$movie->thumb));
+        //     $result = $this->AWS->s3->deleteObject(array('Bucket' => 'pj-movies', 'Key' => '/uploads/thumbs/1650542997_Gearvn_%20Anime%20%28P.11%29_%20%2818%29.jpg'));
         // }
         if($this->Movies->delete($movie) && $this->MoviesInfo->delete($movie_info)){
             $this->Flash->success(__('success'));

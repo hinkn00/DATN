@@ -47,7 +47,7 @@
                         <source src="https://www.youtube.com/embed/4EYDik5IhAc" type="video/mp4">
                         <source src="" type="video/ogg">
                     </video> -->
-                    <iframe type="text/html" width="100%" height="500px" src="https://streamable.com/e/hat6st" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe type="text/html" width="100%" height="500px" src="https://www.youtube.com/embed/Eg_mlzLVtrc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h1>
                         Nội dung phim
                     </h1>
