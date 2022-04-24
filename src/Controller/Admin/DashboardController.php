@@ -16,7 +16,7 @@ class DashboardController extends AdminController
     public function index()
     {
         $this->setModel();
-        $count_movie = $this->Movies->getAllMovies();
+        $count_movie = $this->Movies->getCountAllMovies();
         $movie = $this->Movies->find('all',['contain'=>"MoviesInfo"]);
         $month_current = date('m');
         $year_current = date('Y');

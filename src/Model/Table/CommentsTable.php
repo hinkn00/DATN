@@ -15,6 +15,7 @@ class CommentsTable extends Table
         parent::initialize($config);
 
         $this->setTable('comments');
+        $this->setAlias('Comment');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
@@ -50,5 +51,40 @@ class CommentsTable extends Table
         $rules->add($rules->existsIn('movie_id', 'Movies'), ['errorField' => 'movie_id']);
 
         return $rules;
+    }
+
+    public function search($search)
+    {
+        $joins = array(
+            array(
+                'table' => 'users',
+                'alias' => 'User',
+                'type' => 'inner',
+                'conditions' => [
+                    'User.id = Comment.user_id'
+                ]
+            ),
+            array(
+                'table' => 'movies',
+                'alias' => 'Movie',
+                'type' => 'inner',
+                'conditions' => [
+                    'Movie.id = Comment.movie_id'
+                ]
+            ),
+        );
+        $options = array(
+            'field' => '*',
+            'conditions' => array(
+                'OR' => array(
+                    array('User.name LIKE' => '%'.$search.'%'),
+                    array('Movie.m_name LIKE' => '%'.$search.'%'),
+                )
+            ),
+            'contain' =>['Users','Movies']
+        );
+
+        $data = $this->find('all',$options)->join($joins);
+        return $data;
     }
 }
