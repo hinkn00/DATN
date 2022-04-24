@@ -27,5 +27,6 @@ class Moviesinfo extends Entity
         'year' => true,
         'topview' => true,
         'sesson' => true,
+        'total_episode'=>true
     ];
 }

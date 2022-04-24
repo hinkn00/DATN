@@ -5,15 +5,14 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
-class Comment extends Entity
+class Episode extends Entity
 {
     protected $_accessible = [
-        'user_id' => true,
         'movie_id' => true,
-        'content' => true,
+        'episode' => true,
+        'link_film' => true,
         'created' => true,
         'modified' => true,
-        'users_base' => true,
         'movie' => true,
     ];
 }

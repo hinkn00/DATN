@@ -3,7 +3,7 @@
    <span class="navbar-toggler-icon"></span>
    </button>
    <div class="flex-row d-flex">
-      <a class="navbar-brand mb-1" href="#">Brand</a>
+      <a class="navbar-brand mb-1" href="#">Block Butter <span>(film review)</span></a>
       <button type="button" class="hidden-md-up navbar-toggler" data-toggle="offcanvas" title="Toggle responsive left sidebar">
       <span class="navbar-toggler-icon"></span>
       </button>

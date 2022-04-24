@@ -77,6 +77,16 @@ return static function (RouteBuilder $routes) {
         $routes->connect('/movies/{slug}/edit', ['controller' => 'Movies', 'action' => 'edit'],['_name'=>'admin_movies_edit']);
         $routes->connect('/movies/delete/{id}', ['controller' => 'Movies', 'action' => 'delete'],['_name'=>'admin_movies_delete']);
         $routes->connect('/movies/search', ['controller' => 'Movies', 'action' => 'view'],['_name'=>'admin_movies_search']);
+
+        //Episodes
+        $routes->connect('/episode/home', ['controller' => 'Episodes', 'action' => 'index'],['_name'=>'admin_episodes_home']);
+        $routes->connect('/episode/create', ['controller' => 'Episodes', 'action' => 'add'],['_name'=>'admin_episodes_create']);
+        $routes->connect('/ajaxEpisode', ['controller' => 'Episodes', 'action' => 'ajaxEpisode'],['_name'=>'admin_episodes_total']);
+
+        //Comments
+        $routes->connect('/comment/home', ['controller' => 'Comments', 'action' => 'index'],['_name'=>'admin_comment_home']);
+        $routes->connect('/comment/delete/{id}', ['controller' => 'Comments', 'action' => 'delete'],['_name'=>'admin_comment_delete']);
+        $routes->connect('/comment/search', ['controller' => 'Comments', 'action' => 'search'],['_name'=>'admin_comment_search']);
     });
 
     /*

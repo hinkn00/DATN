@@ -11,12 +11,13 @@
       </li>
       <li class="nav-item"><a class="nav-link <?= $this->request->getParam('controller') == 'Countries' ? 'active' : ''?>" href="<?= $this->Url->build(['controller'=>'Countries' , 'action'=>'index'])?>"><i class="fa-solid fa-earth-asia"></i> Quốc gia</a></li>
       <li class="nav-item"><a class="nav-link <?= $this->request->getParam('controller') == 'Movies'? 'active' : ''?>" href="<?= $this->Url->build(['_name'=>'admin_movies_home'])?>"><i class="fa-solid fa-clapperboard"></i> Phim</a></li>
-      <li class="nav-item"><a class="nav-link <?= $this->request->getParam('controller') == 'Episodes'? 'active' : ''?>" href=""><i class="fa-solid fa-video"></i> Tập phim</a></li>
+      <li class="nav-item"><a class="nav-link <?= $this->request->getParam('controller') == 'Episodes'? 'active' : ''?>" href="<?= $this->Url->build(['_name'=>'admin_episodes_home'])?>"><i class="fa-solid fa-video"></i> Tập phim</a></li>
       <li class="nav-item">
         <a href="<?php echo $this->Url->build(['_name'=>'admin_user_index'])?>" class="nav-link <?= $this->request->getParam('controller') == 'Users' ? 'active' : ''?>">
             <i class="fa-solid fa-user"></i>&nbsp;Quản lý người dùng
         </a>
       </li>
+      <li class="nav-item"><a class="nav-link <?= $this->request->getParam('controller') == 'Comment'? 'active' : ''?>" href="<?= $this->Url->build(['_name'=>'admin_comment_home'])?>"><i class="fa fa-commenting" aria-hidden="true"></i> Bình luận</a></li>
       <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-gear"></i> Cài đặt chung</a></li>
    </ul>
 </div>

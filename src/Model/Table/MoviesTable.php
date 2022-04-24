@@ -31,6 +31,11 @@ class MoviesTable extends Table
             'table' => 'comments',
             'alias' => 'Comment'
         ]);
+        $this->hasMany('Episodes', [
+            'foreignKey' => 'movie_id',
+            'table' => 'episodes',
+            'alias' => 'Episode'
+        ]);
     }
 
     public function validationDefault(Validator $validator): Validator
@@ -60,6 +65,23 @@ class MoviesTable extends Table
     }
 
     public function getAllMovies()
+    {
+        $options = array(
+            'field' => "*",
+            "conditions" => array(
+                'MoviesInfo.m_status =' => 1
+            ),
+            "contain" => array(
+                "MoviesInfo"
+            )
+        );
+
+        $data = $this->find("all",$options);
+
+        return $data;
+    }
+
+    public function getCountAllMovies()
     {
         $options = array(
             'field' => "*",
@@ -160,5 +182,17 @@ class MoviesTable extends Table
         ];
         $data = $this->find('all',$options);
         return $data;
+    }
+
+    public function listMovies()
+    {
+        return $this->find('list',[
+            'keyField' => 'id',
+            'valueField' => 'm_name',
+            'conditions' => [
+                'MoviesInfo.m_status ='=>1 
+            ],
+            'contain'=>['MoviesInfo']           
+        ]);
     }
 }

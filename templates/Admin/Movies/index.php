@@ -44,6 +44,7 @@
                         <th>Tên không dấu</th>
                         <th>Thời lượng</th>
                         <th>Mô tả</th>
+                        <th>Tập phim</th>
                         <th>Trạng thái</th>
                         <th>Chất lượng</th>
                         <th>Phụ đề</th>
@@ -72,6 +73,9 @@
                                 <div id="desc_respon">
                                     <?php echo html_entity_decode($movie->m_desc) ?>
                                 </div>
+                            </td>
+                            <td>
+                                <?= @h($movie->movies_info->total_episode)?>
                             </td>
                             <td><?php echo h($movie->movies_info->m_status) == 0 ? "Ẩn" : "Hiện"; ?></td>
                             <td><?= h($movie->movies_info->resolution)?></td>

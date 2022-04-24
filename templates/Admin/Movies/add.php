@@ -152,6 +152,16 @@
                         ))?>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?= $this->Form->control('movies_info.total_episode', array(
+                            'label' => 'Tổng số tập',
+                            'id' => 'episode_toal',
+                            'class' => 'form-control',
+                            'required' => false
+                        ))?>
+                    </div>
+                </div>
                 <div class="form-group col-md-12">
                     <?= $this->Form->control('movies_info.tags', array(
                         'label' => 'Tags',
