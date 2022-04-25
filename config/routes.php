@@ -82,6 +82,8 @@ return static function (RouteBuilder $routes) {
         $routes->connect('/episode/home', ['controller' => 'Episodes', 'action' => 'index'],['_name'=>'admin_episodes_home']);
         $routes->connect('/episode/create', ['controller' => 'Episodes', 'action' => 'add'],['_name'=>'admin_episodes_create']);
         $routes->connect('/ajaxEpisode', ['controller' => 'Episodes', 'action' => 'ajaxEpisode'],['_name'=>'admin_episodes_total']);
+        $routes->connect('/episode/edit/{id}', ['controller' => 'Episodes', 'action' => 'edit'],['_name'=>'admin_episodes_edit']);
+        $routes->connect('/episode/delete/{id}', ['controller' => 'Episodes', 'action' => 'delete'],['_name'=>'admin_episodes_delete']);
 
         //Comments
         $routes->connect('/comment/home', ['controller' => 'Comments', 'action' => 'index'],['_name'=>'admin_comment_home']);

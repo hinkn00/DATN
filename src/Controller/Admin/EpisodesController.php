@@ -37,10 +37,22 @@ class EpisodesController extends AdminController{
         $this->set('movie_list',$movie_list);
         $episode = $this->Episodes->newEmptyEntity();
         if ($this->request->is('post')) {
-            echo $this->request->getData('movie_id');
-            die;
+            $episode = $this->Episodes->patchEntity($episode, $this->request->getData());
+            // if (!empty($this->request->getData('episode')) || $this->request->getData('episode')) {
+            //     $episode->episode = $this->request->getData('episode');
+            // }
+            if($this->Episodes->save($episode)){
+                $this->Flash->success(__('success'));
+                return $this->redirect(['_name'=>'admin_episodes_create']);
+            }else{
+                $this->set('error','Thêm không thành công! Vui lòng thử lại');
+            }
         }
         $this->set('episode', $episode);
+    }
+    public function edit()
+    {
+        die;
     }
     public function delete()
     {
@@ -81,15 +93,19 @@ class EpisodesController extends AdminController{
         $data = [];
         if ($this->request->is(['post','ajax'])) {
             $data['total_episode'] = $movie->movies_info->total_episode;
-            if($countEpisode === 0){
-                $data['episode_current'] = 1;
+            if($countEpisode >= $movie->movies_info->total_episode){
+                $data['episode_current'] = $movie->movies_info->total_episode;
             }else{
-                if($countEpisode >= $movie->movies_info->total_episode){
-                    $data['episode_current'] = $movie->movies_info->total_episode;
+                if ($countEpisode <= 0) {
+                    $data['episode_current'] = $countEpisode;
+                    $data['episode_next'] = 1;
                 }else{
                     $data['episode_current'] = $countEpisode;
+                    $data['episode_next'] = $countEpisode+1;
                 }
+                $data['episode_next'] = $countEpisode+1;
             }
+            $data['category_id'] = $movie->movies_info->category_id;
             return $this->response->withType("application/json")->withStringBody(json_encode(compact('data')));    
             die;
         }

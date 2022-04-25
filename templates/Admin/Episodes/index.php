@@ -2,7 +2,7 @@
 <div class="col-md-9 col-lg-10 main mt-3">
    <div class="row mb-3">
       <div class="col-lg-12 col-md-12">
-        <h2 class="sub-header mb-3" style="display:flex">Quản lý danh mục</h2>
+        <h2 class="sub-header mb-3" style="display:flex">Quản lý phim theo tập</h2>
         <div class="box-tools" style=" width:100%; display:flex; justify-content: center">
             <form action="<?php echo $this->Url->build(['_name'=>'admin_categories_search'])?>" method="get">
                 <div class="input-search input-group" style="width: 50vw;">
@@ -21,12 +21,12 @@
                 <button class="btn btn-sm btn-outline-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Danh sách hiển thị
                 </button>
-                <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a href="<?php //echo$this->Url->build(array('_name'=>'admin_categories_index'))?>" class="dropdown-item <?php //echo count($categories) == 10 ? 'active': ''?>">10</a>
-                    <a href="?limit=25" class="dropdown-item <?php //echo count($categories) == 25 ? 'active': ''?>">25</a>
-                    <a href="?limit=50" class="dropdown-item <?php //echo count($categories) == 50 ? 'active': ''?>">50</a>
-                    <a href="?limit=100" class="dropdown-item <?php //echo count($categories) == 100 ? 'active': ''?>">100</a>
-                </div> -->
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="<?php echo$this->Url->build(array('_name'=>'admin_episodes_home'))?>" class="dropdown-item <?php echo count($episodes) == 10 ? 'active': ''?>">10</a>
+                    <a href="?limit=25" class="dropdown-item <?php echo count($episodes) == 25 ? 'active': ''?>">25</a>
+                    <a href="?limit=50" class="dropdown-item <?php echo count($episodes) == 50 ? 'active': ''?>">50</a>
+                    <a href="?limit=100" class="dropdown-item <?php echo count($episodes) == 100 ? 'active': ''?>">100</a>
+                </div>
             </div>
             <div class="pull-right mb-2">
                 <a href="<?= $this->Url->build(array('_name'=>'admin_episodes_create'))?>" class="btn btn-sm btn-outline-primary w-10 btn-add"><i class="fa-solid fa-plus"></i></a>
@@ -38,17 +38,34 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
-                        <th>Tên danh mục</th>
-                        <th>Tên không dấu</th>
-                        <th>Mô tả</th>
-                        <th>Trạng thái</th>
-                        <th>Ngày tạo</th>
-                        <th>Ngày sửa</th>
+                        <th>Tên phim</th>
+                        <th>Tập phim</th>
+                        <th>Link phim</th>
                         <th>Khác</th>
                     </tr>
                 </thead>
                 <tbody id="sortTable">
-                    
+                    <?php foreach($episodes as $episode):?>
+                        <tr>
+                            <td><?= $episode->id?></td>
+                            <td><?= @h($episode->movie->m_name)?></td>
+                            <td><?= $episode->episode?></td>
+                            <td style="width:300px">
+                                <?= $episode->link_film?>
+                                <iframe width="500" height="315" src="<?= $episode->link_film?>" title="YouTube video player" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                            </td>
+                            <td>
+                                <a href=<?= $this->URL->build(array("_name"=>'admin_episodes_edit','id' => $episode->id))?> class="btn btn-warning" id="edit-btn">Sửa</a>
+                                <?= $this->Form->postLink(__('Xóa'),
+                                    ['_name'=>'admin_episodes_delete', 'id'=>$episode->id],
+                                    [
+                                        'confirm'=>__('Bạn có chắc muốn xóa tập "{0}" của bộ phim "{1}" hay không?',empty($episode->episode)?'1':$episode->episode,@h($episode->movie->m_name)),
+                                        'class' => 'btn btn-danger',
+                                    ]
+                                )?>
+                            </td>
+                        </tr>
+                    <?php endforeach;?>
                 </tbody>
             </table>
         </div>
@@ -131,4 +148,4 @@
         .catch(function(res){ console.log(res) })
     }
 </script>
-<?php echo $this->Html->script(['admin/category','sweetalert2'])?>
+<?php echo $this->Html->script(['sweetalert2'])?>
