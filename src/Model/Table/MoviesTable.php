@@ -106,7 +106,8 @@ class MoviesTable extends Table
                 'Movie.m_slug' => $slug
             ),
             "contain" => array(
-                "MoviesInfo"
+                "MoviesInfo",
+                "Episodes"
             )
         );
 

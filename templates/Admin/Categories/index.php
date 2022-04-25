@@ -67,7 +67,7 @@
                                     'confirm'=>__('Bạn có chắc muốn xóa danh mục "{0}" không?',$cate->title),
                                     'class' => 'btn btn-danger',
                                 ]
-                                )?>
+                            )?>
                         </td>
                     </tr>
                     <?php endforeach;?>

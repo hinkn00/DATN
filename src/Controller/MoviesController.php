@@ -31,7 +31,7 @@ class MoviesController extends AppController
         $this->loadModel('Comments');
         $comments = $this->Comments->find('all',[
             'conditions' => [
-                'comments.movie_id = '=>$movie->id
+                'comment.movie_id = '=>$movie->id
             ]
         ]);
         $this->set([
@@ -50,8 +50,8 @@ class MoviesController extends AppController
         $this->loadModel('Comments');
         $comments = $this->Comments->find('all',[
             'conditions' => [
-                'comments.movie_id = '=>$movie->id
-            ]
+                'comment.movie_id = '=>$movie->id
+            ],
         ]);
         $this->set(compact('movie','genre_movies','category_movies','comments'));
     }

@@ -12,7 +12,7 @@
         <div class="col-md-6 col-lg-6">
             <div class="pull-right">
             <?= $this->Form->button('Thêm',['class'=>'btn btn-md btn-outline-success', 'style'=>'cursor: pointer','form'=>'frmAdd'])?>
-            <?= $this->Html->link('Hủy bỏ',array('_name'=>'admin_user_index'),array('class'=>'btn btn-md btn-outline-primary'))?>
+            <?= $this->Html->link('Hủy bỏ',array('_name'=>'admin_episodes_home'),array('class'=>'btn btn-md btn-outline-primary'))?>
             </div>
         </div>
         <hr class="w-95">
@@ -40,16 +40,16 @@
                         'required' => false
                     ))?>
                 </div>
-                <div class="form-group col-md-12" id="episodes hidden">
+                <div class="form-group col-md-12 hidden" id="episodes">
+                    <label for="episode">Tập phim (số tập / Tổng số)</label><br>
                     <?= $this->Form->input('episode', array(
-                        'label' => 'Tập phim',
                         'id' => 'episode',
-                        'class' => 'form-control',
-                        'disabled'=>true,
+                        // 'class' => 'form-control',
+                        'readonly'=>true,
                         'required' => false,
-                        'style'=>'width:50px;',
+                        'style'=>'width:50px; text-align: center',
                     ))?>
-                    /<span id="total_epi"></span>
+                    / <span id="total_epi"></span>
                 </div>
             </div>
         <?= $this->Form->end()?>
@@ -95,9 +95,19 @@
                 id: val
             },
             success: function(response){          
-                $('#episodes').removeClass('hidden');
-                $('#total_epi').html(response.data['total_episode']);
-                $('#episode').val(response.data['episode_current'])
+                if(response.data['category_id'] == 3 || response.data['category_id'] == 9){
+                    $('#episodes').removeClass('hidden');
+                    if(response.data['category_id'] == 9){
+                        $('#total_epi').html('???');
+                    }else{
+                        $('#total_epi').html(response.data['total_episode']);
+                    }
+                    $('#episode').val(response.data['episode_next'])
+                }
+                else{
+                    $('#episodes').addClass('hidden');
+                    $('#episode').val('')
+                }
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
