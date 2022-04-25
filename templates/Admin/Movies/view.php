@@ -47,24 +47,31 @@
                     <?php foreach($movies as $movie):?>
                         <tr>
                             <td><?= $movie->id ?></td>
-                            <td><?= $this->Html->image($movie->thumb, ['width'=>98,'height'=>150])?></td>
+                            <td><?= $this->Html->image($url_s3."uploads/thumbs/".$movie->thumb, ['width'=>98,'height'=>150])?></td>
                             <td>
                                 <?= $this->Html->link(__($movie->m_name),["_name"=>'admin_movies_edit','slug' => $movie->m_slug])?>
                             </td>
                             <td>
                                 <?= $movie->m_slug?>
                             </td>
+                            <td><?= h($movie->movies_info->session)?></td>
                             <td>
                                 <div id="desc_respon">
                                     <?php echo html_entity_decode($movie->m_desc) ?>
                                 </div>
                             </td>
+                            <td>
+                                <?= @h($movie->movies_info->total_episode)?>
+                            </td>
                             <td><?php echo h($movie->movies_info->m_status) == 0 ? "Ẩn" : "Hiện"; ?></td>
+                            <td><?= h($movie->movies_info->resolution)?></td>
+                            <td><?= h($movie->movies_info->subtitle)?></td>
                             <td><?php echo h($movie->category_title) ?></td>
                             <td><?php echo h($movie->genre_title) ?></td>
                             <td><?php echo h($movie->country_title) ?></td>
-                            <td><?= $movie->created->format('Y-m-d')?></td>
-                            <td><?= $movie->modified->format('Y-m-d')?></td>
+                            <td></td>
+                            <td></td>
+                            <td style="word-break: break-all; max-width: 250px"><?php echo !empty(($movie->movies_info->tags))? html_entity_decode($movie->movies_info->tags) : '' ?></td>
                             <td class="td-center">
                                 <?= $this->Html->link(__('Sửa'),["_name"=>'admin_movies_edit','slug' => $movie->m_slug],['class'=>"btn btn-warning","id"=>"edit-btn"])?>
                                 <?= $this->Form->postLink(__('Xóa'),

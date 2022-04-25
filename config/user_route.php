@@ -41,7 +41,7 @@
 
         //movies details
         $builder->connect('/{slug}/{id}',["controller"=>"Movies","action"=>"details"],["_name"=>"movies_details"]);
-        $builder->connect('/movie/{slug}',["controller"=>"Movies","action"=>"watch"],["_name"=>"watch_movie"]);
+        $builder->connect('/movie/{slug}/tap-{episode}',["controller"=>"Movies","action"=>"watch"],["_name"=>"watch_movie"]);
 
         //comment
         $builder->connect('/comment/write',["controller"=>"Movies","action"=>"comments"],["_name"=>"comment_film"]);
