@@ -7,8 +7,9 @@ use App\Controller\Admin\AdminController;
 use Cake\Event\EventInterface;
 use Cake\ORM\TableRegistry;
 
-class EpisodesController extends AdminController{
-   
+class EpisodesController extends AdminController
+{
+
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -23,9 +24,9 @@ class EpisodesController extends AdminController{
     public function index()
     {
         $this->setModel();
-        $episodesList = $this->Episodes->find('all',[
-            'order'=>['Episode.created DESC'],
-            'contain'=>['Movies']
+        $episodesList = $this->Episodes->find('all', [
+            'order' => ['Episode.created DESC'],
+            'contain' => ['Movies']
         ]);
         $episodes = $this->paginateAll($episodesList);
         $this->set('episodes', $episodes);
@@ -34,18 +35,18 @@ class EpisodesController extends AdminController{
     {
         $this->setModel();
         $movie_list = $this->Movies->listMovies();
-        $this->set('movie_list',$movie_list);
+        $this->set('movie_list', $movie_list);
         $episode = $this->Episodes->newEmptyEntity();
         if ($this->request->is('post')) {
             $episode = $this->Episodes->patchEntity($episode, $this->request->getData());
             // if (!empty($this->request->getData('episode')) || $this->request->getData('episode')) {
             //     $episode->episode = $this->request->getData('episode');
             // }
-            if($this->Episodes->save($episode)){
+            if ($this->Episodes->save($episode)) {
                 $this->Flash->success(__('success'));
-                return $this->redirect(['_name'=>'admin_episodes_create']);
-            }else{
-                $this->set('error','Thêm không thành công! Vui lòng thử lại');
+                return $this->redirect(['_name' => 'admin_episodes_create']);
+            } else {
+                $this->set('error', 'Thêm không thành công! Vui lòng thử lại');
             }
         }
         $this->set('episode', $episode);
@@ -57,15 +58,15 @@ class EpisodesController extends AdminController{
     public function delete()
     {
         $id = $this->request->getParam('id');
-        $this->request->allowMethod(['post','delete']);
+        $this->request->allowMethod(['post', 'delete']);
 
         $category = $this->Comments->get($id);
 
-        if($this->Comments->delete($category)){
+        if ($this->Comments->delete($category)) {
             $this->Flash->success(__('success'));
-            return $this->redirect(['_name'=>'admin_comment_home']);
-        }else{
-            $this->set('error','Xóa không thành công! Vui lòng thử lại');
+            return $this->redirect(['_name' => 'admin_comment_home']);
+        } else {
+            $this->set('error', 'Xóa không thành công! Vui lòng thử lại');
         }
     }
 
@@ -75,12 +76,12 @@ class EpisodesController extends AdminController{
         $result = $this->Comments->search($search);
 
         $comments =  null;
-        if($result){
+        if ($result) {
             $comments = $this->paginateSearch($result);
-        } else{
+        } else {
             $comments = '';
         }
-        $this->set('comments',$comments);
+        $this->set('comments', $comments);
     }
 
     public function ajaxEpisode()
@@ -88,25 +89,25 @@ class EpisodesController extends AdminController{
         $this->setModel();
         $this->autoRender = false;
         $id = $this->request->getData('id');
-        $movie = $this->Movies->get($id,['contain'=>'MoviesInfo']);
+        $movie = $this->Movies->get($id, ['contain' => 'MoviesInfo']);
         $countEpisode = $this->Episodes->getCountEpisodeOfMovie($id);
         $data = [];
-        if ($this->request->is(['post','ajax'])) {
+        if ($this->request->is(['post', 'ajax'])) {
             $data['total_episode'] = $movie->movies_info->total_episode;
-            if($countEpisode >= $movie->movies_info->total_episode){
+            if ($countEpisode >= $movie->movies_info->total_episode) {
                 $data['episode_current'] = $movie->movies_info->total_episode;
-            }else{
+            } else {
                 if ($countEpisode <= 0) {
                     $data['episode_current'] = $countEpisode;
                     $data['episode_next'] = 1;
-                }else{
+                } else {
                     $data['episode_current'] = $countEpisode;
-                    $data['episode_next'] = $countEpisode+1;
+                    $data['episode_next'] = $countEpisode + 1;
                 }
-                $data['episode_next'] = $countEpisode+1;
+                // $data['episode_next'] = $countEpisode+1;
             }
             $data['category_id'] = $movie->movies_info->category_id;
-            return $this->response->withType("application/json")->withStringBody(json_encode(compact('data')));    
+            return $this->response->withType("application/json")->withStringBody(json_encode(compact('data')));
             die;
         }
         return $this->response->withType("application/json")->withStringBody(json_encode(''));

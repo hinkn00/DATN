@@ -22,7 +22,7 @@
                <div class="movie-btn">
                   <div class="btn-transform transform-vertical red">
                      <div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Xem phim</a></div>
-                     <div><a href="<?= $this->Url->build(['_name'=>'watch_movie','slug'=>$movie->m_slug])?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
+                     <div><a href="<?= $this->Url->build(['_name'=>'watch_movie','slug'=>$movie->m_slug,"episode"=>1])?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
                   </div>
                   <div class="btn-transform transform-vertical">
                      <div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Mua phim</a></div>

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -56,14 +57,31 @@ class EpisodesTable extends Table
     {
         $options = array(
             'field' => '*',
-            'order' => array('Episode.episode DESC','Episode.created DESC'),
-            'conditions'=>array(
-                'Episode.movie_id ='=>$id
+            'order' => array('Episode.episode DESC', 'Episode.created DESC'),
+            'conditions' => array(
+                'Episode.movie_id =' => $id
             )
         );
 
-        $data = $this->find('all',$options)->count();
+        $data = $this->find('all', $options)->count();
 
+        return $data;
+    }
+
+    public function getLinkEpisode($episode, $movie_id)
+    {
+        $option = array(
+            'field' => '*',
+            'conditions' => array(
+                'OR' => array(
+                    'Episode.episode =' => $episode,
+                    'Episode.episode is ' => null,
+                ),
+                'Episode.movie_id =' => $movie_id
+            )
+        );
+
+        $data = $this->find('all', $option)->first();
         return $data;
     }
 }
