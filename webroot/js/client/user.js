@@ -291,7 +291,7 @@ $().ready(function(){
             }
         },
         submitHandler: function (form, event) {
-            // form.submit()
+            form.submit()
         },
         
     });
