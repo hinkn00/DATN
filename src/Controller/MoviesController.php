@@ -34,12 +34,24 @@ class MoviesController extends AppController
         $comments = $this->Comments->find('all', [
             'conditions' => [
                 'comment.movie_id = ' => $movie->id
+            ],
+            'order' => [
+                'comment.created DESC'
             ]
         ]);
+        $agv_comments = $this->Comments->find('all', [
+            'conditions' => [
+                'comment.movie_id = ' => $movie->id
+            ],
+            'order' => [
+                'comment.created DESC'
+            ]
+        ])->all()->avg('rate');
         $this->set([
             'movie' => $movie,
             'movies' => $movies,
-            'comments' => $comments
+            'comments' => $comments,
+            'agv_comments' => $agv_comments
         ]);
     }
 
@@ -60,7 +72,6 @@ class MoviesController extends AppController
             ],
             'contain' => ['Users', 'Movies']
         ]);
-        // echo "<pre>";echo json_encode($comments);die;
         $this->set(compact('movie', 'genre_movies', 'category_movies', 'comments', 'countEpisode', 'episode'));
     }
 
@@ -75,6 +86,7 @@ class MoviesController extends AppController
                 'user_id' => $this->request->getData('user_id'),
                 'movie_id' => $this->request->getData('movie_id'),
                 'content' => $this->request->getData('comment'),
+                'rate' => $this->request->getData('rate_movie'),
                 'creared' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ]);

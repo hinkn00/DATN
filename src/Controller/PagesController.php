@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -13,7 +14,8 @@ use Cake\Event\EventInterface;
 
 class PagesController extends AppController
 {
-    public function beforeFilter(EventInterface $event) {
+    public function beforeFilter(EventInterface $event)
+    {
         parent::beforeFilter($event);
         $check_loader = true;
         $this->set('check_loader', $check_loader);
@@ -59,12 +61,12 @@ class PagesController extends AppController
     public function index()
     {
         $this->setModel();
-        $movies = $this->Movies->find('all',[
+        $movies = $this->Movies->find('all', [
             'contain' => [
                 'MoviesInfo'
             ],
             'conditions' => [
-                'MoviesInfo.m_status ='=>1
+                'MoviesInfo.m_status =' => 1
             ]
         ]);
         $this->set('categoryMovie', $movies);

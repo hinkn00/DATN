@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Entity;
@@ -15,5 +16,6 @@ class Comment extends Entity
         'modified' => true,
         'users_base' => true,
         'movie' => true,
+        'rate' => true
     ];
 }

@@ -8458,3 +8458,7 @@ img.img_avatar {
     height: 50px;
     border-radius: 50%;
 }
+
+.mt-2 {
+    margin-top: 20px !important;
+}

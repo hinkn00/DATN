@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -6,14 +7,16 @@ namespace App\Controller;
 use Cake\Event\EventInterface;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
+
 class AppController extends Controller
 {
-    public function beforeFilter(EventInterface $event) {
+    public function beforeFilter(EventInterface $event)
+    {
         parent::beforeFilter($event);
         $this->Auth->allow();
-        if($this->Auth->User()){
-            if(!empty($this->roleUser()) || $this->roleUser()){
-                return $this->redirect('/admin');    
+        if ($this->Auth->User()) {
+            if (!empty($this->roleUser()) || $this->roleUser()) {
+                return $this->redirect('/admin');
             }
         }
     }
@@ -24,7 +27,7 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth',[
+        $this->loadComponent('Auth', [
             'logoutRedirect' => [
                 'controller' => 'Pages',
                 'action' => 'index'
@@ -39,13 +42,12 @@ class AppController extends Controller
 
         $genres = $this->_getGenre();
         $this->set(compact('genres'));
-        
+
         $countries = $this->_getCountry();
         $this->set(compact('countries'));
 
         $url_s3 = Configure::read('s3_base');
-        $this->set('url_s3',$url_s3);
-
+        $this->set('url_s3', $url_s3);
     }
 
     public function roleUser()
