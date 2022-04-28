@@ -59,7 +59,7 @@
                     <h1>
                         Nội dung phim
                     </h1>
-                    <?= html_entity_decode($movie->m_desc) ?>
+                    <div style="color: #fff"><?= html_entity_decode($movie->m_desc) ?></div>
                     <!-- share link -->
                     <div class="flex-it share-tag">
                         <div class="social-link">

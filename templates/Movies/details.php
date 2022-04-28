@@ -50,13 +50,13 @@
                <div class="movie-rate">
                   <div class="rate">
                      <i class="ion-android-star"></i>
-                     <p><span><?= round($agv_comments, 2) ?></span> /5<br>
+                     <p><span><?= !empty($agv_comments) ? round($agv_comments, 2) : 5 ?></span> /5<br>
                         <span class="rv"><?= (0 < count($comments->toArray()) && count($comments->toArray()) < 10) ? '0' . count($comments->toArray()) : count($comments->toArray()) ?> đánh giá</span>
                      </p>
                   </div>
                   <div class="rate-star">
                      <p>Đánh giá phim: </p>
-                     <div id="rateYo" data-rateyo-rating="<?= $agv_comments ?>"></div>
+                     <div id="rateYo" data-rateyo-rating="<?= !empty($agv_comments) ? $agv_comments : 5 ?>"></div>
                   </div>
                </div>
                <div class="movie-tabs">
