@@ -39,7 +39,8 @@ $routes->scope('/', function (RouteBuilder $builder) {
         ['_name' => 'users_logout']
     );
 
-
+    $builder->connect('/search', ["controller" => "Details", "action" => "search"], ["_name" => "search_movie"]);
+    $builder->connect('/ajaxListMovies', ["controller" => "Details", "action" => "ajaxListMovies"], ["_name" => "ajaxListMovies"]);
     //movies details
     $builder->connect('/{slug}/{id}', ["controller" => "Movies", "action" => "details"], ["_name" => "movies_details"]);
     $builder->connect('/movie/{slug}/tap-{episode}', ["controller" => "Movies", "action" => "watch"], ["_name" => "watch_movie"]);

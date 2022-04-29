@@ -31,22 +31,8 @@ class MoviesController extends AppController
         ));
         $movies = $this->Movies->getAllMoviesRelatedByGenreID($movie->movies_info->genre_id);
         $this->loadModel('Comments');
-        $comments = $this->Comments->find('all', [
-            'conditions' => [
-                'comment.movie_id = ' => $movie->id
-            ],
-            'order' => [
-                'comment.created DESC'
-            ]
-        ]);
-        $agv_comments = $this->Comments->find('all', [
-            'conditions' => [
-                'comment.movie_id = ' => $movie->id
-            ],
-            'order' => [
-                'comment.created DESC'
-            ]
-        ])->all()->avg('rate');
+        $comments = $this->Comments->getCommentOfMovies($movie->id);
+        $agv_comments = $this->Comments->avgRatingOfMovie($movie->id);
         $this->set([
             'movie' => $movie,
             'movies' => $movies,
@@ -66,12 +52,7 @@ class MoviesController extends AppController
         $genre_movies = $this->Movies->getAllMoviesRelatedByGenreID($movie->movies_info->genre_id);
         $category_movies = $this->Movies->getAllMoviesRelatedByCategoryID($movie->movies_info->category_id);
         $this->loadModel('Comments');
-        $comments = $this->Comments->find('all', [
-            'conditions' => [
-                'comment.movie_id = ' => $movie->id
-            ],
-            'contain' => ['Users', 'Movies']
-        ]);
+        $comments = $this->Comments->getCommentOfMovies($movie->id);
         $this->set(compact('movie', 'genre_movies', 'category_movies', 'comments', 'countEpisode', 'episode'));
     }
 

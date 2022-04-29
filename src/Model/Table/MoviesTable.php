@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -76,7 +77,7 @@ class MoviesTable extends Table
             )
         );
 
-        $data = $this->find("all",$options);
+        $data = $this->find("all", $options);
 
         return $data;
     }
@@ -93,7 +94,7 @@ class MoviesTable extends Table
             )
         );
 
-        $data = $this->find("all",$options)->count();
+        $data = $this->find("all", $options)->count();
 
         return $data;
     }
@@ -111,7 +112,7 @@ class MoviesTable extends Table
             )
         );
 
-        $data = $this->find("all",$options)->first();
+        $data = $this->find("all", $options)->first();
 
         return $data;
     }
@@ -122,9 +123,9 @@ class MoviesTable extends Table
             'field' => '*',
             'conditions' => array(
                 'OR' => array(
-                    array('Movie.m_name LIKE' => '%'.$search.'%'),
-                    array('Movie.m_slug LIKE' => '%'.$search.'%'),
-                    array('Movie.m_desc LIKE' => '%'.$search.'%'),
+                    array('Movie.m_name LIKE' => '%' . $search . '%'),
+                    array('Movie.m_slug LIKE' => '%' . $search . '%'),
+                    array('Movie.m_desc LIKE' => '%' . $search . '%'),
                 )
             ),
             'contain' => [
@@ -132,7 +133,7 @@ class MoviesTable extends Table
             ]
         );
 
-        $data = $this->find('all',$options);
+        $data = $this->find('all', $options);
         return $data;
     }
 
@@ -140,60 +141,73 @@ class MoviesTable extends Table
     {
         $options = array(
             'field' => '*',
-            'conditions' =>[
-                'MoviesInfo.m_status = '=> 1,
-                'MoviesInfo.genre_id = '=> $genre_id,
+            'conditions' => [
+                'MoviesInfo.m_status = ' => 1,
+                'MoviesInfo.genre_id = ' => $genre_id,
             ],
             'contain' => [
                 'MoviesInfo'
             ]
         );
 
-        $data = $this->find('all',$options);
-        
+        $data = $this->find('all', $options);
+
         return $data;
     }
     public function getAllMoviesRelatedByCategoryID($category_id)
     {
         $options = array(
             'field' => '*',
-            'conditions' =>[
-                'MoviesInfo.m_status = '=> 1,
-                'MoviesInfo.category_id = '=> $category_id,
+            'conditions' => [
+                'MoviesInfo.m_status = ' => 1,
+                'MoviesInfo.category_id = ' => $category_id,
             ],
             'contain' => [
                 'MoviesInfo'
             ]
         );
 
-        $data = $this->find('all',$options);
-        
+        $data = $this->find('all', $options);
+
         return $data;
     }
 
     public function getMovieOfMonth($month_current, $year_current)
     {
         $options = [
-            'fields'=> ['created'],
+            'fields' => ['created'],
             'conditions' => [
-                'MONTH(Movie.created) =' =>$month_current,
-                'YEAR(Movie.created) ='=> $year_current
+                'MONTH(Movie.created) =' => $month_current,
+                'YEAR(Movie.created) =' => $year_current
             ],
-            'contain'=>"MoviesInfo"
+            'contain' => "MoviesInfo"
         ];
-        $data = $this->find('all',$options);
+        $data = $this->find('all', $options);
         return $data;
     }
 
     public function listMovies()
     {
-        return $this->find('list',[
+        return $this->find('list', [
             'keyField' => 'id',
             'valueField' => 'm_name',
             'conditions' => [
-                'MoviesInfo.m_status ='=>1 
+                'MoviesInfo.m_status =' => 1
             ],
-            'contain'=>['MoviesInfo']           
+            'contain' => ['MoviesInfo']
         ]);
+    }
+
+    public function getMoviesByName($movie_name)
+    {
+        $options = [
+            'field' => '*',
+            'conditions' => [
+                'Movie.m_name LIKE' => '%' . $movie_name . '%'
+            ],
+            'contain' => "MoviesInfo"
+        ];
+        $data = $this->find('all', $options);
+        return $data;
     }
 }

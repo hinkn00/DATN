@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -77,14 +78,36 @@ class CommentsTable extends Table
             'field' => '*',
             'conditions' => array(
                 'OR' => array(
-                    array('User.name LIKE' => '%'.$search.'%'),
-                    array('Movie.m_name LIKE' => '%'.$search.'%'),
+                    array('User.name LIKE' => '%' . $search . '%'),
+                    array('Movie.m_name LIKE' => '%' . $search . '%'),
                 )
             ),
-            'contain' =>['Users','Movies']
+            'contain' => ['Users', 'Movies']
         );
 
-        $data = $this->find('all',$options)->join($joins);
+        $data = $this->find('all', $options)->join($joins);
         return $data;
+    }
+
+    public function avgRatingOfMovie($id_movie)
+    {
+        return $this->find('all', [
+            'conditions' => [
+                'Comment.movie_id = ' => $id_movie
+            ],
+            'order' => [
+                'Comment.created DESC'
+            ]
+        ])->all()->avg('rate');
+    }
+
+    public function getCommentOfMovies($id_movie)
+    {
+        return $this->find('all', [
+            'conditions' => [
+                'Comment.movie_id = ' => $id_movie
+            ],
+            'contain' => ['Users', 'Movies']
+        ]);
     }
 }

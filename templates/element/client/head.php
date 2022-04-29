@@ -19,7 +19,7 @@
 	<meta name="format-detection" content="telephone-no">
 
 	<!-- CSS files -->
-	<?= $this->Html->css(['client/style', 'client/plugins', 'jquery.rateyo.min']) ?>
-	<?php echo $this->Html->script(['jquery.min', 'jquery.rateyo.min']) ?>
+	<?= $this->Html->css(['client/style', 'client/plugins', 'jquery.rateyo.min', 'admin/jquery-ui.css']) ?>
+	<?php echo $this->Html->script(['jquery.min', 'admin/jquery-ui', 'jquery.rateyo.min']) ?>
 
 </head>

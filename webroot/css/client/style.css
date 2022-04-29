@@ -8462,3 +8462,12 @@ img.img_avatar {
 .mt-2 {
     margin-top: 20px !important;
 }
+
+.btn-search--movie {
+    margin-left: -44px;
+    height: 46px;
+    width: 72px;
+    border: none;
+    background: #233a50 !important;
+    color: #fff;
+}
