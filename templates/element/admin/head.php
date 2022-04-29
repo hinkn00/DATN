@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php echo $this->Html->meta('csrfToken',$this->request->getAttribute('csrfToken'));?>
+    <?php echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken')); ?>
     <title>
-        <?= 'Admin'?>:
+        <?= 'Admin' ?>:
         <?= isset($title) ? $title : $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">    
-    <?= $this->Html->css(['bootstrap.min','font-awesome.min','admin/main','admin/jquery-ui.css'])?>
-    <?= $this->Html->script(['jquery.min','admin/jquery-ui','jquery-3.1.1.slim.min','chart'],['type'=>"text/javascript"])?>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+    <?= $this->Html->css(['bootstrap.min', 'font-awesome.min', 'admin/main', 'admin/jquery-ui.css', 'admin/select2.min.css']) ?>
+    <?= $this->Html->script(['jquery.min', 'admin/jquery-ui', 'jquery-3.1.1.slim.min', 'chart', 'admin/select2.min.js'], ['type' => "text/javascript"]) ?>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.slim.min.js"></script>-->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
