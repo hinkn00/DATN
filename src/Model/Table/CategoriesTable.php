@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -64,11 +65,11 @@ class CategoriesTable extends Table
         $options = array(
             'field' => '*',
             'conditions' => array(
-                'Category.status ='=>1
+                'Category.status =' => 1
             )
         );
 
-        $data = $this->find('all',$options)->count();
+        $data = $this->find('all', $options)->count();
 
         return $data;
     }
@@ -85,7 +86,7 @@ class CategoriesTable extends Table
             ]
         ];
 
-        $data = $this->find('all',$options)->first();
+        $data = $this->find('all', $options)->first();
 
         return $data;
     }
@@ -96,25 +97,25 @@ class CategoriesTable extends Table
             'field' => '*',
             'conditions' => array(
                 'OR' => array(
-                    array('Category.title LIKE' => '%'.$search.'%'),
-                    array('Category.slug LIKE' => '%'.$search.'%'),
+                    array('Category.title LIKE' => '%' . $search . '%'),
+                    array('Category.slug LIKE' => '%' . $search . '%'),
                 )
             )
         );
 
-        $data = $this->find('all',$options);
+        $data = $this->find('all', $options);
         return $data;
     }
 
     public function listCategory()
     {
-        return $this->find('list',[
+        return $this->find('list', [
             'keyField' => 'id',
             'valueField' => 'title',
             'conditions' => [
-                'status <> 0' 
+                'status <> 0'
             ],
-            'recursive' => -1            
+            'recursive' => -1
         ]);
     }
 
@@ -126,7 +127,7 @@ class CategoriesTable extends Table
                 'alias' => 'MoviesInfo',
                 'type' => 'inner',
                 'conditions' => [
-                    'MoviesInfo.category_id ='=> $idCate
+                    'MoviesInfo.category_id =' => $idCate
                 ]
             ),
             array(
@@ -140,9 +141,9 @@ class CategoriesTable extends Table
         );
 
         $options = array(
-            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Movie.thumb','Category.title','Category.slug','Category.id'],
+            'fields' => ['Movie.id', 'Movie.m_name', 'Movie.m_slug', 'Movie.thumb', 'Category.title', 'Category.slug', 'Category.id', 'MoviesInfo.resolution'],
             'conditions' => array(
-                'OR'=>[
+                'OR' => [
                     "Category.title =" => $categoryTitle,
                     "Category.id =" => $idCate
                 ],
@@ -150,9 +151,9 @@ class CategoriesTable extends Table
             ),
             'order' => [
                 'Category.modified' => 'desc'
-            ],            
+            ],
         );
-        $data = $this->find('all',$options)->join($joins);
+        $data = $this->find('all', $options)->join($joins);
 
         return $data;
     }

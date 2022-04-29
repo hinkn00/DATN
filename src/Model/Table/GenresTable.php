@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -66,11 +67,11 @@ class GenresTable extends Table
                 'Genre.modified DESC'
             ),
             'conditions' => array(
-                'Genre.status ='=>1
+                'Genre.status =' => 1
             )
         );
 
-        $data = $this->find('all',$options);
+        $data = $this->find('all', $options);
 
         return $data;
     }
@@ -80,11 +81,11 @@ class GenresTable extends Table
         $options = array(
             'field' => '*',
             'conditions' => array(
-                'Genre.status ='=>1
+                'Genre.status =' => 1
             )
         );
 
-        $data = $this->find('all',$options)->count();
+        $data = $this->find('all', $options)->count();
 
         return $data;
     }
@@ -101,7 +102,7 @@ class GenresTable extends Table
             ]
         ];
 
-        $data = $this->find('all',$options)->first();
+        $data = $this->find('all', $options)->first();
 
         return $data;
     }
@@ -112,29 +113,29 @@ class GenresTable extends Table
             'field' => '*',
             'conditions' => array(
                 'OR' => array(
-                    array('Genre.title LIKE' => '%'.$search.'%'),
-                    array('Genre.slug LIKE' => '%'.$search.'%'),
+                    array('Genre.title LIKE' => '%' . $search . '%'),
+                    array('Genre.slug LIKE' => '%' . $search . '%'),
                 )
             )
         );
 
-        $data = $this->find('all',$options);
+        $data = $this->find('all', $options);
         return $data;
     }
 
     public function listGenres()
     {
-        return $this->find('list',[
+        return $this->find('list', [
             'keyField' => 'id',
             'valueField' => 'title',
             'conditions' => [
-                'status <> 0' 
+                'status <> 0'
             ],
-            'recursive' => -1            
+            'recursive' => -1
         ]);
     }
 
-    public function getMoviesByGenre($genreTitle , $idGen)
+    public function getMoviesByGenre($genreTitle, $idGen)
     {
         $joins = array(
             array(
@@ -142,7 +143,7 @@ class GenresTable extends Table
                 'alias' => 'MoviesInfo',
                 'type' => 'inner',
                 'conditions' => [
-                    'MoviesInfo.genre_id ='=> $idGen
+                    'MoviesInfo.genre_id =' => $idGen
                 ]
             ),
             array(
@@ -156,9 +157,9 @@ class GenresTable extends Table
         );
 
         $options = array(
-            'fields' => ['Movie.id','Movie.m_name','Movie.m_slug','Movie.thumb','Genre.title','Genre.slug','Genre.id'],
+            'fields' => ['Movie.id', 'Movie.m_name', 'Movie.m_slug', 'Movie.thumb', 'Genre.title', 'Genre.slug', 'Genre.id', 'MoviesInfo.resolution'],
             'conditions' => array(
-                'OR'=>[
+                'OR' => [
                     "Genre.title =" => $genreTitle,
                     "Genre.id =" => $idGen
                 ],
@@ -166,9 +167,9 @@ class GenresTable extends Table
             ),
             'order' => [
                 'Genre.modified' => 'desc'
-            ],            
+            ],
         );
-        $data = $this->find('all',$options)->join($joins);
+        $data = $this->find('all', $options)->join($joins);
 
         return $data;
     }

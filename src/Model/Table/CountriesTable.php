@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -68,7 +69,7 @@ class CountriesTable extends Table
             ]
         ];
 
-        $data = $this->find('all',$options)->first();
+        $data = $this->find('all', $options)->first();
 
         return $data;
     }
@@ -79,25 +80,25 @@ class CountriesTable extends Table
             'field' => '*',
             'conditions' => array(
                 'OR' => array(
-                    array('Country.country_name LIKE' => '%'.$search.'%'),
-                    array('Country.country_slug LIKE' => '%'.$search.'%'),
+                    array('Country.country_name LIKE' => '%' . $search . '%'),
+                    array('Country.country_slug LIKE' => '%' . $search . '%'),
                 )
             )
         );
 
-        $data = $this->find('all',$options);
+        $data = $this->find('all', $options);
         return $data;
     }
 
     public function listCountry()
     {
-        return $this->find('list',[
+        return $this->find('list', [
             'keyField' => 'id',
             'valueField' => 'country_name',
             'conditions' => [
                 'Country.country_status <> 0'
             ],
-            'recursive' => -1            
+            'recursive' => -1
         ]);
     }
 
@@ -109,7 +110,7 @@ class CountriesTable extends Table
                 'alias' => 'MoviesInfo',
                 'type' => 'inner',
                 'conditions' => [
-                    'MoviesInfo.country_id ='=> $idCount
+                    'MoviesInfo.country_id =' => $idCount
                 ]
             ),
             array(
@@ -123,9 +124,9 @@ class CountriesTable extends Table
         );
 
         $options = array(
-            'fields' => ['Movie.id','Movie.m_name','Movie.thumb','Movie.m_slug','Country.country_name','Country.country_slug','Country.id'],
+            'fields' => ['Movie.id', 'Movie.m_name', 'Movie.thumb', 'Movie.m_slug', 'Country.country_name', 'Country.country_slug', 'Country.id', 'MoviesInfo.resolution'],
             'conditions' => array(
-                'OR'=>[
+                'OR' => [
                     "Country.country_name =" => $countryTitle,
                     "Country.id =" => $idCount
                 ],
@@ -133,9 +134,9 @@ class CountriesTable extends Table
             ),
             'order' => [
                 'Country.modified' => 'desc'
-            ],            
+            ],
         );
-        $data = $this->find('all',$options)->join($joins);
+        $data = $this->find('all', $options)->join($joins);
 
         return $data;
     }
