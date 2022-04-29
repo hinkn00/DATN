@@ -2,32 +2,11 @@
 <div class="hero common-hero">
     <div class="container">
         <div class="row">
-            <!-- <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="hero-ct">
-                    <h1><?php echo $category->title ?></h1>
-                    <?php
-                    $this->Breadcrumbs->add([
-                        [
-                            'title' => 'Trang chủ',
-                            'url' => ['controller' => 'Pages', 'action' => 'home'],
-                            'options' => [
-                                'class' => 'active'
-                            ]
-                        ],
-                        [
-                            'title' => $category->title,
-                            'options' => [
-                                'innerAttrs' => [
-                                    'class' => "ion-ios-arrow-right"
-                                ]
-                            ]
-
-                        ]
-                    ]);
-                    echo $this->Breadcrumbs->render();
-                    ?>
+                    <h1><?php echo __('Từ khóa: ') . $this->request->getQuery('tag_key') ?></h1>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
@@ -36,7 +15,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="topbar-filter fw">
-                    <p>Đã tìm thấy tổng cộng có: <span><?php echo "" ?> </span>phim</p>
+                    <p>Đã tìm thấy tổng cộng có: <span><?php echo count($movie_searchs->toArray()) ?> </span>phim</p>
                     <label>Sắp xếp:</label>
                     <select>
                         <option value="date_desc">Ngày gần nhất</option>
