@@ -93,10 +93,10 @@ class CommentsTable extends Table
     {
         return $this->find('all', [
             'conditions' => [
-                'comment.movie_id = ' => $id_movie
+                'Comment.movie_id = ' => $id_movie
             ],
             'order' => [
-                'comment.created DESC'
+                'Comment.created DESC'
             ]
         ])->all()->avg('rate');
     }
@@ -105,7 +105,7 @@ class CommentsTable extends Table
     {
         return $this->find('all', [
             'conditions' => [
-                'comment.movie_id = ' => $id_movie
+                'Comment.movie_id = ' => $id_movie
             ],
             'contain' => ['Users', 'Movies']
         ]);
