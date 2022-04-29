@@ -20,7 +20,27 @@ class AppController extends Controller
             }
         }
     }
-
+    public function dd($param)
+    {
+        echo "<pre>";
+        echo json_encode($param);
+        echo "</pre>";
+        die;
+    }
+    public function ddd($param)
+    {
+        echo "<pre>";
+        print_r($param);
+        echo "</pre>";
+        die;
+    }
+    public function d_4($param)
+    {
+        echo "<pre>";
+        var_dump($param);
+        echo "</pre>";
+        die;
+    }
     public function initialize(): void
     {
         parent::initialize();

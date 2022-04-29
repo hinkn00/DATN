@@ -1,13 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use Cake\Core\Configure;
+
 
 class DetailsController extends AppController
 {
-    public function beforeFilter(EventInterface $event) {
+    public function beforeFilter(EventInterface $event)
+    {
         parent::beforeFilter($event);
     }
     public function setModel()
@@ -15,6 +19,8 @@ class DetailsController extends AppController
         $this->loadModel("Categories");
         $this->loadModel("Countries");
         $this->loadModel("Genres");
+        $this->loadModel("Movies");
+        $this->loadModel("Comments");
     }
     public function category()
     {
@@ -24,8 +30,9 @@ class DetailsController extends AppController
 
         $cate_movies = $this->Categories->getMoviesByCategory($category->title, $category->id);
         $count_cate_movies = count($cate_movies->toArray());
+        $rating = $this->rating($cate_movies->toArray());
 
-        $this->set(compact('category', 'cate_movies','count_cate_movies'));
+        $this->set(compact('category', 'cate_movies', 'count_cate_movies', 'rating'));
     }
     public function countries()
     {
@@ -34,7 +41,8 @@ class DetailsController extends AppController
         $country = $this->Countries->getSlugOfCountries($country_slug);
         $county_movies = $this->Countries->getMoviesByCountries($country->country_slug, $country->id);
         $count_movies = count($county_movies->toArray());
-        $this->set(compact('country','county_movies','count_movies'));
+        $rating = $this->rating($county_movies->toArray());
+        $this->set(compact('country', 'county_movies', 'count_movies', 'rating'));
     }
     public function genres()
     {
@@ -43,6 +51,53 @@ class DetailsController extends AppController
         $genre = $this->Genres->getSlugOfGenres($genre_slug);
         $genre_movies = $this->Genres->getMoviesByGenre($genre->slug, $genre->id);
         $count_gen_movies = count($genre_movies->toArray());
-        $this->set(compact('genre','genre_movies','count_gen_movies'));
+        $rating = $this->rating($genre_movies->toArray());
+
+        $this->set(compact('genre', 'genre_movies', 'count_gen_movies', 'rating'));
+    }
+
+    public function search()
+    {
+        $this->setModel();
+        $query = $this->request->getQuery('tag_key');
+        $movie_searchs = $this->Movies->getMoviesByName($query);
+
+        $rating = $this->rating($movie_searchs->toArray());
+        $this->set(compact('movie_searchs', 'rating'));
+    }
+
+    public function ajaxListMovies()
+    {
+        $this->setModel();
+        $this->autoRender = false;
+        $query = $this->request->getQuery('query');
+        $availableTags = $this->Movies->getMoviesByName($query);
+        $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+
+        if ($this->request->is(['ajax'])) {
+            foreach ($availableTags as $k => $index) {
+                $array_data[] = $index['m_name'];
+                // $array_data['value'] = $index['m_name'];
+                // $array_data['label'] = '<a href="' . $url . '/' . $index['m_slug'] . '/' . $index['id'] . '">
+                // <img src="' . Configure::read('s3_base') . 'uploads/thumbs/' . $index['thumb'] . '" width="30" height="30"/>
+                // &nbsp;&nbsp;' . $index['m_name'] . '</a>';
+            }
+            return $this->response->withType("application/json")->withStringBody(json_encode(compact('array_data')));
+
+            die;
+        }
+        return $this->response->withType("application/json")->withStringBody(json_encode(compact('')));
+        die;
+    }
+
+    public function rating(array $movies)
+    {
+        $rating = [];
+        foreach ($movies as $key => $value) {
+            $id = !empty($value->Movie['id']) ? $value->Movie['id'] : $value->id;
+            $agv_comments = $this->Comments->avgRatingOfMovie($id);
+            $rating[] = $agv_comments;
+        }
+        return $rating;
     }
 }
