@@ -13,7 +13,7 @@
 		transform: translate(-50%, -50%);
 	}
 
-	.btn {
+	.btn.change-avtar {
 		width: 100px;
 		height: 40px;
 		border-radius: 5px;
@@ -230,8 +230,8 @@
 				?>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" form="changeFrm">Thay đổi</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary change-avtar" form="changeFrm">Thay đổi</button>
+				<button type="button" class="btn btn-secondary change-avtar" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
