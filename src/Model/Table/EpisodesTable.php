@@ -84,4 +84,30 @@ class EpisodesTable extends Table
         $data = $this->find('all', $option)->first();
         return $data;
     }
+
+    public function getMoviesHasLink()
+    {
+        $data = $this->find()->select(['movie_id_distinct' => 'DISTINCT (Episode.movie_id)'])->order(['movie_id_distinct' => 'DESC']);
+        return $data;
+    }
+
+    public function search($search)
+    {
+        $options = array(
+            'field' => '*',
+            'conditions' => array(
+                'Movies.m_name LIKE' => '%' . $search . '%'
+            ),
+            'order' => array(
+                'Episode.id DESC',
+                'Episode.created DESC'
+            ),
+            'contain' => [
+                'Movies'
+            ]
+        );
+
+        $data = $this->find('all', $options);
+        return $data;
+    }
 }

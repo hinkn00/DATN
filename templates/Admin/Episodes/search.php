@@ -1,40 +1,28 @@
-<?php $this->assign('title', 'Quản lý tập phim') ?>
+<?php $this->assign('title', 'Tìm kiếm: ' . $this->request->getQuery('query')) ?>
 <div class="col-md-9 col-lg-10 main mt-3">
     <div class="row mb-3">
         <div class="col-lg-12 col-md-12">
-            <h2 class="sub-header mb-3" style="display:flex">Quản lý phim theo tập</h2>
+            <h2 class="sub-header mb-3" style="display:flex">Tìm kiếm: <strong> <?= $this->request->getQuery('query') ?></strong></h2>
             <div class="box-tools" style=" width:100%; display:flex; justify-content: center">
                 <form action="<?php echo $this->Url->build(['_name' => 'admin_episodes_search']) ?>" method="get">
                     <div class="input-search input-group" style="width: 50vw;">
-                        <input type="text" name="query" class="form-control pull-right" id="query" placeholder="Nhập nội dung tìm kiếm">
+                        <input type="text" name="query" class="form-control pull-right" id="query" value="<?= $this->request->getQuery('query') ?>">
                         <div class="button-search input-group-btn">
                             <button type="submit" class="btn btn-primary search-icon" style="
-                            border-top-right-radius: 7px 7px;
-                            border-bottom-right-radius: 7px 7px;
-                        "><i class="fa fa-search"></i></button>
+                                border-top-right-radius: 7px 7px;
+                                border-bottom-right-radius: 7px 7px;
+                            "><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </form>
             </div>
             <div>
                 <div class="dropdown pull-left mb-2">
-                    <button class="btn btn-sm btn-outline-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Danh sách hiển thị
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a href="<?php echo $this->Url->build(array('_name' => 'admin_episodes_home')) ?>" class="dropdown-item <?php echo count($episodes) == 10 ? 'active' : '' ?>">10</a>
-                        <a href="?limit=25" class="dropdown-item <?php echo count($episodes) == 25 ? 'active' : '' ?>">25</a>
-                        <a href="?limit=50" class="dropdown-item <?php echo count($episodes) == 50 ? 'active' : '' ?>">50</a>
-                        <a href="?limit=100" class="dropdown-item <?php echo count($episodes) == 100 ? 'active' : '' ?>">100</a>
-                    </div>
-                </div>
-                <div class="pull-right mb-2">
-                    <a href="<?= $this->Url->build(array('_name' => 'admin_episodes_create')) ?>" class="btn btn-sm btn-outline-primary w-10 btn-add"><i class="fa-solid fa-plus"></i></a>
-                    <a class="btn btn-sm btn-outline-primary w-10 btn-down"><i class="fa-solid fa-download"></i></a>
+                    <?= $this->Html->link('Trở về', array('_name' => 'admin_episodes_home'), array('class' => 'btn btn-md btn-warning')) ?>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+            <div class="table-responsive" id="movie_scroll" style="margin-bottom: 5px;">
+                <table class="table table-striped table-bordered" id="movie_table">
                     <thead class="thead-inverse">
                         <tr>
                             <th>#</th>
@@ -44,7 +32,7 @@
                             <th>Khác</th>
                         </tr>
                     </thead>
-                    <tbody id="sortTable">
+                    <tbody>
                         <?php foreach ($episodes as $episode) : ?>
                             <tr>
                                 <td><?= $episode->id ?></td>
@@ -111,45 +99,4 @@ if ($flash) :
         })
     </script>
 <?php endif; ?>
-<script>
-    var csrfToken = $('meta[name="csrfToken"]').attr('content');
-    var id_arr = [];
-    $("#sortTable").sortable({
-        placeholder: 'ui-state-highlight',
-        update: function(event, ui) {
-            $('#sortTable tr').each(function() {
-                id_arr.push($(this).attr('id'));
-            })
-
-            ajaxChange(id_arr);
-        }
-    });
-
-    var ajaxChange = function(id_arr) {
-        fetch("<?php echo $this->Url->build(['_name' => 'admin_change_number_category']); ?>", {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                method: "POST",
-                body: JSON.stringify({
-                    ids: id_arr
-                })
-            })
-            .then(function(res) {
-                Swal.fire({
-                        icon: `success`,
-                        title: `Sắp xếp thành công!`,
-                        timer: 5000
-                    })
-                    .then(function() {
-                        location.reload();
-                    });
-            })
-            .catch(function(res) {
-                console.log(res)
-            })
-    }
-</script>
 <?php echo $this->Html->script(['sweetalert2']) ?>

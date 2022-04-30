@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller\Admin;
@@ -7,23 +8,24 @@ use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
 use Cake\Core\Configure;
 
-class AdminController extends Controller 
+class AdminController extends Controller
 {
     public function initialize(): void
     {
         parent::initialize();
         $this->viewBuilder()->setLayout('admin');
-        
+
         $url_s3 = Configure::read('s3_base');
-        $this->set('url_s3',$url_s3);
+        $this->set('url_s3', $url_s3);
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth',[
+        $this->loadComponent('ShowDataDebug');
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
-                    'fields' => ['username'=>'email','password'=>'password'],
-                    'scope' => ['active'=> 1],
+                    'fields' => ['username' => 'email', 'password' => 'password'],
+                    'scope' => ['active' => 1],
                     'userModel' => 'Users'
                 ]
             ],
@@ -48,14 +50,15 @@ class AdminController extends Controller
          */
         //$this->loadComponent('FormProtection');
     }
-    
-    public function beforeFilter(EventInterface $event) {
+
+    public function beforeFilter(EventInterface $event)
+    {
         parent::beforeFilter($event);
-        $this->Auth->allow(['login']);    
-        
-        if($this->Auth->User()){
-            if(empty($this->roleUser()) || !$this->roleUser()){
-                return $this->redirect('/');    
+        $this->Auth->allow(['login']);
+
+        if ($this->Auth->User()) {
+            if (empty($this->roleUser()) || !$this->roleUser()) {
+                return $this->redirect('/');
             }
         }
     }
@@ -65,12 +68,13 @@ class AdminController extends Controller
         return $this->Auth->User('is_admin');
     }
 
-    function paginateAll($user_list){
+    function paginateAll($user_list)
+    {
         $limit = $this->request->getParam('limit');
-        return $this->paginate($user_list, array('limit'=> !empty($limit)? $limit : '10'));
+        return $this->paginate($user_list, array('limit' => !empty($limit) ? $limit : '10'));
     }
     public function paginateSearch($options)
     {
-        return $this->paginate($options,array('limit' => '10'));
+        return $this->paginate($options, array('limit' => '10'));
     }
 }
