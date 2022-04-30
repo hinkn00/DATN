@@ -35,7 +35,30 @@ class EpisodesController extends AdminController
     {
         $this->setModel();
         $movie_list = $this->Movies->listMovies();
-        $this->set('movie_list', $movie_list);
+
+        //get list movie has links film(sign film)
+        $movie_regis_link = $this->Episodes->getMoviesHasLink();
+        $movie_get_all = $this->Movies->getAllMovies();
+        $movie_id_has_links = array();
+        $movie_id_sort_links = array();
+        foreach ($movie_regis_link as $movie) {
+            $movie_id_has_links[] = $movie['movie_id_distinct']; //get id movie has link
+        };
+        foreach ($movie_get_all as $m) {
+            if (in_array($m->id, $movie_id_has_links)) {
+                if ($m->movies_info->category_id == 3 || $m->movies_info->category_id == 9) { //find movie multiple episode
+                    continue;
+                }
+                $movie_id_sort_links[$m->id] = $m->m_name; //get odd movie has link
+            }
+        }
+        $movie_lists =  array();
+        foreach ($movie_list as $key => $va) {
+            if (!in_array($va, $movie_id_sort_links)) { //find film not link or odd film has link yet 
+                $movie_lists[$key] = $va;
+            }
+        }
+        $this->set('movie_lists', $movie_lists);
         $episode = $this->Episodes->newEmptyEntity();
         if ($this->request->is('post')) {
             $episode = $this->Episodes->patchEntity($episode, $this->request->getData());
@@ -53,18 +76,36 @@ class EpisodesController extends AdminController
     }
     public function edit()
     {
-        die;
+        $id = $this->request->getParam('id');
+        $episode = $this->Episodes->get($id, [
+            'contain' => ['Movies']
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $episode = $this->Episodes->patchEntity($episode, $this->request->getData());
+            $episode->modified = date("Y-m-d H:i:s");
+
+            if ($this->Episodes->save($episode)) {
+                $this->Flash->success(__('success'));
+                return $this->redirect(['_name' => 'admin_episodes_edit', 'id' => $episode->id]);
+            } else {
+                $this->set('error', 'Cập nhật không thành công! Vui lòng thử lại');
+            }
+        }
+
+        $this->set(compact('episode'));
     }
     public function delete()
     {
         $id = $this->request->getParam('id');
         $this->request->allowMethod(['post', 'delete']);
 
-        $category = $this->Comments->get($id);
+        $episode = $this->Episodes->get($id, [
+            'contain' => ['Movies']
+        ]);
 
-        if ($this->Comments->delete($category)) {
+        if ($this->Episodes->delete($episode)) {
             $this->Flash->success(__('success'));
-            return $this->redirect(['_name' => 'admin_comment_home']);
+            return $this->redirect(['_name' => 'admin_episodes_home']);
         } else {
             $this->set('error', 'Xóa không thành công! Vui lòng thử lại');
         }
@@ -73,15 +114,15 @@ class EpisodesController extends AdminController
     public function search()
     {
         $search = trim($this->request->getQuery('query'));
-        $result = $this->Comments->search($search);
+        $result = $this->Episodes->search($search);
 
-        $comments =  null;
+        $episodes =  null;
         if ($result) {
-            $comments = $this->paginateSearch($result);
+            $episodes = $this->paginateSearch($result);
         } else {
-            $comments = '';
+            $episodes = '';
         }
-        $this->set('comments', $comments);
+        $this->set('episodes', $episodes);
     }
 
     public function ajaxEpisode()

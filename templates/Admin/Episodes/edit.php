@@ -1,4 +1,4 @@
-<?php $this->assign('title', 'Thêm tập phim'); ?>
+<?php $this->assign('title', 'Sửa link phim:') ?>
 <style>
     .hidden {
         display: none;
@@ -7,30 +7,20 @@
 <div class="col-md-9 col-lg-10 main mt-3">
     <div class="row mb-3">
         <div class="col-md-6 col-lg-6">
-            <h2 class="sub-header">Thêm tập phim</h2>
+            <h2 class="sub-header">Sửa tập phim: <?= @h($episode->movie->m_name) ?></h2>
+            <?php if (!empty($episode->episode)) : ?>
+                <span>Tập: <?= $episode->episode ?></span>
+            <?php endif; ?>
         </div>
         <div class="col-md-6 col-lg-6">
             <div class="pull-right">
-                <?= $this->Form->button('Thêm', ['class' => 'btn btn-md btn-outline-success', 'style' => 'cursor: pointer', 'form' => 'frmAdd']) ?>
+                <?= $this->Form->button('Sửa', ['class' => 'btn btn-md btn-outline-success', 'style' => 'cursor: pointer', 'form' => 'frmEdit']) ?>
                 <?= $this->Html->link('Hủy bỏ', array('_name' => 'admin_episodes_home'), array('class' => 'btn btn-md btn-outline-primary')) ?>
             </div>
         </div>
         <hr class="w-95">
-        <?= $this->Form->create($episode, ['id' => 'frmAdd', 'type' => 'file', 'style' => 'width:100%']) ?>
+        <?= $this->Form->create($episode, ['id' => 'frmEdit', 'type' => 'file', 'style' => 'width:100%']) ?>
         <div class="row ml-3 mr-3">
-            <div class="form-group col-md-12">
-                <?= $this->Form->control('movie_id', array(
-                    'label' => 'Chọn phim',
-                    'id' => 'movie_id',
-                    'class' => 'form-control form-select',
-                    'options' => $movie_lists,
-                    'style' => 'text-align: center;',
-                    'required' => false,
-                    'autofocus',
-                    'empty' => 'Vui lòng chọn phim',
-                    // 'multiple'=>"multiple"
-                )) ?>
-            </div>
             <div class="form-group col-md-12">
                 <?= $this->Form->control('link_film', array(
                     'label' => 'Link phim',
@@ -39,17 +29,6 @@
                     'type' => 'text',
                     'required' => false
                 )) ?>
-            </div>
-            <div class="form-group col-md-12 hidden" id="episodes">
-                <label for="episode">Tập phim (số tập / Tổng số)</label><br>
-                <?= $this->Form->input('episode', array(
-                    'id' => 'episode',
-                    // 'class' => 'form-control',
-                    'readonly' => true,
-                    'required' => false,
-                    'style' => 'width:50px; text-align: center',
-                )) ?>
-                / <span id="total_epi"></span>
             </div>
         </div>
         <?= $this->Form->end() ?>
@@ -62,7 +41,7 @@ if ($flash) :
         $(document).ready(function() {
             Swal.fire({
                 icon: `success`,
-                title: `Thêm dữ liệu thành công`,
+                title: `Sửa dữ liệu thành công`,
                 timer: 5000
             })
         })
