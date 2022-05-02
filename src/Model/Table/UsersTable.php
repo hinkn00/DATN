@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Table\UsersBaseTable;
 use Cake\ORM\Query;
-class UsersTable extends UsersBaseTable{
+
+class UsersTable extends UsersBaseTable
+{
     // hàm xử lý
     public function getCountAllUsers()
     {
@@ -15,7 +18,7 @@ class UsersTable extends UsersBaseTable{
             )
         );
 
-        $data = $this->find('all',$options)->count();
+        $data = $this->find('all', $options)->count();
         return $data;
     }
 
@@ -25,27 +28,25 @@ class UsersTable extends UsersBaseTable{
             'field' => '*',
             'conditions' => array(
                 'OR' => array(
-                    array('User.name LIKE' => '%'.$search.'%'),
-                    array('User.email LIKE' => '%'.$search.'%'),
-                    array('User.role LIKE' => '%'.$search.'%')
+                    array('User.name LIKE' => '%' . $search . '%'),
+                    array('User.email LIKE' => '%' . $search . '%'),
+                    array('User.role LIKE' => '%' . $search . '%')
                 )
             )
         );
 
-        $data = $this->find('all',$options);
+        $data = $this->find('all', $options);
         return $data;
     }
 
     public function checkEmailUsers($email)
     {
         $options = [
-            'filed' => ['email','active'],
             'conditions' => array(
-                "email" => $email,
-                'active' => 1
+                "User.email =" => $email,
             )
         ];
-        $data = $this->find('all',$options)->first();
+        $data = $this->find('all', $options)->first();
         return $data;
     }
 }
