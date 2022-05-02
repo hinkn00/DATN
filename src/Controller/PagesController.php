@@ -71,4 +71,9 @@ class PagesController extends AppController
         ]);
         $this->set('categoryMovie', $movies);
     }
+
+    public function error404()
+    {
+        $this->viewBuilder()->setTemplatePath('Error');
+    }
 }
