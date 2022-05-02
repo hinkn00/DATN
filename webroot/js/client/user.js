@@ -248,9 +248,29 @@ $().ready(function(){
                 required : true,
                 maxlength: 50
             },
-            email : {
+            email_regis : {
                 required : true,
-                email : true
+                email : true,
+                remote: {
+                    url: "/checkEmail",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    data: {
+                        _csrfToken: function(){return $("meta[name=csrfToken]").attr('content')},
+                        email_regis: function() { return $("#email_regis").val(); }
+                    },
+                    dataFilter: function (response) {
+                        respone_d = response;
+
+                        if (response === 0 || response != 1) {
+                            return true;
+                        }else{
+                            message = 'Email đã tồn tại';
+                            return false;
+                        }
+                    },                                     
+                },
             },
             password : {
                 minlength: 8,
@@ -273,9 +293,11 @@ $().ready(function(){
                 required: "Tên khách hàng không được để trống",
                 maxlength: "Nhập tối đa 50 ký tự"
             },
-            email : {
+            email_regis : {
                 required: "Email không được để trống",
-                email: "Email sử dụng không đúng định dạng *@*.*"
+                email: "Email sử dụng không đúng định dạng *@*.*",
+                // remote: "Email đã tồn tại"
+                remote: function(){ return message; }
             },
             password : {
                 minlength: "Mật khẩu ít nhất phải 8 ký tự trở lên",
@@ -306,4 +328,61 @@ $().ready(function(){
     //     })
     //     return false;
     // });
+
+    $('.forward-pass').on('click', function(){
+        $('#formReset').removeClass('hidden');
+        $('.login-social').addClass('hidden');
+        $('#formLogin').addClass('hidden');
+        $('.title-form--user').html('Lấy mật khẩu')
+    });
+
+    $('#formReset').validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules:{
+            email_reset : {
+                required : true,
+                email : true,
+                remote: {
+                    url: "/checkEmail",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    data: {
+                        _csrfToken: function(){return $("meta[name=csrfToken]").attr('content')},
+                        email_regis: function() { return $("#email_reset").val(); }
+                    },
+                    dataFilter: function (response) {
+                        respone_d = response;
+
+                        if (response != 0 || response == 1) {
+                            return true;
+                        }else{
+                            message = 'Email không tồn tại';
+                            return false;
+                        }
+                    },                                     
+                },
+            },
+        }, 
+        messages: {
+            email_reset : {
+                required: "Email không được để trống",
+                email: "Email sử dụng không đúng định dạng *@*.*",
+                // remote: "Email đã tồn tại"
+                remote: function(){ return message; }
+            },
+        }, 
+        submitHandler: function (form, event) {
+            form.submit()
+        },
+    });
+
+    $('.login').on('click', function(){
+        $('#formReset').addClass('hidden');
+        $('.login-social').removeClass('hidden');
+        $('#formLogin').removeClass('hidden');
+        $('.title-form--user').html('Đăng nhập')
+    });
 });

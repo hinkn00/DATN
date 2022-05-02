@@ -8471,3 +8471,52 @@ img.img_avatar {
     background: #233a50 !important;
     color: #fff;
 }
+
+.pull-right {
+    display: flex !important;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* email send*/
+.email {
+    max-width: 500px;
+    position: absolute;
+    height: auto;
+    background-color: bisque;
+    color: #000;
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 7px;
+}
+
+.title--email {
+    font-size: 38px;
+    text-transform: uppercase;
+}
+
+.contet--email {
+    font-size: 20px;
+    margin: 15px 0;
+    text-align: justify;
+}
+
+.contet--email .heading,
+.contet--email .body,
+.contet--email .foot {
+    margin-bottom: 15px;
+}
+
+.contet--email .foot a {
+    text-decoration: none;
+    color: #fff;
+    padding: 12px;
+    width: auto;
+    height: 50px;
+    background-color: blueviolet;
+    border: none;
+    text-transform: uppercase;
+    border-radius: 7px;
+}

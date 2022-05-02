@@ -19,6 +19,13 @@ $routes->scope('/', function (RouteBuilder $builder) {
         ['_name' => 'register']
     );
     $builder->connect(
+        '/users/forward',
+        ['controller' => 'Members', 'action' => 'forward'],
+        ['_name' => 'forward']
+    );
+    $builder->connect('/users/reset-pass/{token}', ['controller' => 'Members', 'action' => 'resetPass'], ['_name' => 'reset-pass']);
+    $builder->connect('/not-found', ['controller' => 'Pages', 'action' => 'error404'], ['_name' => 'error404']);
+    $builder->connect(
         '/users/profile/{id}',
         ['controller' => 'Members', 'action' => 'profile'],
         ['_name' => 'member_profile']
@@ -39,6 +46,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
         ['_name' => 'users_logout']
     );
 
+    $builder->connect('/checkEmail', ["controller" => "Members", "action" => "checkEmail"], ["_name" => "checkEmail"]);
     $builder->connect('/search', ["controller" => "Details", "action" => "search"], ["_name" => "search_movie"]);
     $builder->connect('/ajaxListMovies', ["controller" => "Details", "action" => "ajaxListMovies"], ["_name" => "ajaxListMovies"]);
     //movies details

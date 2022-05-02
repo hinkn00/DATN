@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -26,5 +27,7 @@ class ErrorController extends AppController
 
     public function afterFilter(EventInterface $event)
     {
+        return $this->redirect(['controller' => 'Pages', 'action' => 'error404']);
+        exit();
     }
 }

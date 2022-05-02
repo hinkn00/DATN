@@ -14,6 +14,7 @@
 	<meta name="keywords" content="">
 	<meta name="author" content="">
 	<link rel="profile" href="#">
+	<?php echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken')); ?>
 
 	<!--Google Font-->
 	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
