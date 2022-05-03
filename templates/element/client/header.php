@@ -55,7 +55,7 @@
 						</a>
 						<ul class="dropdown-menu level1">
 							<?php for ($i = 2022; $i >= 1990; $i--) : ?>
-								<li><a href="<?php echo $this->Url->build(['_name' => 'countries_details', 'slug' => $country->country_slug]) ?>"><?= $i ?></a></li>
+								<li><a href="<?php echo $this->Url->build(['_name' => 'year_details', 'year' => $i]) ?>"><?= $i ?></a></li>
 							<?php endfor; ?>
 						</ul>
 					</li>
