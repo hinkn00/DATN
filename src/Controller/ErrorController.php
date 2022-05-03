@@ -27,7 +27,7 @@ class ErrorController extends AppController
 
     public function afterFilter(EventInterface $event)
     {
-        // return $this->redirect(['controller' => 'Pages', 'action' => 'error404']);
-        // exit();
+        return $this->redirect(['controller' => 'Pages', 'action' => 'error404']);
+        exit();
     }
 }
