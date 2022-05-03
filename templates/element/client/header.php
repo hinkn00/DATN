@@ -63,6 +63,10 @@
 				<ul class="nav navbar-nav flex-child-menu menu-right">
 					<?php
 					if (!empty($member_info)) : ?>
+						<?php if (!empty($notifyAccept) && $notifyAccept == 1) {
+							header('location: ' . $this->Url->build(['_name' => 'index']));
+							die;
+						} ?>
 						<li><a href="<?= $this->Url->build(['_name' => 'member_profile', 'id' => $member_info['id']]) ?>">Thông tin</a></li>
 						<li class="logoutLink"><a href="<?= $this->Url->build(['_name' => 'users_logout']) ?>">đăng xuất</a></li>
 					<?php else : ?>
