@@ -8520,3 +8520,25 @@ img.img_avatar {
     text-transform: uppercase;
     border-radius: 7px;
 }
+
+.wrapper-email {
+    background-color: #dfc4c4;
+    width: 500px;
+    height: 350px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.icon-email {
+    margin-top: -200px;
+    padding-top: 100px;
+}
+
+.containt-email {
+    text-transform: uppercase;
+    padding-top: 33px;
+    font-weight: 500;
+    font-size: 18px;
+    font-family: system-ui;
+}
