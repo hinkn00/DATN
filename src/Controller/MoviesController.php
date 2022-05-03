@@ -30,6 +30,8 @@ class MoviesController extends AppController
             'contain' => 'MoviesInfo'
         ));
         $movies = $this->Movies->getAllMoviesRelatedByGenreID($movie->movies_info->genre_id);
+        // $movies_session = $this->Movies->getMoviesBySession($movie->m_name, $movie->movies_info->sesson);
+        // $this->ShowDataDebug->dd($movies_session);
         $this->loadModel('Comments');
         $comments = $this->Comments->getCommentOfMovies($movie->id);
         $agv_comments = $this->Comments->avgRatingOfMovie($movie->id);
