@@ -1,4 +1,4 @@
-<?php $this->assign('title', 'Lấy lại mật khẩu') ?>
+<?php $this->assign('title', 'Đường dẫn hết hạn') ?>
 <style>
     body {
         background-color: #020D18;
@@ -20,11 +20,11 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="wrapper-email">
                     <div class="icon-email">
-                        <i class="fa fa-envelope fa-4x" aria-hidden="true"></i>
+                        <i class="fa fa-exclamation-circle fa-4x" aria-hidden="true"></i>
                     </div>
                     <div class="containt-email">
-                        Vui lòng kiểm tra hộp thư. <br>
-                        Thư có thể ở trong mục spam của email gửi về
+                        Đường dẫn đã hết hạn <br>
+                        Vui lòng kiểm tra lại đường dẫn!
                     </div>
                 </div>
             </div>
