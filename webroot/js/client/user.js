@@ -385,4 +385,36 @@ $().ready(function(){
         $('#formLogin').removeClass('hidden');
         $('.title-form--user').html('Đăng nhập')
     });
+
+    //check validator pass
+    $('#resetPass').validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        debug: false,
+        success: 'valid',
+        rules: {
+            new_password : {
+                required : true,
+                validatePassword: true
+            },
+            cf_password : {
+                required : true,
+                validatePassword: true,
+                equalTo: "#new_password"
+            },
+        },
+        messages: {
+            new_password : {
+                required: "Vui lòng nhập mật khẩu mới",
+            },
+            cf_password : {
+                required: "Vui lòng xác nhận mật khẩu mới",
+                equalTo: "Mật khẩu xác nhận không trùng khớp"
+            },
+        },
+        submitHandler: function (form) {
+            form.submit();
+        },
+    });
 });
