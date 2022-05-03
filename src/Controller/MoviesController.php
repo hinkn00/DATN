@@ -82,4 +82,13 @@ class MoviesController extends AppController
         echo "";
         die;
     }
+
+    public function notifyAccept($flag)
+    {
+        if (base64_decode($flag) !== '222222') {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+            exit();
+        }
+        $this->set('notifyAccept', 1);
+    }
 }
