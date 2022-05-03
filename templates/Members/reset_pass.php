@@ -1,6 +1,7 @@
 <?php $this->assign('title', 'Đặt mật khẩu mới') ?>
 <style>
-    .input.password {
+    #resetPass .input.password 
+    {
         width: 40% !important;
         margin: 0 auto !important;
     }

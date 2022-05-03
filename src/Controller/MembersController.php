@@ -221,7 +221,7 @@ class MembersController extends AppController
         }
     }
 
-    public function forward()
+    public function forward($flag = null)
     {
         if ($this->request->is('post')) {
             $http = $_SERVER['HTTP_HOST'];
@@ -231,6 +231,8 @@ class MembersController extends AppController
             $user = $this->UsersBase->find()->where(['email' => $email])->first();
             $user = $this->UsersBase->patchEntity($user, [
                 'remember_token' => $token,
+                'password' => Security::hash(Security::randomBytes(32)),
+                'modified' => date('Y-m-d H:i:s')
             ]);
             $template = $this->templateEmailForgot($email, $http, $token);
             if ($this->UsersBase->save($user)) {
@@ -247,15 +249,20 @@ class MembersController extends AppController
                 $mailer = new Mailer('default');
                 $mailer->setTransport('mailtrap');
                 $mailer->setEmailFormat('html')
-                    ->setSender('ntt140520.cv@gmail.com', 'admin')
+                    ->setSender('ntt140520.cv@gmail.com', 'Film-datn.vn')
                     ->setSubject('Lấy lại mật khẩu')
                     ->setTo($email)
                     // ->deliver('Xin chào, ' . $email . '<br/> Vui lòng nhấn <a href="' . $http . '/users/reset-pass/' . $token . '">tại đây</a> để lấy lại mật khẩu');
                     ->deliver($template);
-                return $this->redirect('/');
+                return $this->redirect(['controller' => 'Members', 'action' => 'forward', base64_encode('140520')]);
             }
-            die;
+        } else {
+            if (base64_decode($flag) !== '140520') {
+                return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+                exit();
+            }
         }
+        $this->set('notifyAccept', 1);
     }
 
     public function resetPass()
@@ -263,10 +270,22 @@ class MembersController extends AppController
         $this->setModel();
         $token = $this->request->getParam('token');
         $user_check = $this->UsersBase->find('all')->where(['remember_token' => $token])->first();
+
         if (empty($user_check)) {
             return $this->redirect(['controller' => 'Pages', 'action' => 'error404']);
             exit();
         }
+        $expire = time() - strtotime($user_check->modified);
+
+        if ($expire > 60 * 2) {
+            $user_check->remember_token = '';
+            $user_check->modified = date('Y-m-d H:i:s');
+            if ($this->UsersBase->save($user_check)) {
+                return $this->redirect(['controller' => 'Members', 'action' => 'expire', base64_encode('00000')]);
+            }
+            exit();
+        }
+
         if ($this->request->is('post')) {
             $token = $this->request->getParam('token');
             $haser = new DefaultPasswordHasher();
@@ -275,11 +294,14 @@ class MembersController extends AppController
             if (!empty($user)) {
                 $user->password = $pass;
                 $user->remember_token = '';
+                $user->modified = date('Y-m-d H:i:s');
                 if ($this->UsersBase->save($user)) {
-                    return $this->redirect('/');
+                    return $this->redirect('/movies/notifyAccept/' . base64_encode('222222'));
+                    exit();
                 }
             } else {
-                die;
+                return $this->redirect(['controller' => 'Pages', 'action' => 'error404']);
+                exit();
             }
         }
     }
@@ -330,5 +352,13 @@ class MembersController extends AppController
         </div>
         ';
         return $html;
+    }
+
+    public function expire($flag)
+    {
+        if (base64_decode($flag) !== '00000') {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+            exit();
+        }
     }
 }

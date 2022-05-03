@@ -1,4 +1,4 @@
-<?php $this->assign('title', 'Lấy lại mật khẩu') ?>
+<?php $this->assign('title', 'Thông báo') ?>
 <style>
     body {
         background-color: #020D18;
@@ -20,11 +20,11 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="wrapper-email">
                     <div class="icon-email">
-                        <i class="fa fa-envelope fa-4x" aria-hidden="true"></i>
+                        <i class="fa fa-bell fa-4x" aria-hidden="true"></i>
                     </div>
                     <div class="containt-email">
-                        Vui lòng kiểm tra hộp thư. <br>
-                        Thư có thể ở trong mục spam của email gửi về
+                        Thay đổi mật khẩu thành công! <br>
+                        Đăng nhập <a href="#" class="loginLink">ở đây</a>
                     </div>
                 </div>
             </div>

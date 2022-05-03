@@ -23,7 +23,9 @@ $routes->scope('/', function (RouteBuilder $builder) {
         ['controller' => 'Members', 'action' => 'forward'],
         ['_name' => 'forward']
     );
+    $builder->connect('/movies/notifyAccept', ['controller' => 'Movies', 'action' => 'notifyAccept'], ['_name' => 'notify']);
     $builder->connect('/users/reset-pass/{token}', ['controller' => 'Members', 'action' => 'resetPass'], ['_name' => 'reset-pass']);
+    $builder->connect('/expire', ['controller' => 'Members', 'action' => 'expire'], ['_name' => 'expire']);
     $builder->connect('/not-found', ['controller' => 'Pages', 'action' => 'error404'], ['_name' => 'error404']);
     $builder->connect(
         '/users/profile/{id}',
