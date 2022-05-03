@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Migrations\AbstractMigration;
@@ -40,7 +41,7 @@ class AddFieldsToMovieInfos extends AbstractMigration
             'null' => false,
         ]);
         $table->addColumn('topview', 'string', [
-            'default' => 'ngay',
+            'default' => 'tuan',
             'limit' => 30,
             'null' => false,
         ]);
