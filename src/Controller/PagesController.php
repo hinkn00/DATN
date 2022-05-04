@@ -29,6 +29,7 @@ class PagesController extends AppController
     {
         $this->loadModel('Categories');
         $this->loadModel('Movies');
+        $this->loadModel('MoviesInfo');
     }
     public function display(string ...$path): ?Response
     {
@@ -69,6 +70,14 @@ class PagesController extends AppController
                 'MoviesInfo.m_status =' => 1
             ]
         ]);
+        //get topview:ngay
+        $top_tuan = $this->MoviesInfo->getTopTuanByMovie();
+        //get topview:thang
+        $top_thang = $this->MoviesInfo->getTopThangByMovie();;
+        //get topview:nam
+        $top_nam = $this->MoviesInfo->getTopNamByMovie();;
+
+        $this->set(compact('top_tuan', 'top_thang', 'top_nam'));
         $this->set('categoryMovie', $movies);
     }
 

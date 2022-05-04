@@ -66,5 +66,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
 
     //genres
     $builder->connect('/genres/{slug}', ["controller" => "Details", "action" => "genres"], ["_name" => "genres_details"]);
+    //year
+    $builder->connect('/year/{year}', ["controller" => "Details", "action" => "year"], ["_name" => "year_details"]);
     $builder->fallbacks();
 });

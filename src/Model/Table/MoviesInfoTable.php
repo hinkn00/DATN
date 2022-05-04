@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -15,6 +16,7 @@ class MoviesinfoTable extends Table
         parent::initialize($config);
 
         $this->setTable('movies_info');
+        $this->setAlias('MoviesInfo');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
@@ -66,5 +68,101 @@ class MoviesinfoTable extends Table
 
         return $rules;
     }
-    
+    public function getTopTuanByMovie()
+    {
+        $options = [
+            'field' => '*',
+            'conditions' => [
+                'MoviesInfo.topview = ' => 'tuan',
+                'MoviesInfo.m_status =' => 1
+            ],
+            'contain' => [
+                'Movies',
+                'Categories',
+                'Genres',
+                'Countries'
+            ],
+            'limit' => 4,
+            'order' => [
+                'MoviesInfo.modified DESC',
+                'MoviesInfo.created DESC',
+                'MoviesInfo.id DESC'
+            ]
+        ];
+
+        return $this->find('all', $options);
+    }
+    public function getTopThangByMovie()
+    {
+        $options = [
+            'field' => '*',
+            'conditions' => [
+                'MoviesInfo.topview = ' => 'thang',
+                'MoviesInfo.m_status =' => 1
+            ],
+            'contain' => [
+                'Movies',
+                'Categories',
+                'Genres',
+                'Countries'
+            ],
+            'limit' => 4,
+            'order' => [
+                'MoviesInfo.modified DESC',
+                'MoviesInfo.created DESC',
+                'MoviesInfo.id DESC'
+            ]
+        ];
+
+        return $this->find('all', $options);
+    }
+
+    public function getTopNamByMovie()
+    {
+        $options = [
+            'field' => '*',
+            'conditions' => [
+                'MoviesInfo.topview = ' => 'nam',
+                'MoviesInfo.m_status =' => 1
+            ],
+            'contain' => [
+                'Movies',
+                'Categories',
+                'Genres',
+                'Countries'
+            ],
+            'limit' => 4,
+            'order' => [
+                'MoviesInfo.modified DESC',
+                'MoviesInfo.created DESC',
+                'MoviesInfo.id DESC'
+            ]
+        ];
+
+        return $this->find('all', $options);
+    }
+
+    public function getMoviesByYear($year)
+    {
+        $options = [
+            'field' => '*',
+            'conditions' => [
+                'MoviesInfo.year = ' => $year,
+                'MoviesInfo.m_status =' => 1
+            ],
+            'contain' => [
+                'Movies',
+                'Categories',
+                'Genres',
+                'Countries'
+            ],
+            'order' => [
+                'MoviesInfo.modified DESC',
+                'MoviesInfo.created DESC',
+                'MoviesInfo.id DESC'
+            ]
+        ];
+
+        return $this->find('all', $options);
+    }
 }

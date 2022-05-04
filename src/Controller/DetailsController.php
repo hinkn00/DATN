@@ -20,6 +20,7 @@ class DetailsController extends AppController
         $this->loadModel("Countries");
         $this->loadModel("Genres");
         $this->loadModel("Movies");
+        $this->loadModel("MoviesInfo");
         $this->loadModel("Comments");
     }
     public function category()
@@ -54,6 +55,16 @@ class DetailsController extends AppController
         $rating = $this->rating($genre_movies->toArray());
 
         $this->set(compact('genre', 'genre_movies', 'count_gen_movies', 'rating'));
+    }
+    public function year()
+    {
+        $this->setModel();
+        $year = $this->request->getParam('year');
+        $year_movies = $this->MoviesInfo->getMoviesByYear($year);
+        $count_year_movies = count($year_movies->toArray());
+        $rating = $this->rating($year_movies->toArray());
+
+        $this->set(compact('year', 'year_movies', 'count_year_movies', 'rating'));
     }
 
     public function search()

@@ -210,4 +210,17 @@ class MoviesTable extends Table
         $data = $this->find('all', $options);
         return $data;
     }
+    public function getMoviesBySession($movie_name, $movie_sesson)
+    {
+        $options = [
+            'field' => '*',
+            'conditions' => [
+                'Movie.m_name LIKE' => '%' . $movie_name . '%',
+                'MoviesInfo.sesson <>' => $movie_sesson
+            ],
+            'contain' => "MoviesInfo"
+        ];
+        $data = $this->find('all', $options);
+        return $data;
+    }
 }
