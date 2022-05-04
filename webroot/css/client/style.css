@@ -8284,7 +8284,7 @@ header#headerv3-light {
     }
 }
 footer {
-    background: url("../images/uploads/ft-bg.jpg") no-repeat;
+    background: url("../images/uploads/ft-bg.jpg") no-repeat #373839;
     background-position: center;
     background-size: cover;
 }
@@ -8479,7 +8479,7 @@ img.img_avatar {
 }
 
 /* email send*/
-.email {
+.email--send {
     max-width: 500px;
     position: absolute;
     height: auto;

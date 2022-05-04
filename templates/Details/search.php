@@ -14,6 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
+                <?php if(!empty($movie_searchs->toArray())):?>
                 <div class="topbar-filter fw">
                     <p>Đã tìm thấy tổng cộng có: <span><?php echo count($movie_searchs->toArray()) ?> </span>phim</p>
                     <label>Sắp xếp:</label>
@@ -57,6 +58,9 @@
                         <a href="#"><i class="ion-arrow-right-b"></i></a>
                     </div>
                 </div>
+                <?php else:?>
+                    <p style="font-size:28px; text-align:justify">Không tìm thấy phim hoặc phim không tồn tại!</p>
+                <?php endif;?>
             </div>
         </div>
     </div>

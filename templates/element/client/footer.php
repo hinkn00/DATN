@@ -1,13 +1,13 @@
 <!-- footer section-->
 <footer class="ht-footer">
-	<!-- <div class="container">
+	<div class="container">
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
-				 <a href="#"><?php //echo $this->Html->image('default/logo1.png',['class'=>'logo'])
-								?></a>
-				 <p>5th Avenue st, manhattan<br>
-				New York, NY 10001</p>
-				<p>Call us: <a href="#">(+01) 202 342 6789</a></p>
+				 <!-- <a href="#"><?php //echo $this->Html->image('default/logo1.png',['class'=>'logo'])
+								?></a> -->
+				 <p>298, Cầu Diễn, Bắc Từ Liêm, Hà Nội<br>
+				Đại học công nghiệp hà nội</p>
+				<p>Số điện thoại: <a href="#">(+01) 223456789</a></p>
 			</div>
 			<div class="flex-child-ft item2">
 				<h4>Resources</h4>
@@ -41,20 +41,20 @@
 				<h4>Newsletter</h4>
 				<p>Subscribe to our newsletter system now <br> to get latest news from us.</p>
 				<form action="#">
-					<input type="text" placeholder="Enter your email...">
+					<input type="text" placeholder="Chức năng đang phát triển">
 				</form>
-				<a href="#" class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a>
+				<!-- <a href="#" class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a> -->
 			</div>
 		</div>
 	</div>
 	<div class="ft-copyright">
 		<div class="ft-left">
-			<p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p>
+			<!-- <p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p> -->
 		</div>
 		<div class="backtotop">
 			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
 		</div>
-	</div> -->
+	</div>
 </footer>
 <!-- end of footer section-->
 
