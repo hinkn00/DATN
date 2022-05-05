@@ -84,5 +84,6 @@ class PagesController extends AppController
     public function error404()
     {
         $this->viewBuilder()->setTemplatePath('Error');
+        $this->set('flag_error', 1);
     }
 }
