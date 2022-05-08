@@ -121,7 +121,7 @@
                         <h4 class="sb-title">Top view</h4>
                         <div id="tabs">
                             <ul>
-                                <li><a href="#tabs-1">Ngày</a></li>
+                                <li><a href="#tabs-1">Tuần</a></li>
                                 <li><a href="#tabs-2">Tháng</a></li>
                                 <li><a href="#tabs-3">Năm</a></li>
                             </ul>
