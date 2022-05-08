@@ -1,12 +1,13 @@
 <!-- footer section-->
+<?php if(empty($flag_error)):?>
 <footer class="ht-footer">
 	<div class="container">
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
 				 <!-- <a href="#"><?php //echo $this->Html->image('default/logo1.png',['class'=>'logo'])
 								?></a> -->
-				 <p>298, Cầu Diễn, Bắc Từ Liêm, Hà Nội<br>
-				Đại học công nghiệp hà nội</p>
+                <p>Lưu ý: các tính năng phần này đang trong quá trình phát triển <br/> Thành thật xin lỗi vì sự bất tiện này.</p> 
+              	<p>Địa chỉ: Đang cập nhật</p>
 				<p>Số điện thoại: <a href="#">(+01) 223456789</a></p>
 			</div>
 			<div class="flex-child-ft item2">
@@ -56,6 +57,7 @@
 		</div>
 	</div>
 </footer>
+<?php endif;?>
 <!-- end of footer section-->
 
 <?= $this->Html->script(['font-awesome', 'client/plugins', 'client/plugins2', 'client/custom', 'client/common', 'sweetalert2']) ?>
