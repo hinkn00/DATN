@@ -28,7 +28,7 @@ class UsersSeed extends AbstractSeed
                 'name'          => $faker->name,
                 'email'         => $faker->unique()->email,
                 'email_verified'=> '1',
-                'password'      => $hasher->hash('123456789'),
+                'password'      => $hasher->hash('Tg_140520'),
                 'remember_token'=> $faker->sha1(),
                 'is_admin'      => 0,
                 'role'          => 'member',
