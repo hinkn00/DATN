@@ -1,5 +1,3 @@
-## Hướng dẫn cài đặt
-mở file hướng dẫn cài đặt.pdf để xem chi tiết hướng dẫn
 ## Update
 
 Since this skeleton is a starting point for your application and various files
