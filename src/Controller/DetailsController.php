@@ -70,7 +70,14 @@ class DetailsController extends AppController
     public function search()
     {
         $this->setModel();
-        $query = $this->request->getQuery('tag_key');
+        $query = '';
+        if($this->request->getQuery('tag_key')){
+            $query = $this->request->getQuery('tag_key');
+        }
+        if($this->request->getQuery('tag')){
+            $query = $this->request->getQuery('tag');
+        }
+        
         $movie_searchs = $this->Movies->getMoviesByName($query);
 
         $rating = $this->rating($movie_searchs->toArray());
