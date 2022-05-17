@@ -203,7 +203,10 @@ class MoviesTable extends Table
         $options = [
             'field' => '*',
             'conditions' => [
-                'Movie.m_name LIKE' => '%' . $movie_name . '%'
+                'OR' => [
+                    'Movie.m_name LIKE' => '%' . $movie_name . '%',
+                    'MoviesInfo.tags LIKE' => '%'.$movie_name.'%'
+                ]
             ],
             'contain' => "MoviesInfo"
         ];

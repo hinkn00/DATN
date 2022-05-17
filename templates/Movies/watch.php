@@ -146,7 +146,7 @@
                                 <?php $hash_tag = array();
                                 $tags = explode(', ', @h($movie->movies_info->tags)); ?>
                                 <?php foreach ($tags as $tag) : ?>
-                                    <li><a href="https://www.google.com/"><?= html_entity_decode($tag) ?></a></li>
+                                    <li><a href="/search?tag=<?= html_entity_decode($tag) ?>"><?= html_entity_decode($tag) ?></a></li>
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <?php echo ""; ?>
