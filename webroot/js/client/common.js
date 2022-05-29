@@ -58,25 +58,105 @@ $(function(){
         // };
     });
 
+    $('#payment-movies').click(function(e){
+        // e.preventDefault();
+        $.ajax({
+            url: $(this).attr('data-url'),
+            type: 'post',
+            data:{
+                _csrfToken: $('meta[name="csrfToken"]').attr('content'),
+                id: $(this).attr("data-value")
+            },
+            // beforeSend: function() {
+            //     alert('truoc khi send')
+            // },
+            success: function(data) {
+                window.location.href= data
+            },
+        })
+    })
+
+    $('#formPaymentInfo button').click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: '/pay_info',
+            type: 'get',
+            beforeSend: function() {
+                $('#formPaymentInfo').prepend('<div id="overload"><div class="loader"></div></div>');
+            },
+            success: function(data) {
+                window.location.href= data
+            },
+        })
+    })
+
+    //check number phone
+    jQuery.validator.addMethod("phone_number", function(phone_number, element) {
+        phone_number = phone_number.replace(/\s+/g, "");
+        return this.optional(element) || phone_number.length > 9 && 
+        phone_number.match(/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/);
+    }, "Số điện thoại không đúng định dạng");
+
+    $('#formPaymentConfirm').validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            'payment-name' : {
+                required : true,
+            },
+            'payment-email' : {
+                required : true,
+                email: true
+            },
+            'payment-phone': {
+                required: true,
+                phone_number: true
+            },
+            'payment-pay':{
+                required: true
+            }
+        },
+        messages: {
+            'payment-name' : {
+                required : 'Vui lòng nhập tên người mua',
+            },
+            'payment-email' : {
+                required : 'Không bỏ trống địa chỉ email',
+                email: 'Địa chỉ email không đúng định dạng'
+            },
+            'payment-phone': {
+                required: 'Không để trống số điện thoại'
+            },
+            'payment-pay':{
+                required: function(){
+                    $('.payment-pay-error').css('display','block')
+                }
+            }
+        },
+        submitHandler: function (form) {
+            // form.submit();
+            $('.payment-pay-error').css('display','none');
+            let payment_note = $('#payment-note').val() === '' ? $('input[name="desc"]').val() : $('#payment-note').val();
+            $.ajax({
+                url: '/pay_movie',
+                type: 'post',
+                beforeSend: function() {
+                    $('#formPaymentConfirm').prepend('<div id="overload"><div class="loader"></div></div>');
+                },
+                data:{
+                    _csrfToken: $("meta[name=csrfToken]").attr('content'),
+                    'payment-amount': $('[name="payment-amount"]').val(),
+                    'payment-note': payment_note,
+                    'payment-pay': $('[name="payment-pay"]').val()
+                },
+                success: function(data) {
+                    window.location.href= data;
+                },
+            })
+            
+        },
+    });
+
     
 });
-
-// function getPlaceHolerSearch(search = 'category') {
-//     let placeholder = '';
-//     switch (search) {
-//         case 'category':
-//             placeholder = 'Nhập tên phim để tìm kiếm theo danh mục';
-//             break;
-//         case 'genre':
-//             placeholder = 'Nhập tên phim để tìm kiếm theo thể loại';
-//             break;
-//         case 'country':
-//             placeholder = 'Nhập tên phim để tìm kiếm theo quốc gia';
-//             break;
-//         default:
-//             placeholder = 'Nhập tên phim để tìm kiếm'
-//             break;
-//     }
-
-//     return placeholder;
-// }

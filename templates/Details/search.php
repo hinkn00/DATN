@@ -4,7 +4,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="hero-ct">
-                    <h1><?php echo __('Từ khóa: ') . $this->request->getQuery('tag_key') ?></h1>
+                    <?php if(!empty( $this->request->getQuery('tag_key'))):?>
+                        <h1><?php echo __('Tìm kiếm: ') . $this->request->getQuery('tag_key')?></h1>
+                    <?php else:?>
+                        <h1><?php echo __('Từ khóa: ') . $this->request->getQuery('tag')?></h1>
+                    <?php endif;?>
                 </div>
             </div>
         </div>

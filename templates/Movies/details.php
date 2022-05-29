@@ -27,7 +27,7 @@
                   </div>
                   <div class="btn-transform transform-vertical">
                      <div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Mua phim</a></div>
-                     <div><a href="#" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
+                     <div><a href="javascript:void(0)" id="payment-movies" data-value="<?= $movie->id?>" data-url="<?= $this->Url->build(['_name'=>'ajaxPay'])?>" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
                   </div>
                </div>
             </div>

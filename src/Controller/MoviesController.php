@@ -93,4 +93,84 @@ class MoviesController extends AppController
         }
         $this->set('notifyAccept', 1);
     }
+
+    public function payMovie()
+    {
+        $session = $this->request->getSession();
+        
+        if(!$session->read('info_movie') && !$session->read('pass_movie')){
+            return $this->redirect(['_name' => 'pay_info']);
+            die;
+        }
+
+        if($this->request->is('post','ajax')){
+            $get_data = $this->request->getData();
+            $info_movie = [];
+            $info_movie['payment-amount'] = $get_data['payment-amount'];
+            $info_movie['payment-note'] = $get_data['payment-note'];
+            $info_movie['payment-pay'] = $get_data['payment-pay'];
+            $session->write('info_user_movie', $info_movie);
+            return $this->response->withType("application/json")->withStringBody(json_encode('/pay_order'));
+            die;
+        }
+    }
+
+    public function payInfo()
+    {
+        $session = $this->request->getSession();
+        if(!$session->read('pass_movie')){
+            $session->write('pass_movie', true);
+        }
+        if($session->read('info_user_movie')){
+            return $this->redirect(['_name' => 'pay_order']);
+            die;
+        }
+        if ($this->request->is(['ajax'])) {
+            return $this->response->withType("application/json")->withStringBody(json_encode('/pay_movie'));
+            die;
+        }
+    }
+
+    public function payOrder()
+    {
+        $session = $this->request->getSession();
+        if(!$session->read('info_movie')){
+            return $this->redirect(['_name' => 'pay_info']);
+            die;
+        }
+        if(!$session->read('info_user_movie')){
+            return $this->redirect(['_name' => 'pay_movie']);
+            die;
+        }
+        if($this->request->is('post','ajax')){
+            $this->loadComponent('VNPAY');
+            $data = [] ;
+            $data[] = [
+                'payment-note'=>$session->read('info_user_movie.payment-note'),
+                'payment-amount'=> (int) $session->read('info_user_movie.payment-amount'),
+                'payment-pay'=>$session->read('info_user_movie.payment-pay'),
+            ];
+            if($data[0]['payment-pay'] === 'vn_pay'){
+                $inputData = $this->VNPAY->inputData($data[0]);
+                $result = $this->VNPAY->resultQuery($inputData);
+                return $this->response->withType("application/json")->withStringBody(json_encode($result));
+                die;
+            }
+        }
+    }
+
+    public function ajaxPay()
+    {
+        if ($this->request->is(['ajax'])) {
+            $id = $this->request->getData('id');
+            $movie = $this->Movies->get($id);
+            $info_movie = [];
+            $info_movie['movie_name'] = $movie->m_name;
+            $session = $this->request->getSession();
+            $session->write('info_movie', $info_movie);
+            return $this->response->withType("application/json")->withStringBody(json_encode('/pay_info'));
+        }
+        return $this->response->withType("application/json")->withStringBody(json_encode(compact('')));
+        die;
+    }
 }
