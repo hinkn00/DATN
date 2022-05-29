@@ -118,4 +118,38 @@ class DetailsController extends AppController
         }
         return $rating;
     }
+
+    public function card()
+    {
+        $check_loader = true;
+        $this->set('check_loader', $check_loader);
+        if($this->request->is(['post', 'ajax'])){
+            $this->loadComponent('VNPAY');
+            $data = [] ;
+            $data[] = $this->request->getData();
+            $inputData = $this->VNPAY->inputData($data[0]);
+            $result = $this->VNPAY->resultQuery($inputData);
+            return $this->response->withType("application/json")->withStringBody(json_encode(compact('result')));   
+            die;
+        }
+    }
+    public function result()
+    {
+        //sau khi thanh toan thanh cong thi luu vao db
+        $session = $this->request->getSession();
+        $check_loader = true;
+        $this->set('check_loader', $check_loader);
+        $status_vnp = $this->request->getQuery('vnp_ResponseCode');
+        
+        if($session->read('info_movie')){
+            if($status_vnp === '00' || $status_vnp == '00'){
+                $session->delete('info_movie');
+                $session->delete('info_user_movie');
+                $session->delete('pass_movie');
+            }
+        }else{
+            return $this->redirect('/pay_info');
+            die;
+        }
+    }
 }

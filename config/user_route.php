@@ -68,5 +68,11 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->connect('/genres/{slug}', ["controller" => "Details", "action" => "genres"], ["_name" => "genres_details"]);
     //year
     $builder->connect('/year/{year}', ["controller" => "Details", "action" => "year"], ["_name" => "year_details"]);
+    $builder->connect('/pay_info', ["controller" => "Movies", "action" => "pay_info"], ["_name" => "pay_info"]);
+    $builder->connect('/pay_movie', ["controller" => "Movies", "action" => "pay_movie"], ["_name" => "pay_movie"]);
+    $builder->connect('/pay_order', ["controller" => "Movies", "action" => "pay_order"], ["_name" => "pay_order"]);
+    $builder->connect('/ajaxPay', ["controller" => "Movies", "action" => "ajaxPay"], ["_name" => "ajaxPay"]);
+    // $builder->connect('/card', ["controller" => "Details", "action" => "card"], ["_name" => "card"]);
+    $builder->connect('/result', ["controller" => "Details", "action" => "result"], ["_name" => "result"]);
     $builder->fallbacks();
 });
