@@ -68,17 +68,17 @@
 						<a href="#" class="redbtn" data-toggle="modal" data-target="#changeAvatar">Change avatar</a>
 					</div>
 					<div class="user-fav">
-						<p>Account Details</p>
+						<p>Chi tiết tài khoản</p>
 						<ul>
-							<li class="active"><a href="userprofile.html">Profile</a></li>
-							<li><a href="userfavoritelist.html">Favorite movies</a></li>
-							<li><a href="userrate.html">Rated movies</a></li>
+							<li class="active"><a href="#infoFrm">Thông tin</a></li>
+							<li><a href="#">Phim yêu thích</a></li>
+							<li><a href="/card">Thẻ thanh toán</a></li>
 						</ul>
 					</div>
 					<div class="user-fav">
-						<p>Others</p>
+						<p>Khác</p>
 						<ul>
-							<li><a href="#">Thay đổi mật khẩu</a></li>
+							<li><a href="#passwordFrm">Thay đổi mật khẩu</a></li>
 							<li><a href="<?= $this->Url->build(['_name' => 'users_logout']) ?>">Đăng xuất</a></li>
 						</ul>
 					</div>
