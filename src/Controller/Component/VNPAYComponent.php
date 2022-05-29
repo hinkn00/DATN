@@ -5,14 +5,14 @@ namespace App\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
-
+// use Cake\Core\Configure;
 class VNPAYComponent extends Component
 {
     protected $_defaultConfig = [
         'vnp_TmnCode'=>"HG4DTXOD",
         'vnp_HashSecret'=>"FOENIGYLEYYLJTOIPAQCBTLWROMHZMVH",
         'vnp_Url'=>"https://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
-        'vnp_Returnurl'=> 'http://moviesdev.datn.vn/result',
+        'vnp_Returnurl'=> BASE_URL.'/result',
         'vnp_apiUrl'=>"http://sandbox.vnpayment.vn/merchant_webapi/merchant.html",
     ];
 

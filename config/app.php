@@ -7,6 +7,7 @@ use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
 use Cake\Core\Configure;
+define('BASE_URL', 'http://moviesdev.datn.vn/');
 return [
     /*
      * Debug Level:
